@@ -48,6 +48,7 @@ sub Main {
     }
     if (ConstData::EXE_CHARA) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,   "names",   "./output/chara/name_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_WORLD,  "worlds",  "./output/chara/world_");
     }
     if (ConstData::EXE_BATTLE) {
     }
