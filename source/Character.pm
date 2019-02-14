@@ -1,7 +1,7 @@
 #===================================================================
 #        キャラステータス解析パッケージ
 #-------------------------------------------------------------------
-#            (C) 2018 @white_mns
+#            (C) 2019 @white_mns
 #===================================================================
 
 
@@ -17,7 +17,7 @@ use source::lib::GetNode;
 require "./source/lib/IO.pm";
 require "./source/lib/time.pm";
 
-#require "./source/chara/Name.pm";
+require "./source/chara/Name.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -49,7 +49,7 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
 
     #インスタンス作成
-    #if (ConstData::EXE_CHARA_NAME)               { $self->{DataHandlers}{Name}              = Name->new();}
+    if (ConstData::EXE_CHARA_NAME)               { $self->{DataHandlers}{Name}              = Name->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -112,10 +112,11 @@ sub ParsePage{
     my $tree = HTML::TreeBuilder->new;
     $tree->parse($content);
 
-    my $span_in3_nodes = &GetNode::GetNode_Tag_Attr("span", "id", "in3", \$tree);
-
+    my $div_cnm_nodes = &GetNode::GetNode_Tag_Attr("div", "class", "CNM", \$tree);
+    my $div_align_right_nodes = &GetNode::GetNode_Tag_Attr("div", "align", "RIGHT", \$tree);
+    
     # データリスト取得
-    #if (exists($self->{DataHandlers}{Name})) {$self->{DataHandlers}{Name}->GetData ($e_no, $$span_in3_nodes[0])};
+    if (exists($self->{DataHandlers}{Name})) {$self->{DataHandlers}{Name}->GetData ($e_no, $$div_cnm_nodes[0], $$div_align_right_nodes[scalar(@$div_align_right_nodes) - 1])};
 
     $tree = $tree->delete;
 }
