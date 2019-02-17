@@ -19,6 +19,7 @@ require "./source/lib/time.pm";
 
 require "./source/chara/Name.pm";
 require "./source/chara/World.pm";
+require "./source/chara/Item.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -52,6 +53,7 @@ sub Init{
     #インスタンス作成
     if (ConstData::EXE_CHARA_NAME)  { $self->{DataHandlers}{Name}  = Name->new();}
     if (ConstData::EXE_CHARA_WORLD) { $self->{DataHandlers}{World} = World->new();}
+    if (ConstData::EXE_CHARA_ITEM)  { $self->{DataHandlers}{Item}  = Item->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -117,10 +119,12 @@ sub ParsePage{
     my $div_cnm_nodes         = &GetNode::GetNode_Tag_Attr("div", "class", "CNM",     \$tree);
     my $div_cimgn1_nodes      = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGJN1", \$tree);
     my $div_align_right_nodes = &GetNode::GetNode_Tag_Attr("div", "align", "RIGHT",   \$tree);
+    my $div_y870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "Y870",    \$tree);
     
     # データリスト取得
-    if (exists($self->{DataHandlers}{Name}))  {$self->{DataHandlers}{Name}->GetData ($e_no, $$div_cnm_nodes[0], $$div_align_right_nodes[scalar(@$div_align_right_nodes) - 1])};
+    if (exists($self->{DataHandlers}{Name}))  {$self->{DataHandlers}{Name}->GetData ($e_no, $$div_cnm_nodes[0], $$div_align_right_nodes[ scalar(@$div_align_right_nodes)-1 ])};
     if (exists($self->{DataHandlers}{World})) {$self->{DataHandlers}{World}->GetData($e_no, $$div_cimgn1_nodes[0])};
+    if (exists($self->{DataHandlers}{Item}))  {$self->{DataHandlers}{Item}->GetData ($e_no, $div_y870_nodes)};
 
     $tree = $tree->delete;
 }

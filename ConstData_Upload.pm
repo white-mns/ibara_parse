@@ -22,6 +22,7 @@ use warnings;
     use constant EXE_CHARA                => 1;
         use constant EXE_CHARA_NAME            => 1;
         use constant EXE_CHARA_WORLD           => 1;
+        use constant EXE_CHARA_ITEM            => 1;
     use constant EXE_BATTLE               => 1;
 
 1;
