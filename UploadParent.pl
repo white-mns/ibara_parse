@@ -44,7 +44,7 @@ sub Main {
     $upload->DBConnect();
     
     if (ConstData::EXE_DATA) {
-        #&UploadData($upload, ConstData::EXE_DATA_PROPER_NAME, "proper_names", "./output/data/proper_name.csv");
+        &UploadData($upload, ConstData::EXE_DATA_PROPER_NAME, "proper_names", "./output/data/proper_name.csv");
     }
     if (ConstData::EXE_CHARA) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,   "names",   "./output/chara/name_");
