@@ -20,6 +20,7 @@ require "./source/lib/time.pm";
 require "./source/chara/Name.pm";
 require "./source/chara/World.pm";
 require "./source/chara/Item.pm";
+require "./source/chara/Superpower.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -51,9 +52,10 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
 
     #インスタンス作成
-    if (ConstData::EXE_CHARA_NAME)  { $self->{DataHandlers}{Name}  = Name->new();}
-    if (ConstData::EXE_CHARA_WORLD) { $self->{DataHandlers}{World} = World->new();}
-    if (ConstData::EXE_CHARA_ITEM)  { $self->{DataHandlers}{Item}  = Item->new();}
+    if (ConstData::EXE_CHARA_NAME)       { $self->{DataHandlers}{Name}       = Name->new();}
+    if (ConstData::EXE_CHARA_WORLD)      { $self->{DataHandlers}{World}      = World->new();}
+    if (ConstData::EXE_CHARA_ITEM)       { $self->{DataHandlers}{Item}       = Item->new();}
+    if (ConstData::EXE_CHARA_SUPERPOWER) { $self->{DataHandlers}{Superpower} = Superpower->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {

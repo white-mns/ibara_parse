@@ -45,9 +45,11 @@ sub Init{
 
     #インスタンス作成
     $self->{DataHandlers}{ProperName}     = StoreProperName->new();
+    $self->{DataHandlers}{SuperpowerData} = StoreProperData->new();
 
     #他パッケージへの引き渡し用インスタンス
     $self->{CommonDatas}{ProperName} = $self->{DataHandlers}{ProperName};
+    $self->{CommonDatas}{Superpower} = $self->{DataHandlers}{Superpower};
 
     my $header_list = "";
     my $output_file = "";
@@ -59,6 +61,16 @@ sub Init{
     ];
     $output_file = "./output/data/". "proper_name" . ".csv";
     $self->{DataHandlers}{ProperName}->Init($header_list, $output_file," ");
+
+    # 施設区分情報の初期化
+    $header_list = [
+                "superpower_id",
+                "name",
+                "text",
+    ];
+    $output_file = "./output/data/". "superpower_data" . ".csv";
+    $self->{DataHandlers}{SuperpowerData}->Init($header_list, $output_file, [" ", " "]);
+
 
     return;
 }
