@@ -46,10 +46,12 @@ sub Init{
     #インスタンス作成
     $self->{DataHandlers}{ProperName}     = StoreProperName->new();
     $self->{DataHandlers}{SuperpowerData} = StoreProperData->new();
+    $self->{DataHandlers}{SkillData}      = StoreProperData->new();
 
     #他パッケージへの引き渡し用インスタンス
-    $self->{CommonDatas}{ProperName} = $self->{DataHandlers}{ProperName};
-    $self->{CommonDatas}{Superpower} = $self->{DataHandlers}{Superpower};
+    $self->{CommonDatas}{ProperName}     = $self->{DataHandlers}{ProperName};
+    $self->{CommonDatas}{SuperpowerData} = $self->{DataHandlers}{SuperpowerData};
+    $self->{CommonDatas}{SkillData}      = $self->{DataHandlers}{SkillData};
 
     my $header_list = "";
     my $output_file = "";
@@ -62,7 +64,7 @@ sub Init{
     $output_file = "./output/data/". "proper_name" . ".csv";
     $self->{DataHandlers}{ProperName}->Init($header_list, $output_file," ");
 
-    # 施設区分情報の初期化
+    # 異能・生産情報の初期化
     $header_list = [
                 "superpower_id",
                 "name",
@@ -71,6 +73,19 @@ sub Init{
     $output_file = "./output/data/". "superpower_data" . ".csv";
     $self->{DataHandlers}{SuperpowerData}->Init($header_list, $output_file, [" ", " "]);
 
+    # スキル情報の初期化
+    $header_list = [
+                "skill_id",
+                "name",
+                "type_id",
+                "element_id",
+                "ep",
+                "sp",
+                "timing_id",
+                "text",
+    ];
+    $output_file = "./output/data/". "skill_data" . ".csv";
+    $self->{DataHandlers}{SkillData}->Init($header_list, $output_file, [" ", 0, 0, 0, 0, " "]);
 
     return;
 }

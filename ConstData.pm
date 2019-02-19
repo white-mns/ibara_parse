@@ -26,5 +26,6 @@ use warnings;
         use constant EXE_CHARA_WORLD       => 1;
         use constant EXE_CHARA_ITEM        => 1;
         use constant EXE_CHARA_SUPERPOWER  => 1;
+        use constant EXE_CHARA_SKILL       => 1;
     use constant EXE_BATTLE         => 1;
 1;

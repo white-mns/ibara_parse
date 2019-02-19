@@ -44,14 +44,16 @@ sub Main {
     $upload->DBConnect();
     
     if (ConstData::EXE_DATA) {
-        &UploadData($upload, ConstData::EXE_DATA_PROPER_NAME,     "proper_names",     "./output/data/proper_name.csv");
+        &UploadData($upload, ConstData::EXE_DATA_PROPER_NAME,     "proper_names",    "./output/data/proper_name.csv");
         &UploadData($upload, ConstData::EXE_DATA_SUPERPOWER_DATA, "superpower_data", "./output/data/superpower_data.csv");
+        &UploadData($upload, ConstData::EXE_DATA_SKILL_DATA,      "skill_data",      "./output/data/skill_data.csv");
     }
     if (ConstData::EXE_CHARA) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,       "names",       "./output/chara/name_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_WORLD,      "worlds",      "./output/chara/world_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_ITEM,       "items",       "./output/chara/item_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SUPERPOWER, "superpowers", "./output/chara/superpower_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SKILL,      "skills",      "./output/chara/skill_");
     }
     if (ConstData::EXE_BATTLE) {
     }
