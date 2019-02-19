@@ -17,7 +17,7 @@ use source::lib::GetNode;
 require "./source/lib/IO.pm";
 require "./source/lib/time.pm";
 
-require "./source/act/ActSkill.pm";
+require "./source/act/SkillMastery.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -49,7 +49,7 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
 
     #インスタンス作成
-    if (ConstData::EXE_ACT_SKILL) { $self->{DataHandlers}{ActSkill} = ActSkill->new();}
+    if (ConstData::EXE_ACT_SKILL_MASTERY) { $self->{DataHandlers}{SkillMastery} = SkillMastery->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -98,7 +98,7 @@ sub ParsePage{
     my $table1_nodes = &GetNode::GetNode_Tag_Attr("table", "id", "TABLE1", \$tree);
     
     # データリスト取得
-    if (exists($self->{DataHandlers}{ActSkill})) {$self->{DataHandlers}{ActSkill}->GetData ($$table1_nodes[0])};
+    if (exists($self->{DataHandlers}{SkillMastery})) {$self->{DataHandlers}{SkillMastery}->GetData ($$table1_nodes[0])};
 
     $tree = $tree->delete;
 }

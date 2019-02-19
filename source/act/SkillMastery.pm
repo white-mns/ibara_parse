@@ -1,5 +1,5 @@
 #===================================================================
-#        スキル習得画面スキル情報取得パッケージ
+#        スキル習得条件取得パッケージ
 #-------------------------------------------------------------------
 #            (C) 2019 @white_mns
 #===================================================================
@@ -17,7 +17,7 @@ use source::lib::GetNode;
 #------------------------------------------------------------------#
 #    パッケージの定義
 #------------------------------------------------------------------#     
-package ActSkill;
+package SkillMastery;
 
 #-----------------------------------#
 #    コンストラクタ
@@ -36,9 +36,55 @@ sub new {
 sub Init{
     my $self = shift;
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
+ 
+    #初期化
+    $self->{Datas}{Data}  = StoreData->new();
+
+    $self->{SkillMastery} = {};
+
+    my $header_list = "";
+   
+    $header_list = [
+                "skill_id",
+                "requirement_1_id",
+                "requirement_1_lv",
+                "requirement_2_id",
+                "requirement_2_lv",
+    ];
+
+    $self->{Datas}{Data}->Init($header_list);
+    
+    #出力ファイル設定
+    $self->{Datas}{Data}->SetOutputName( "./output/data/skill_mastery.csv" );
+
+    $self->ReadLastData( "./output/data/skill_mastery.csv" );
 
     return;
 }
+
+#-----------------------------------#
+#    既存データを読み込む
+#-----------------------------------#
+sub ReadLastData{
+    my $self      = shift;
+    my $file_name = shift;
+    my $id0_name = shift;
+    
+    my $content = &IO::FileRead ( $file_name );
+    
+    my @file_data = split(/\n/, $content);
+    shift (@file_data);
+    
+    foreach my  $data_set(@file_data){
+        my $data = []; 
+        @$data   = split(ConstData::SPLIT, $data_set);
+        
+        $self->{SkillMastery}{$$data[0]} = {"requirement_1_id" => $$data[1], "requirement_1_lv" => $$data[2], "requirement_2_id" => $$data[3], "requirement_2_id" =>$$data[4]};
+    }
+    
+    return;
+}
+
 
 #-----------------------------------#
 #    データ取得
@@ -85,27 +131,21 @@ sub ParseTrData{
         }
 
         $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(1, [$skill_name, $type_id, $element_id, $$td_nodes[2]->as_text, $$td_nodes[3]->as_text, $timing_id, $text]);
-    }
+        
+        my ($requirement_1_id, $requirement_1_lv, $requirement_2_id, $requirement_2_lv) = (0, 0, 0, 0);
 
-    return;
-}
+        if ($$td_nodes[0]->as_text =~ /(\D+)(\d+)(\D+)(\d+)/) {
+            $requirement_1_id = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
+            $requirement_1_lv = $2;
+            $requirement_2_id = $self->{CommonDatas}{ProperName}->GetOrAddId($3);
+            $requirement_2_lv = $4;
 
-#-----------------------------------#
-#    タイトル画像からノードを探索
-#------------------------------------
-#    引数｜divY870ノード
-#-----------------------------------#
-sub SearchNodeFromTitleImg{
-    my $self  = shift;
-    my $div_nodes = shift;
-    my $title = shift;
-
-    foreach my $div_node (@$div_nodes){
-        # imgの抽出
-        my $img_nodes = &GetNode::GetNode_Tag("img",\$div_node);
-        if (scalar(@$img_nodes) > 0 && $$img_nodes[0]->attr("src") =~ /$title/) {
-            return $div_node;
+        } elsif ($$td_nodes[0]->as_text =~ /(\D+)(\d+)/) {
+            $requirement_1_id = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
+            $requirement_1_lv = $2;
         }
+
+        $self->{SkillMastery}{sprintf("%05d",$skill_id)} = {"requirement_1_id" => $requirement_1_id, "requirement_1_lv" => $requirement_1_lv, "requirement_2_id" => $requirement_2_id, "requirement_2_lv" =>$requirement_2_lv}
     }
 
     return;
@@ -119,6 +159,12 @@ sub SearchNodeFromTitleImg{
 sub Output{
     my $self = shift;
     
+    # スキル習得条件の書き出し
+    foreach my $skill_id (sort{$a cmp $b} keys %{ $self->{SkillMastery} } ) {
+        my $data = $self->{SkillMastery}{$skill_id};
+        $self->{Datas}{Data}->AddData( join(ConstData::SPLIT, ($skill_id, $$data{"requirement_1_id"}, $$data{"requirement_1_lv"}, $$data{"requirement_2_id"}, $$data{"requirement_2_lv"})));
+    }
+
     foreach my $object( values %{ $self->{Datas} } ) {
         $object->Output();
     }
