@@ -79,7 +79,7 @@ sub ReadLastData{
         my $data = []; 
         @$data   = split(ConstData::SPLIT, $data_set);
         
-        $self->{SkillMastery}{$$data[0]} = {"requirement_1_id" => $$data[1], "requirement_1_lv" => $$data[2], "requirement_2_id" => $$data[3], "requirement_2_id" =>$$data[4]};
+        $self->{SkillMastery}{$$data[0]} = {"requirement_1_id" => $$data[1], "requirement_1_lv" => $$data[2], "requirement_2_id" => $$data[3], "requirement_2_lv" =>$$data[4]};
     }
     
     return;
@@ -130,7 +130,10 @@ sub ParseTrData{
             $timing_id = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
         }
 
-        $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(1, [$skill_name, $type_id, $element_id, $$td_nodes[2]->as_text, $$td_nodes[3]->as_text, $timing_id, $text]);
+        my $ep = ($$td_nodes[2]->as_text ne " ") ? $$td_nodes[2]->as_text : 0;
+        my $sp = ($$td_nodes[3]->as_text ne " ") ? $$td_nodes[3]->as_text : 0;
+
+        $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(1, [$skill_name, $type_id, $element_id, $ep, $sp, $timing_id, $text]);
         
         my ($requirement_1_id, $requirement_1_lv, $requirement_2_id, $requirement_2_lv) = (0, 0, 0, 0);
 
