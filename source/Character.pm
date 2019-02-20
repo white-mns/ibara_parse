@@ -52,6 +52,7 @@ sub new {
 sub Init{
     my $self = shift;
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
+    $self->{ResultNo0} = sprintf ("%02d", $self->{ResultNo});
 
     #インスタンス作成
     if (ConstData::EXE_CHARA_NAME)       { $self->{DataHandlers}{Name}       = Name->new();}
@@ -81,7 +82,7 @@ sub Execute{
 
     my $start = 1;
     my $end   = 0;
-    my $directory = './data/orig/result' . $self->{ResultNo} . '_' . $self->{GenerateNo} . '/now';
+    my $directory = './data/orig/result' . $self->{ResultNo0} . '_' . $self->{GenerateNo} . '/k/now';
     if (ConstData::EXE_ALLRESULT) {
         #結果全解析
         $end = GetMaxFileNo($directory,"r");
@@ -128,6 +129,11 @@ sub ParsePage{
     my $div_align_right_nodes = &GetNode::GetNode_Tag_Attr("div", "align", "RIGHT",   \$tree);
     my $div_y870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "Y870",    \$tree);
     
+    if(!scalar(@$div_align_right_nodes)) {
+        $tree = $tree->delete;
+        return;
+    };
+
     # データリスト取得
     if (exists($self->{DataHandlers}{Name}))       {$self->{DataHandlers}{Name}->GetData ($e_no, $$div_cnm_nodes[0], $$div_align_right_nodes[ scalar(@$div_align_right_nodes)-1 ])};
     if (exists($self->{DataHandlers}{World}))      {$self->{DataHandlers}{World}->GetData($e_no, $$div_cimgjn1_nodes[0])};

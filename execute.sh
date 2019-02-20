@@ -6,7 +6,7 @@ cd `dirname $0`	#解析コードのあるディレクトリで作業をする
 #------------------------------------------------------------------
 # 更新回数、再更新番号の定義確認、設定
 
-RESULT_NO=$1
+RESULT_NO=`printf "%02d" $1`
 GENERATE_NO=$2
 
 if [ -z "$RESULT_NO" ]; then
@@ -36,8 +36,7 @@ ZIP_NAME=${RESULT_NO}_$GENERATE_NO
 #------------------------------------------------------------------
 # 圧縮結果をダウンロード。なければ各個アクセスするシェルスクリプトを実行
 if [ ! -f ./data/orig/result${ZIP_NAME}.zip ]; then
-    wget -O data/orig/result${ZIP_NAME}.zip http://lisge.com/ib/result${RESULT_NO}.zip
-    :
+    wget -O data/orig/result${ZIP_NAME}.zip http://lisge.com/ib/k/result${RESULT_NO}.zip
 fi
 
 if [ ! -f ./data/orig/result${ZIP_NAME}.zip ] || [ ! -s ./data/orig/result${ZIP_NAME}.zip ]; then
@@ -51,7 +50,9 @@ if [ -f ./data/orig/result${ZIP_NAME}.zip ]; then
     cd ./data/orig
 
     unzip -q result${ZIP_NAME}.zip
-    if [ -d result${RESULT_NO} ]; then
+    if [ -d result ]; then
+        mv result  result${ZIP_NAME}
+    elif [ -d result${RESULT_NO} ]; then
         mv result${RESULT_NO}  result${ZIP_NAME}
     fi
 
