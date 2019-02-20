@@ -108,6 +108,9 @@ sub GetItemData{
         my $effects = [{"id"=> 0, "value"=> 0, "need_lv"=> 0},{"id"=> 0, "value"=> 0, "need_lv"=> 0},{"id"=> 0, "value"=> 0, "need_lv"=> 0}];
 
         my $td_nodes = &GetNode::GetNode_Tag("td",\$tr_node);
+
+        if ($$td_nodes[1]->as_text eq " " && $$td_nodes[2]->as_text eq " ") {next;}
+
         $i_no = $$td_nodes[0]->as_text;
         $name = $$td_nodes[1]->as_text;
         $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($$td_nodes[2]->as_text);
@@ -139,8 +142,15 @@ sub GetItemData{
                     $$effects[$i-1]{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect);
                 }
             } else {
-                # 効果なし（－）のとき
-                $$effects[$i-1]{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect_texts[$i]);
+                # 料理・装備等必要Lvの表記がない時
+                if ($effect_texts[$i] =~ /(\D+)(\d+)/) {
+                    $$effects[$i-1]{"id"}    = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
+                    $$effects[$i-1]{"value"} = $2;
+
+                } else {
+                    # 効果に数値がないとき
+                    $$effects[$i-1]{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect_texts[$i]);
+                }
             }
         }
 
