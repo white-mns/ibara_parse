@@ -41,6 +41,7 @@ sub Main{
         print "Error:Unusual ResultNo or GenerateNo\n";
         return;
     }
+    $result_no = sprintf ("%02d", $result_no);
 
     my @objects;        #探索するデータ項目の登録
     my %common_datas;

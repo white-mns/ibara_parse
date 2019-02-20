@@ -41,6 +41,8 @@ sub Main {
         return;
     }
 
+    $result_no = sprintf ("%02d", $result_no);
+
     $upload->DBConnect();
     
     if (ConstData::EXE_DATA) {
