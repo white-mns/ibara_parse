@@ -114,11 +114,14 @@ sub ParseTrData{
         my $td_nodes = &GetNode::GetNode_Tag("td",\$tr_node);
 
         my $td0_text = $$td_nodes[0]->as_text;
+        my @td0_child = $$td_nodes[0]->content_list;
 
-        if ($td0_text =~ /／/) {
-            my @td0_texts = split(/／/, $td0_text);
-            $name       = $td0_texts[0];
-            $skill_name = $td0_texts[ scalar(@td0_texts)-1 ];
+        if (scalar(@td0_child) > 1) {
+            $name       = $td0_child[0];
+            $skill_name = $td0_child[2]->as_text;
+            $skill_name =~ s/（//g;
+            $skill_name =~ s/）//g;
+
         } else {
             $name       = $$td_nodes[0]->as_text;
             $skill_name = $$td_nodes[0]->as_text;
