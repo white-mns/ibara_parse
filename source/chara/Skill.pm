@@ -138,7 +138,7 @@ sub ParseTrData{
             $timing_id = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
         }
 
-        $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(1, [$skill_name, $type_id, $element_id, $$td_nodes[2]->as_text, $$td_nodes[3]->as_text, $timing_id, $text]);
+        $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, $type_id, $element_id, $$td_nodes[2]->as_text, $$td_nodes[3]->as_text, $timing_id, $text]);
         $lv = $$td_nodes[1]->as_text;
 
         $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $skill_id, $lv)));
