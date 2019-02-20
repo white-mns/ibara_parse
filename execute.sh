@@ -43,11 +43,17 @@ if [ ! -f ./data/orig/result${ZIP_NAME}.zip ] || [ ! -s ./data/orig/result${ZIP_
     ./_result_download.sh $RESULT_NO $GENERATE_NO
 fi
 
+
 # 圧縮結果ファイルを展開
 if [ -f ./data/orig/result${ZIP_NAME}.zip ]; then
+
     echo "open archive..."
     
     cd ./data/orig
+
+    rm  -rf result
+    rm  -rf result${RESULT_NO}
+    rm  -rf result${ZIP_NAME}
 
     unzip -q result${ZIP_NAME}.zip
     if [ -d result ]; then
@@ -59,7 +65,7 @@ if [ -f ./data/orig/result${ZIP_NAME}.zip ]; then
     cd ../../
 
     perl ./GetData.pl      $RESULT_NO $GENERATE_NO
-    perl ./UploadParent.pl $RESULT_NO $GENERATE_NO
+    #perl ./UploadParent.pl $RESULT_NO $GENERATE_NO
 
 #------------------------------------------------------------------
 # 展開したファイルを削除
