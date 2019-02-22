@@ -23,6 +23,7 @@ require "./source/chara/Item.pm";
 require "./source/chara/Superpower.pm";
 require "./source/chara/Skill.pm";
 require "./source/chara/Place.pm";
+require "./source/chara/Party.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -61,6 +62,7 @@ sub Init{
     if (ConstData::EXE_CHARA_SUPERPOWER) { $self->{DataHandlers}{Superpower} = Superpower->new();}
     if (ConstData::EXE_CHARA_SKILL)      { $self->{DataHandlers}{Skill}      = Skill->new();}
     if (ConstData::EXE_CHARA_PLACE)      { $self->{DataHandlers}{Place}      = Place->new();}
+    if (ConstData::EXE_CHARA_PARTY)      { $self->{DataHandlers}{Party}      = Party->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -127,6 +129,7 @@ sub ParsePage{
     my $div_cimgjn1_nodes     = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGJN1", \$tree);
     my $div_cimgnm4_nodes     = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGNM4", \$tree);
     my $div_align_right_nodes = &GetNode::GetNode_Tag_Attr("div", "align", "RIGHT",   \$tree);
+    my $div_r870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "R870",    \$tree);
     my $div_y870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "Y870",    \$tree);
     
     if(!scalar(@$div_align_right_nodes)) {
@@ -135,12 +138,13 @@ sub ParsePage{
     };
 
     # データリスト取得
-    if (exists($self->{DataHandlers}{Name}))       {$self->{DataHandlers}{Name}->GetData ($e_no, $$div_cnm_nodes[0], $$div_align_right_nodes[ scalar(@$div_align_right_nodes)-1 ])};
-    if (exists($self->{DataHandlers}{World}))      {$self->{DataHandlers}{World}->GetData($e_no, $$div_cimgjn1_nodes[0])};
-    if (exists($self->{DataHandlers}{Item}))       {$self->{DataHandlers}{Item}->GetData ($e_no, $div_y870_nodes)};
+    if (exists($self->{DataHandlers}{Name}))       {$self->{DataHandlers}{Name}->GetData       ($e_no, $$div_cnm_nodes[0], $$div_align_right_nodes[ scalar(@$div_align_right_nodes)-1 ])};
+    if (exists($self->{DataHandlers}{World}))      {$self->{DataHandlers}{World}->GetData      ($e_no, $$div_cimgjn1_nodes[0])};
+    if (exists($self->{DataHandlers}{Item}))       {$self->{DataHandlers}{Item}->GetData       ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Superpower})) {$self->{DataHandlers}{Superpower}->GetData ($e_no, $div_y870_nodes)};
-    if (exists($self->{DataHandlers}{Skill}))      {$self->{DataHandlers}{Skill}->GetData ($e_no, $div_y870_nodes)};
-    if (exists($self->{DataHandlers}{Place}))      {$self->{DataHandlers}{Place}->GetData($e_no, $$div_cimgnm4_nodes[0])};
+    if (exists($self->{DataHandlers}{Skill}))      {$self->{DataHandlers}{Skill}->GetData      ($e_no, $div_y870_nodes)};
+    if (exists($self->{DataHandlers}{Place}))      {$self->{DataHandlers}{Place}->GetData      ($e_no, $$div_cimgnm4_nodes[0])};
+    if (exists($self->{DataHandlers}{Party}))      {$self->{DataHandlers}{Party}->GetData      ($e_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }

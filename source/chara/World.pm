@@ -79,7 +79,7 @@ sub GetData{
 sub GetWorldData{
     my $self = shift;
     my $node = shift;
-    my ($world) = ("");
+    my $world = 0;
  
     my $img_nodes = &GetNode::GetNode_Tag("img", \$node);
 
