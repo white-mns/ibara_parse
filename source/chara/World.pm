@@ -79,7 +79,7 @@ sub GetData{
 sub GetWorldData{
     my $self = shift;
     my $node = shift;
-    my ($world) = ("");
+    my $world = 0;
  
     my $img_nodes = &GetNode::GetNode_Tag("img", \$node);
 
@@ -91,8 +91,7 @@ sub GetWorldData{
         $world = -1;
     }
 
-    my @datas=($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $world);
-    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, @datas));
+    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $world) ));
 
     return;
 }

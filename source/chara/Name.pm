@@ -88,8 +88,7 @@ sub GetNameData{
     $player = $pl_node->as_text;
     $player =~ s/PL \/ //g;
 
-    my @datas=($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $player);
-    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, @datas));
+    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $player) ));
 
     return;
 }
