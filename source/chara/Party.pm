@@ -68,8 +68,8 @@ sub GetData{
     
     $self->{ENo} = $e_no;
 
-    my $ne0_tr = $self->GetMatchingTr($nodes, "ne0");
-    my $ne_tr = $self->GetMatchingTr($nodes, "ne");
+    my $ne0_tr = $self->SearchMatchingTrNodeFromTitleImg($nodes, "ne0");
+    my $ne_tr  = $self->SearchMatchingTrNodeFromTitleImg($nodes, "ne");
 
     $self->GetParty    ($ne0_tr, 0);
 
@@ -84,7 +84,7 @@ sub GetData{
 #    引数｜データノード
 #          タイトル画像名
 #-----------------------------------#
-sub GetMatchingTr{
+sub SearchMatchingTrNodeFromTitleImg{
     my $self = shift;
     my $nodes = shift;
     my $img_text   = shift;
