@@ -57,6 +57,7 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_ITEM,       "items",       "./output/chara/item_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SUPERPOWER, "superpowers", "./output/chara/superpower_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SKILL,      "skills",      "./output/chara/skill_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_STUDY,      "studies",     "./output/chara/study_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PLACE,      "places",      "./output/chara/place_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PARTY,      "parties",     "./output/chara/party_");
     }
