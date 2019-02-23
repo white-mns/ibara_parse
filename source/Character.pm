@@ -22,6 +22,8 @@ require "./source/chara/World.pm";
 require "./source/chara/Item.pm";
 require "./source/chara/Superpower.pm";
 require "./source/chara/Skill.pm";
+require "./source/chara/Card.pm";
+require "./source/chara/Study.pm";
 require "./source/chara/Place.pm";
 require "./source/chara/Party.pm";
 
@@ -61,6 +63,8 @@ sub Init{
     if (ConstData::EXE_CHARA_ITEM)       { $self->{DataHandlers}{Item}       = Item->new();}
     if (ConstData::EXE_CHARA_SUPERPOWER) { $self->{DataHandlers}{Superpower} = Superpower->new();}
     if (ConstData::EXE_CHARA_SKILL)      { $self->{DataHandlers}{Skill}      = Skill->new();}
+    if (ConstData::EXE_CHARA_CARD)       { $self->{DataHandlers}{Card}       = Card->new();}
+    if (ConstData::EXE_CHARA_SKILL)      { $self->{DataHandlers}{Study}      = Study->new();}
     if (ConstData::EXE_CHARA_PLACE)      { $self->{DataHandlers}{Place}      = Place->new();}
     if (ConstData::EXE_CHARA_PARTY)      { $self->{DataHandlers}{Party}      = Party->new();}
 
@@ -143,6 +147,8 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{Item}))       {$self->{DataHandlers}{Item}->GetData       ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Superpower})) {$self->{DataHandlers}{Superpower}->GetData ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Skill}))      {$self->{DataHandlers}{Skill}->GetData      ($e_no, $div_y870_nodes)};
+    if (exists($self->{DataHandlers}{Card}))       {$self->{DataHandlers}{Card}->GetData       ($e_no, $div_y870_nodes)};
+    if (exists($self->{DataHandlers}{Study}))      {$self->{DataHandlers}{Study}->GetData      ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Place}))      {$self->{DataHandlers}{Place}->GetData      ($e_no, $$div_cimgnm4_nodes[0])};
     if (exists($self->{DataHandlers}{Party}))      {$self->{DataHandlers}{Party}->GetData      ($e_no, $div_r870_nodes)};
 
