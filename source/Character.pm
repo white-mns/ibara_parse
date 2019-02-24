@@ -19,6 +19,7 @@ require "./source/lib/time.pm";
 
 require "./source/chara/Name.pm";
 require "./source/chara/World.pm";
+require "./source/chara/Status.pm";
 require "./source/chara/Item.pm";
 require "./source/chara/Superpower.pm";
 require "./source/chara/Skill.pm";
@@ -60,6 +61,7 @@ sub Init{
     #インスタンス作成
     if (ConstData::EXE_CHARA_NAME)       { $self->{DataHandlers}{Name}       = Name->new();}
     if (ConstData::EXE_CHARA_WORLD)      { $self->{DataHandlers}{World}      = World->new();}
+    if (ConstData::EXE_CHARA_STATUS)     { $self->{DataHandlers}{Status}     = Status->new();}
     if (ConstData::EXE_CHARA_ITEM)       { $self->{DataHandlers}{Item}       = Item->new();}
     if (ConstData::EXE_CHARA_SUPERPOWER) { $self->{DataHandlers}{Superpower} = Superpower->new();}
     if (ConstData::EXE_CHARA_SKILL)      { $self->{DataHandlers}{Skill}      = Skill->new();}
@@ -131,10 +133,15 @@ sub ParsePage{
 
     my $div_cnm_nodes         = &GetNode::GetNode_Tag_Attr("div", "class", "CNM",     \$tree);
     my $div_cimgjn1_nodes     = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGJN1", \$tree);
+    my $div_cimgnm1_nodes     = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGNM1", \$tree);
+    my $div_cimgnm2_nodes     = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGNM2", \$tree);
+    my $div_cimgnm3_nodes     = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGNM3", \$tree);
     my $div_cimgnm4_nodes     = &GetNode::GetNode_Tag_Attr("div", "class", "CIMGNM4", \$tree);
     my $div_align_right_nodes = &GetNode::GetNode_Tag_Attr("div", "align", "RIGHT",   \$tree);
     my $div_r870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "R870",    \$tree);
     my $div_y870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "Y870",    \$tree);
+
+    my $div_cimgnm_nodes      = ["", $$div_cimgnm1_nodes[0], $$div_cimgnm2_nodes[0], $$div_cimgnm3_nodes[0], $$div_cimgnm4_nodes[0]];
     
     if(!scalar(@$div_align_right_nodes)) {
         $tree = $tree->delete;
@@ -144,6 +151,7 @@ sub ParsePage{
     # データリスト取得
     if (exists($self->{DataHandlers}{Name}))       {$self->{DataHandlers}{Name}->GetData       ($e_no, $$div_cnm_nodes[0], $$div_align_right_nodes[ scalar(@$div_align_right_nodes)-1 ])};
     if (exists($self->{DataHandlers}{World}))      {$self->{DataHandlers}{World}->GetData      ($e_no, $$div_cimgjn1_nodes[0])};
+    if (exists($self->{DataHandlers}{Status}))     {$self->{DataHandlers}{Status}->GetData     ($e_no, $$div_cimgjn1_nodes[0], $div_cimgnm_nodes)};
     if (exists($self->{DataHandlers}{Item}))       {$self->{DataHandlers}{Item}->GetData       ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Superpower})) {$self->{DataHandlers}{Superpower}->GetData ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Skill}))      {$self->{DataHandlers}{Skill}->GetData      ($e_no, $div_y870_nodes)};
