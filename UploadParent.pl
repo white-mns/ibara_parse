@@ -62,6 +62,7 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_STUDY,      "studies",     "./output/chara/study_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PLACE,      "places",      "./output/chara/place_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PARTY,      "parties",     "./output/chara/party_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_COMPOUND,   "compounds",  "./output/chara/compound_");
     }
     if (ConstData::EXE_BATTLE) {
     }
