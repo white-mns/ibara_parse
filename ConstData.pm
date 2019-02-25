@@ -32,6 +32,7 @@ use warnings;
         use constant EXE_CHARA_STUDY       => 1;
         use constant EXE_CHARA_PLACE       => 1;
         use constant EXE_CHARA_PARTY       => 1;
+        use constant EXE_CHARA_COMPOUND    => 1;
     use constant EXE_ACT            => 1;
         use constant EXE_ACT_SKILL_MASTERY => 1;
     use constant EXE_BATTLE         => 1;

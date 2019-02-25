@@ -27,6 +27,7 @@ require "./source/chara/Card.pm";
 require "./source/chara/Study.pm";
 require "./source/chara/Place.pm";
 require "./source/chara/Party.pm";
+require "./source/chara/Compound.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -69,6 +70,7 @@ sub Init{
     if (ConstData::EXE_CHARA_SKILL)      { $self->{DataHandlers}{Study}      = Study->new();}
     if (ConstData::EXE_CHARA_PLACE)      { $self->{DataHandlers}{Place}      = Place->new();}
     if (ConstData::EXE_CHARA_PARTY)      { $self->{DataHandlers}{Party}      = Party->new();}
+    if (ConstData::EXE_CHARA_COMPOUND)   { $self->{DataHandlers}{Compound}   = Compound->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -159,6 +161,7 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{Study}))      {$self->{DataHandlers}{Study}->GetData      ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Place}))      {$self->{DataHandlers}{Place}->GetData      ($e_no, $$div_cimgnm4_nodes[0])};
     if (exists($self->{DataHandlers}{Party}))      {$self->{DataHandlers}{Party}->GetData      ($e_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Compound}))   {$self->{DataHandlers}{Compound}->GetData   ($e_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }
