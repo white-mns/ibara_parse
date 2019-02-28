@@ -74,6 +74,7 @@ sub GetData{
     
     return;
 }
+
 #-----------------------------------#
 #    現在地データ取得
 #------------------------------------
@@ -82,7 +83,7 @@ sub GetData{
 sub GetPlaceData{
     my $self = shift;
     my $node = shift;
-    my ($field_id, $area, $area_column, $area_row) = (0, "", 0);
+    my ($field_id, $area, $area_column, $area_row) = (0, "",  "", 0);
  
     my $b_nodes = &GetNode::GetNode_Tag("b", \$node);
 
