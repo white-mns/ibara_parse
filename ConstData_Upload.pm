@@ -35,6 +35,7 @@ use warnings;
         use constant EXE_CHARA_PARTY           => 1;
         use constant EXE_CHARA_PARTY_INFO      => 1;
         use constant EXE_CHARA_COMPOUND        => 1;
+        use constant EXE_CHARA_MOVE            => 1;
     use constant EXE_BATTLE               => 1;
 
 1;
