@@ -52,19 +52,21 @@ sub Main {
         &UploadData($upload, ConstData::EXE_DATA_SKILL_MASTERY,   "skill_masteries", "./output/data/skill_mastery.csv");
     }
     if (ConstData::EXE_CHARA) {
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,       "names",       "./output/chara/name_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_WORLD,      "worlds",      "./output/chara/world_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_STATUS,     "statuses",    "./output/chara/status_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_ITEM,       "items",       "./output/chara/item_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SUPERPOWER, "superpowers", "./output/chara/superpower_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SKILL,      "skills",      "./output/chara/skill_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_CARD,       "cards",       "./output/chara/card_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_STUDY,      "studies",     "./output/chara/study_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PLACE,      "places",      "./output/chara/place_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PARTY,      "parties",     "./output/chara/party_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PARTY_INFO, "party_infos", "./output/chara/party_info_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_COMPOUND,   "compounds",   "./output/chara/compound_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MOVE,       "moves",       "./output/chara/move_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,              "names",               "./output/chara/name_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_WORLD,             "worlds",              "./output/chara/world_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_STATUS,            "statuses",            "./output/chara/status_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_ITEM,              "items",               "./output/chara/item_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SUPERPOWER,        "superpowers",         "./output/chara/superpower_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SKILL,             "skills",              "./output/chara/skill_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_CARD,              "cards",               "./output/chara/card_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_STUDY,             "studies",             "./output/chara/study_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PLACE,             "places",              "./output/chara/place_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PARTY,             "parties",             "./output/chara/party_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_PARTY_INFO,        "party_infos",         "./output/chara/party_info_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_COMPOUND,          "compounds",           "./output/chara/compound_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MOVE,              "moves",               "./output/chara/move_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_BATTLE_INFO,  "next_battle_infos",   "./output/chara/next_battle_info_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_BATTLE_ENEMY, "next_battle_enemies", "./output/chara/next_battle_enemy_");
     }
     if (ConstData::EXE_BATTLE) {
     }

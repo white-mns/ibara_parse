@@ -29,6 +29,7 @@ require "./source/chara/Place.pm";
 require "./source/chara/Party.pm";
 require "./source/chara/Compound.pm";
 require "./source/chara/Move.pm";
+require "./source/chara/NextBattle.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -61,18 +62,19 @@ sub Init{
     $self->{ResultNo0} = sprintf ("%02d", $self->{ResultNo});
 
     #インスタンス作成
-    if (ConstData::EXE_CHARA_NAME)       { $self->{DataHandlers}{Name}       = Name->new();}
-    if (ConstData::EXE_CHARA_WORLD)      { $self->{DataHandlers}{World}      = World->new();}
-    if (ConstData::EXE_CHARA_STATUS)     { $self->{DataHandlers}{Status}     = Status->new();}
-    if (ConstData::EXE_CHARA_ITEM)       { $self->{DataHandlers}{Item}       = Item->new();}
-    if (ConstData::EXE_CHARA_SUPERPOWER) { $self->{DataHandlers}{Superpower} = Superpower->new();}
-    if (ConstData::EXE_CHARA_SKILL)      { $self->{DataHandlers}{Skill}      = Skill->new();}
-    if (ConstData::EXE_CHARA_CARD)       { $self->{DataHandlers}{Card}       = Card->new();}
-    if (ConstData::EXE_CHARA_SKILL)      { $self->{DataHandlers}{Study}      = Study->new();}
-    if (ConstData::EXE_CHARA_PLACE)      { $self->{DataHandlers}{Place}      = Place->new();}
-    if (ConstData::EXE_CHARA_PARTY)      { $self->{DataHandlers}{Party}      = Party->new();}
-    if (ConstData::EXE_CHARA_COMPOUND)   { $self->{DataHandlers}{Compound}   = Compound->new();}
-    if (ConstData::EXE_CHARA_MOVE)       { $self->{DataHandlers}{Move}       = Move->new();}
+    if (ConstData::EXE_CHARA_NAME)        { $self->{DataHandlers}{Name}       = Name->new();}
+    if (ConstData::EXE_CHARA_WORLD)       { $self->{DataHandlers}{World}      = World->new();}
+    if (ConstData::EXE_CHARA_STATUS)      { $self->{DataHandlers}{Status}     = Status->new();}
+    if (ConstData::EXE_CHARA_ITEM)        { $self->{DataHandlers}{Item}       = Item->new();}
+    if (ConstData::EXE_CHARA_SUPERPOWER)  { $self->{DataHandlers}{Superpower} = Superpower->new();}
+    if (ConstData::EXE_CHARA_SKILL)       { $self->{DataHandlers}{Skill}      = Skill->new();}
+    if (ConstData::EXE_CHARA_CARD)        { $self->{DataHandlers}{Card}       = Card->new();}
+    if (ConstData::EXE_CHARA_SKILL)       { $self->{DataHandlers}{Study}      = Study->new();}
+    if (ConstData::EXE_CHARA_PLACE)       { $self->{DataHandlers}{Place}      = Place->new();}
+    if (ConstData::EXE_CHARA_PARTY)       { $self->{DataHandlers}{Party}      = Party->new();}
+    if (ConstData::EXE_CHARA_COMPOUND)    { $self->{DataHandlers}{Compound}   = Compound->new();}
+    if (ConstData::EXE_CHARA_MOVE)        { $self->{DataHandlers}{Move}       = Move->new();}
+    if (ConstData::EXE_CHARA_NEXT_BATTLE) { $self->{DataHandlers}{NextBattle} = NextBattle->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -165,6 +167,7 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{Party}))      {$self->{DataHandlers}{Party}->GetData      ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Compound}))   {$self->{DataHandlers}{Compound}->GetData   ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Move}))       {$self->{DataHandlers}{Move}->GetData       ($e_no, $div_r870_nodes, $div_cimgnm_nodes)};
+    if (exists($self->{DataHandlers}{NextBattle})) {$self->{DataHandlers}{NextBattle}->GetData ($e_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }
