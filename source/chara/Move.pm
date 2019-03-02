@@ -38,7 +38,10 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
     
     #初期化
-    $self->{Datas}{Data}  = StoreData->new();
+    $self->{Datas}{Move}                = StoreData->new();
+    $self->{Datas}{MovePartyCount} = StoreData->new();
+    $self->{MoveParty} = {};
+
     my $header_list = "";
    
     $header_list = [
@@ -53,10 +56,21 @@ sub Init{
                 "landform_id",
     ];
 
-    $self->{Datas}{Data}->Init($header_list);
+    $self->{Datas}{Move}->Init($header_list);
+    
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "party_no",
+                "landform_id",
+                "move_count",
+    ];
+
+    $self->{Datas}{MovePartyCount}->Init($header_list);
     
     #出力ファイル設定
-    $self->{Datas}{Data}->SetOutputName( "./output/chara/move_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{Move}->SetOutputName          ( "./output/chara/move_"             . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{MovePartyCount}->SetOutputName( "./output/chara/move_party_count_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
     
     return;
 }
@@ -76,11 +90,29 @@ sub GetData{
 
     my $next_div_node = $self->SearchDivNodeFromTitleImg($div_r870_nodes, "next");
 
+    $self->InitializePartyMove();
     $self->GetMoveData($next_div_node, $div_cimgnm_nodes);
     
     return;
 }
 
+#-----------------------------------#
+#    データ取得
+#------------------------------------
+#    引数｜e_no,キャラクターイメージデータノード
+#-----------------------------------#
+sub InitializePartyMove{
+    my $self = shift;
+    
+    if (!exists ($self->{PartyMove}{sprintf("%04d", $self->{CommonDatas}{Party}{$self->{ENo}})})) {
+            $self->{PartyMove}{sprintf("%04d", $self->{CommonDatas}{Party}{$self->{ENo}})} = {};
+        for(my $i=1;$i<=5;$i++) {
+            $self->{PartyMove}{sprintf("%04d", $self->{CommonDatas}{Party}{$self->{ENo}})}{$i} = 0;
+        }
+    }
+    
+    return;
+}
 #-----------------------------------#
 #    行動DIVノード取得
 #------------------------------------
@@ -157,7 +189,8 @@ sub GetMove{
         
     }
 
-    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $move_no, $field_id, $area, $area_column, $area_row, $landform_id) ));
+    $self->{Datas}{Move}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $move_no, $field_id, $area, $area_column, $area_row, $landform_id) ));
+    $self->{PartyMove}{sprintf("%04d", $self->{CommonDatas}{Party}{$self->{ENo}})}{$landform_id} += 1;
 }
 
 #-----------------------------------#
@@ -185,8 +218,8 @@ sub GetPlaceData{
         $landform_id = $1;
     }
 
-    my @datas=($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $move_no, $field_id, $area, $area_column, $area_row, $landform_id);
-    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, @datas));
+    $self->{Datas}{Move}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $move_no, $field_id, $area, $area_column, $area_row, $landform_id)));
+    $self->{PartyMove}{sprintf("%04d", $self->{CommonDatas}{Party}{$self->{ENo}})}{$landform_id} += 1;
 
     return;
 }
@@ -216,6 +249,14 @@ sub GetLandformId{
 sub Output{
     my $self = shift;
     
+    foreach my $party_no (sort{$a cmp $b} keys %{$self->{PartyMove}}) {
+        foreach my $landform_id (keys %{$self->{PartyMove}{$party_no}}) {
+            my $count = $self->{PartyMove}{$party_no}{$landform_id};
+    
+            $self->{Datas}{MovePartyCount}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $party_no, $landform_id, $count)));
+        }
+    }
+
     foreach my $object( values %{ $self->{Datas} } ) {
         $object->Output();
     }

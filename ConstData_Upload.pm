@@ -36,6 +36,7 @@ use warnings;
         use constant EXE_CHARA_PARTY_INFO        => 1;
         use constant EXE_CHARA_COMPOUND          => 1;
         use constant EXE_CHARA_MOVE              => 1;
+        use constant EXE_CHARA_MOVE_PARTY_COUNT  => 1;
         use constant EXE_CHARA_NEXT_BATTLE_INFO  => 1;
         use constant EXE_CHARA_NEXT_BATTLE_ENEMY => 1;
     use constant EXE_BATTLE               => 1;

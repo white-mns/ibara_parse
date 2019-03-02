@@ -41,6 +41,8 @@ sub Init{
     #初期化
     $self->{Datas}{Party}     = StoreData->new();
     $self->{Datas}{PartyInfo} = StoreData->new();
+    $self->{CommonDatas}{Party} = {};
+
     my $header_list = "";
    
     $header_list = [
@@ -124,6 +126,7 @@ sub GetParty{
 
     $self->{Datas}{Party}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $party) ));
     
+    $self->{CommonDatas}{Party}{$self->{ENo}} = $party;
 
     return;
 }
