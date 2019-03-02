@@ -12,6 +12,7 @@ require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
+use source::lib::GetIbaraNode;
 
 
 #------------------------------------------------------------------#
@@ -82,8 +83,8 @@ sub GetData{
     
     $self->{ENo} = $e_no;
 
-    my $ne0_tr = $self->SearchMatchingTrNodeFromTitleImg($nodes, "ne0");
-    my $ne_tr  = $self->SearchMatchingTrNodeFromTitleImg($nodes, "ne");
+    my $ne0_tr = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ne0");
+    my $ne_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ne");
 
     $self->GetParty    ($ne0_tr, 0);
     $self->GetPartyInfo($ne0_tr, 0);
@@ -91,34 +92,6 @@ sub GetData{
     $self->GetParty    ($ne_tr,  1);
     $self->GetPartyInfo($ne_tr,  1);
     
-    return;
-}
-
-#-----------------------------------#
-#    対戦組み合わせTR取得
-#------------------------------------
-#    引数｜データノード
-#          タイトル画像名
-#-----------------------------------#
-sub SearchMatchingTrNodeFromTitleImg{
-    my $self = shift;
-    my $nodes = shift;
-    my $img_text   = shift;
-
-    foreach my $node (@$nodes) {
-        my $img_nodes = &GetNode::GetNode_Tag("img", \$node);
-
-        if (!scalar(@$img_nodes)) { next;}
-
-        my $title   = $$img_nodes[0]->attr("src");
-        if ($title =~ /$img_text.png/) {
-            my $table_nodes = &GetNode::GetNode_Tag("table", \$node);
-            my $tr_nodes = &GetNode::GetNode_Tag("tr", \$$table_nodes[0]);
-
-            return $$tr_nodes[0];
-        }
-    }
-
     return;
 }
 
@@ -147,7 +120,7 @@ sub GetParty{
 
     my $link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
 
-    my $party = $self->GetENoFromLink($$link_nodes[0]);
+    my $party = &GetIbaraNode::GetENoFromLink($$link_nodes[0]);
 
     $self->{Datas}{Party}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $party) ));
     
@@ -180,7 +153,7 @@ sub GetPartyInfo{
 
     my $child_link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
 
-    if ($self->{ENo} != $self->GetENoFromLink($$child_link_nodes[0]) ) { return;} # 戦闘ENoの判定
+    if ($self->{ENo} != &GetIbaraNode::GetENoFromLink($$child_link_nodes[0]) ) { return;} # 戦闘ENoの判定
 
     # パーティ情報の取得
     my ($name, $member_num) = (0, 0);
@@ -194,27 +167,6 @@ sub GetPartyInfo{
     $self->{Datas}{PartyInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $name, $member_num) ));
 
     return;
-}
-
-#-----------------------------------#
-#    リンクからENoを取得する
-#------------------------------------
-#    引数｜リンクノード
-#-----------------------------------#
-sub GetENoFromLink{
-    my $self = shift;
-    my $node = shift;
-    
-    if (!$node || $node !~ /HASH/) {return 0;}
-
-    my $url = $node->attr("href");
-
-    if ($url =~ /r(\d+).html/) {
-        return $1;
-    }
-
-    return 0;
-
 }
 
 #-----------------------------------#
