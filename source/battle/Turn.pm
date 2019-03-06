@@ -14,6 +14,7 @@ use ConstData;        #定数呼び出し
 use source::lib::GetNode;
 use source::lib::GetIbaraNode;
 
+require "./source/battle/Action.pm";
 
 #------------------------------------------------------------------#
 #    パッケージの定義
@@ -39,6 +40,7 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
     
     #初期化
+    $self->{Datas}{Action} = Action->new();
     $self->{Datas}{Data}  = StoreData->new();
     my $header_list = "";
 
@@ -47,11 +49,10 @@ sub Init{
                 "generate_no",
                 "party_no",
                 "battle_type",
-                "enemy_party_name_id",
-                "member_num",
     ];
 
     $self->{Datas}{Data}->Init($header_list);
+    $self->{Datas}{Action}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
    
     #出力ファイル設定
     #$self->{Datas}{Data}->SetOutputName ( "./output/battle/turn_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
@@ -72,6 +73,8 @@ sub GetData{
     
     $self->{PNo} = $p_no;
     $self->{BattleNo} = $battle_no;
+
+    $self->{Datas}{Action}->BattleStart();
 
     $self->ParseTurnNodes($nodes);
     
@@ -96,7 +99,7 @@ sub ParseTurnNodes{
 
         my $turn = $self->GetTurn($node);
 
-        print "turn : " . $turn . "\n";
+        $self->{Datas}{Action}->GetData($self->{PNo}, $self->{BattleNo}, $turn, $node);
     }
 
 
