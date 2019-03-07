@@ -14,7 +14,7 @@ use ConstData;        #定数呼び出し
 use source::lib::GetNode;
 use source::lib::GetIbaraNode;
 
-require "./source/battle/Action.pm";
+require "./source/battle/BattleAction.pm";
 
 #------------------------------------------------------------------#
 #    パッケージの定義
@@ -40,7 +40,7 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
     
     #初期化
-    $self->{Datas}{Action} = Action->new();
+    $self->{Datas}{BattleAction} = BattleAction->new();
     $self->{Datas}{Data}  = StoreData->new();
     my $header_list = "";
 
@@ -52,7 +52,7 @@ sub Init{
     ];
 
     $self->{Datas}{Data}->Init($header_list);
-    $self->{Datas}{Action}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{BattleAction}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
    
     #出力ファイル設定
     #$self->{Datas}{Data}->SetOutputName ( "./output/battle/turn_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
@@ -63,18 +63,16 @@ sub Init{
 #-----------------------------------#
 #    データ取得
 #------------------------------------
-#    引数｜e_no,名前データノード
+#    引数｜戦闘管理番号,PT番号,戦闘番号,戦闘開始時・Turn表記divノード
 #-----------------------------------#
 sub GetData{
-    my $self      = shift;
-    my $p_no      = shift;
-    my $battle_no = shift;
-    my $nodes     = shift;
+    my $self          = shift;
+    $self->{BattleId} = shift;
+    $self->{PNo}      = shift;
+    $self->{BattleNo} = shift;
+    my $nodes         = shift;
     
-    $self->{PNo} = $p_no;
-    $self->{BattleNo} = $battle_no;
-
-    $self->{Datas}{Action}->BattleStart();
+    $self->{Datas}{BattleAction}->BattleStart($self->{BattleId});
 
     $self->ParseTurnNodes($nodes);
     
@@ -84,10 +82,7 @@ sub GetData{
 #-----------------------------------#
 #    戦闘開始時・Turn表記に使われるdivノードを解析
 #------------------------------------
-#    引数｜対戦組み合わせデータノード
-#          パーティタイプ 
-#            0:今回戦闘
-#            1:次回予告
+#    引数｜Turn表記ノード
 #-----------------------------------#
 sub ParseTurnNodes{
     my $self = shift;
@@ -95,11 +90,17 @@ sub ParseTurnNodes{
 
     if (!$nodes) {return;}
 
+    { # 戦闘開始時発動付加の解析
+        my $img_nodes = &GetNode::GetNode_Tag("img", \$$nodes[0]);
+        if (scalar(@$img_nodes)) {
+            $self->{Datas}{BattleAction}->GetData(0, $$img_nodes[0]);
+        }
+    }
     foreach my $node (@$nodes) {
 
         my $turn = $self->GetTurn($node);
 
-        $self->{Datas}{Action}->GetData($self->{PNo}, $self->{BattleNo}, $turn, $node);
+        $self->{Datas}{BattleAction}->GetData($turn, $node);
     }
 
 
@@ -111,10 +112,7 @@ sub ParseTurnNodes{
 #-----------------------------------#
 #    戦闘開始時・Turn表記に使われるdivノードを解析
 #------------------------------------
-#    引数｜対戦組み合わせデータノード
-#          パーティタイプ 
-#            0:今回戦闘
-#            1:次回予告
+#    引数｜Turn表記ノード
 #-----------------------------------#
 sub GetTurn{
     my $self = shift;

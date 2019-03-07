@@ -17,6 +17,7 @@ use source::lib::GetNode;
 require "./source/lib/IO.pm";
 require "./source/lib/time.pm";
 
+require "./source/battle/BattleInfo.pm";
 require "./source/battle/Turn.pm";
 
 use ConstData;        #定数呼び出し
@@ -50,7 +51,8 @@ sub Init{
     $self->{ResultNo0} = sprintf ("%02d", $self->{ResultNo});
 
     #インスタンス作成
-    $self->{DataHandlers}{Turn} = Turn->new();
+    $self->{DataHandlers}{BattleInfo} = BattleInfo->new();
+    $self->{DataHandlers}{Turn}       = Turn->new();
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -105,6 +107,8 @@ sub ParsePage{
     my $e_no        = shift;
     my $battle_no   = shift;
 
+    my $battle_id = -1;
+
     #結果の読み込み
     my $content = "";
     $content = &IO::FileRead($file_name);
@@ -118,7 +122,10 @@ sub ParsePage{
     my $div_r870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "R870",    \$tree);
 
     # データリスト取得
-    if (exists($self->{DataHandlers}{Turn})) {$self->{DataHandlers}{Turn}->GetData($e_no, $battle_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{BattleInfo})) {
+        $battle_id = $self->{DataHandlers}{BattleInfo}->GetBattleId("r".$e_no."b".$battle_no, $e_no, $battle_no, $$div_r870_nodes[0]);
+    }
+    if (exists($self->{DataHandlers}{Turn})) {$self->{DataHandlers}{Turn}->GetData($battle_id, $e_no, $battle_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }
