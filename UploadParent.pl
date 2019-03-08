@@ -45,6 +45,8 @@ sub Main {
 
     $upload->DBConnect();
     
+    $upload->DeleteSameResult("uploaded_checks", $result_no, $generate_no);
+
     if (ConstData::EXE_DATA) {
         &UploadData($upload, ConstData::EXE_DATA_PROPER_NAME,     "proper_names",    "./output/data/proper_name.csv");
         &UploadData($upload, ConstData::EXE_DATA_SUPERPOWER_DATA, "superpower_data", "./output/data/superpower_data.csv");
@@ -74,6 +76,7 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTION,           "battle_actions",      "./output/battle/action_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTER,            "battle_acters",       "./output/battle/acter_");
     }
+        &UploadResult($upload, $result_no, $generate_no, 1,                                      "uploaded_checks",     "./output/etc/uploaded_check_");
     print "result_no:$result_no,generate_no:$generate_no\n";
     return;
 }
