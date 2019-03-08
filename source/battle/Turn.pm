@@ -90,12 +90,15 @@ sub ParseTurnNodes{
 
     if (!$nodes) {return;}
 
+    $self->{Datas}{BattleAction}->GetActerNickname($$nodes[0]);
+
     { # 戦闘開始時発動付加の解析
         my $img_nodes = &GetNode::GetNode_Tag("img", \$$nodes[0]);
         if (scalar(@$img_nodes)) {
             $self->{Datas}{BattleAction}->GetData(0, $$img_nodes[0]);
         }
     }
+
     foreach my $node (@$nodes) {
 
         my $turn = $self->GetTurn($node);

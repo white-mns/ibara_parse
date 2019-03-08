@@ -38,7 +38,8 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
     
     #初期化
-    $self->{Datas}{Data}   = StoreData->new();
+    $self->{Datas}{Action} = StoreData->new();
+    $self->{Datas}{Acter}  = StoreData->new();
     my $header_list = "";
 
     $header_list = [
@@ -51,7 +52,7 @@ sub Init{
                 "skill_id",
                 "fuka_id",
     ];
-    $self->{Datas}{Data}->Init($header_list);
+    $self->{Datas}{Action}->Init($header_list);
  
     $header_list = [
                 "result_no",
@@ -59,6 +60,7 @@ sub Init{
                 "battle_id",
                 "party_no",
     ];
+
     $header_list = [
                 "result_no",
                 "generate_no",
@@ -67,7 +69,9 @@ sub Init{
                 "acter_type",
                 "e_no",
                 "enemy_id",
+                "suffix_id",
     ];
+    $self->{Datas}{Acter}->Init($header_list);
 
     $header_list = [
                 "result_no",
@@ -82,7 +86,8 @@ sub Init{
 
   
     #出力ファイル設定
-    $self->{Datas}{Data}->SetOutputName ( "./output/battle/action_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{Action}->SetOutputName( "./output/battle/action_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{Acter}->SetOutputName ( "./output/battle/acter_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
 
     return;
 }
@@ -111,7 +116,7 @@ sub ParseBattleActionNodes{
     my $self = shift;
     my $turn_node = shift;
 
-    my ($acter_type, $e_no, $enemy_id) = (-1, -1, -1);
+    my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
 
     if (!$turn_node) {return;}
 
@@ -122,10 +127,21 @@ sub ParseBattleActionNodes{
         if ($node =~ /HASH/ && $node->tag eq "div" && $node->attr("class") && $node->attr("class") eq "R870") {last;}
         if ($node =~ /HASH/ && $node->tag eq "b" &&  $node->right =~ /HASH/ && $node->right->tag eq "dl") {
             if ($node->as_text =~ /(.+)の行動/) {
+                ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
+
                 my $nickname = $1;
                 $nickname =~ s/^▼//;
-                $e_no = $nickname;
-                $acter_type = 0;
+                $nickname =~ s/\s//g;
+
+                if (exists($self->{NicknameToEno}{$nickname})) {
+                    $e_no = $self->{NicknameToEno}{$nickname};
+                    $acter_type = 0;
+
+                } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
+                    $enemy_id = $self->{NicknameToEnemyId}{$nickname};
+                    $acter_type = 1;
+                }
+
             }
 
         } elsif ($node =~ /HASH/ && $node->tag eq "dl") {
@@ -134,9 +150,7 @@ sub ParseBattleActionNodes{
                 $self->GetBattleAction($acter_type, $e_no, $enemy_id, $dl_node);
             }
 
-            my ($acter_type, $e_no, $enemy_id) = (-1, -1, -1);
-            $self->{ActNo} += 1;
-            $self->{ActSubNo} += 1;
+            my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
         }
 
     }
@@ -183,17 +197,30 @@ sub GetBattleAction{
             $skill_name =~ s/！！//g;
             $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, 0, 0, 0, 0, 0, " "]);
 
-            $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
-            #$self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $self->{ActSubNo}, $acter_type, $e_no, $enemy_id) ));
+            $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
+            $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
 
+            $self->{ActNo} += 1;
             $self->{ActSubNo} += 1;
             
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /HK\d/) {
             my $node_text = $node->as_text;
             if ($node_text =~ /(.+)の(.+?)！/) {
+                my ($fuka_acter_type, $fuka_e_no, $fuka_enemy_id) = (-1, 0, 0);
                 $act_type = 2;
-                $e_no         = $1;
+
+                my $nickname  = $1;
                 my $fuka_name = $2;
+                $nickname =~ s/\s//g;
+
+                if (exists($self->{NicknameToEno}{$nickname})) {
+                    $fuka_e_no = $self->{NicknameToEno}{$nickname};
+                    $fuka_acter_type = 0;
+
+                } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
+                    $fuka_enemy_id = $self->{NicknameToEnemyId}{$nickname};
+                    $fuka_acter_type = 1;
+                }
 
                 my @right = $node->right;
 
@@ -204,9 +231,10 @@ sub GetBattleAction{
 
                 $fuka_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($fuka_name);
 
-                $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
-                #$self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $self->{ActSubNo}, $acter_type, $e_no, $enemy_id) ));
+                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
+                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $fuka_acter_type, $fuka_e_no, $fuka_enemy_id, 0) ));
 
+                $self->{ActNo} += 1;
                 $self->{ActSubNo} += 1;
 
             } elsif ($node_text =~ /通常攻撃！/) {
@@ -214,9 +242,10 @@ sub GetBattleAction{
 
                 $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, ["通常攻撃", 0, 0, 0, 0, 0, " "]);
 
-                $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
-                #$self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $self->{ActSubNo}, $acter_type, $e_no, $enemy_id) ));
+                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
+                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
 
+                $self->{ActNo} += 1;
                 $self->{ActSubNo} += 1;
             }
 
@@ -224,6 +253,42 @@ sub GetBattleAction{
     }
 
     return;
+}
+#-----------------------------------#
+#    戦闘開始時・行動番号をリセット
+#------------------------------------
+#    引数｜
+#-----------------------------------#
+sub GetActerNickname{
+    my $self = shift;
+    my $node = shift;
+
+    $self->{NicknameToEno}     = {};
+    $self->{NicknameToEnemyId} = {};
+
+    my $div_INIJN_nodes = &GetNode::GetNode_Tag_Attr("div", "class", 'INIJN', \$node);
+
+    foreach my $div_INIJN_node (@$div_INIJN_nodes) {
+        my $link_nodes = &GetNode::GetNode_Tag("a", \$div_INIJN_node);
+        if (scalar(@$link_nodes)) {
+            my $nickname = $$link_nodes[0]->as_text;
+            my $src = $$link_nodes[0]->attr("href");
+
+            $nickname =~ s/\s//g;
+
+            if ($src =~ /r(\d+)\.html/) {
+                $self->{NicknameToEno}{$nickname} = $1;
+            }
+
+        } else {
+            my @child_nodes = $div_INIJN_node->content_list;
+            my $enemy_name = $child_nodes[2];
+            $enemy_name =~ s/\s//g;
+            my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
+
+            $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
+        }
+    }
 }
 
 #-----------------------------------#
@@ -234,10 +299,12 @@ sub GetBattleAction{
 sub BattleStart{
     my $self = shift;
     $self->{BattleId} = shift;
+
     $self->{ActNo} = 0;
     $self->{ActSubNo} = 0;
+    $self->{NicknameToEno}  = {};
+    $self->{NicknameToEnemyId} = {};
 }
-
 
 #-----------------------------------#
 #    出力
