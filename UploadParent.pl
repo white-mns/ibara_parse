@@ -70,6 +70,9 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_BATTLE_ENEMY, "next_battle_enemies", "./output/chara/next_battle_enemy_");
     }
     if (ConstData::EXE_BATTLE) {
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTION,           "battle_actions",      "./output/battle/action_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTER,            "battle_acters",       "./output/battle/acter_");
     }
     print "result_no:$result_no,generate_no:$generate_no\n";
     return;

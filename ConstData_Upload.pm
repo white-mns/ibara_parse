@@ -40,5 +40,8 @@ use warnings;
         use constant EXE_CHARA_NEXT_BATTLE_INFO  => 1;
         use constant EXE_CHARA_NEXT_BATTLE_ENEMY => 1;
     use constant EXE_BATTLE               => 1;
+        use constant EXE_BATTLE_INFO             => 1;
+        use constant EXE_BATTLE_ACTION           => 1;
+        use constant EXE_BATTLE_ACTER            => 1;
 
 1;

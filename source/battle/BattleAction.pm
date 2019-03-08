@@ -1,0 +1,322 @@
+#===================================================================
+#        戦闘行動解析パッケージ
+#-------------------------------------------------------------------
+#            (C) 2019 @white_mns
+#===================================================================
+
+
+# パッケージの使用宣言    ---------------#   
+use strict;
+use warnings;
+require "./source/lib/Store_Data.pm";
+require "./source/lib/Store_HashData.pm";
+use ConstData;        #定数呼び出し
+use source::lib::GetNode;
+use source::lib::GetIbaraNode;
+
+#------------------------------------------------------------------#
+#    パッケージの定義
+#------------------------------------------------------------------#     
+package BattleAction;
+
+#-----------------------------------#
+#    コンストラクタ
+#-----------------------------------#
+sub new {
+  my $class = shift;
+  
+  bless {
+        Datas => {},
+  }, $class;
+}
+
+#-----------------------------------#
+#    初期化
+#-----------------------------------#
+sub Init{
+    my $self = shift;
+    ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
+    
+    #初期化
+    $self->{Datas}{Action} = StoreData->new();
+    $self->{Datas}{Acter}  = StoreData->new();
+    my $header_list = "";
+
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "battle_id",
+                "turn",
+                "act_id",
+                "act_type",
+                "skill_id",
+                "fuka_id",
+    ];
+    $self->{Datas}{Action}->Init($header_list);
+ 
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "battle_id",
+                "party_no",
+    ];
+
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "battle_id",
+                "act_id",
+                "acter_type",
+                "e_no",
+                "enemy_id",
+                "suffix_id",
+    ];
+    $self->{Datas}{Acter}->Init($header_list);
+
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "battle_id",
+                "act_id",
+                "act_sub_id",
+                "target_type",
+                "e_no",
+                "enemy_id",
+    ];
+
+  
+    #出力ファイル設定
+    $self->{Datas}{Action}->SetOutputName( "./output/battle/action_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{Acter}->SetOutputName ( "./output/battle/acter_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+
+    return;
+}
+
+#-----------------------------------#
+#    データ取得
+#------------------------------------
+#    引数｜ターン数,戦闘開始時・Turn表記divノード
+#-----------------------------------#
+sub GetData{
+    my $self          = shift;
+    $self->{Turn}     = shift;
+    my $node          = shift;
+
+    $self->ParseBattleActionNodes($node);
+    
+    return;
+}
+
+#-----------------------------------#
+#    戦闘開始時・Turn表記に使われるdivノードを元に、次のターン開始までの行動を解析
+#------------------------------------
+#    引数｜Turn表記ノード
+#-----------------------------------#
+sub ParseBattleActionNodes{
+    my $self = shift;
+    my $turn_node = shift;
+
+    my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
+
+    if (!$turn_node) {return;}
+
+    my @nodes = $turn_node->right;
+
+    foreach my $node (@nodes) {
+
+        if ($node =~ /HASH/ && $node->tag eq "div" && $node->attr("class") && $node->attr("class") eq "R870") {last;}
+        if ($node =~ /HASH/ && $node->tag eq "b" &&  $node->right =~ /HASH/ && $node->right->tag eq "dl") {
+            if ($node->as_text =~ /(.+)の行動/) {
+                ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
+
+                my $nickname = $1;
+                $nickname =~ s/^▼//;
+                $nickname =~ s/\s//g;
+
+                if (exists($self->{NicknameToEno}{$nickname})) {
+                    $e_no = $self->{NicknameToEno}{$nickname};
+                    $acter_type = 0;
+
+                } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
+                    $enemy_id = $self->{NicknameToEnemyId}{$nickname};
+                    $acter_type = 1;
+                }
+
+            }
+
+        } elsif ($node =~ /HASH/ && $node->tag eq "dl") {
+            my $dl_nodes = &GetNode::GetNode_Tag("dl", \$node);
+            foreach my $dl_node (@$dl_nodes) {  
+                $self->GetBattleAction($acter_type, $e_no, $enemy_id, $dl_node);
+            }
+
+            my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
+        }
+
+    }
+
+    return;
+}
+
+#-----------------------------------#
+#    戦闘行動dlノードを解析
+#------------------------------------
+#    引数｜行動種別
+#            0:通常攻撃
+#            1:アクティブスキル
+#            2:パッシブスキル・付加
+#          ENo
+#          敵ID
+#          戦闘行動ノード
+#-----------------------------------#
+sub GetBattleAction{
+    my $self = shift;
+    my $acter_type = shift;
+    my $e_no = shift;
+    my $enemy_id = shift;
+    my $dl_node = shift;
+
+    my @nodes = $dl_node->content_list;
+
+    foreach my $node (@nodes) {
+        my ($act_type, $skill_id, $fuka_id) = (-1, 0, 0);
+
+        if ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F\di/) {
+            $act_type = 1;
+
+            my $skill_name = $node->as_text;
+
+            my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
+
+            if (scalar(@$sk_nodes)) {
+                $skill_name = $$sk_nodes[0]->as_text;
+                $skill_name =~ s/^\>\>//g;
+            }
+
+            $skill_name =~ s/\s//g;
+            $skill_name =~ s/！！//g;
+            $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, 0, 0, 0, 0, 0, " "]);
+
+            $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
+            $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
+
+            $self->{ActNo} += 1;
+            $self->{ActSubNo} += 1;
+            
+        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /HK\d/) {
+            my $node_text = $node->as_text;
+            if ($node_text =~ /(.+)の(.+?)！/) {
+                my ($fuka_acter_type, $fuka_e_no, $fuka_enemy_id) = (-1, 0, 0);
+                $act_type = 2;
+
+                my $nickname  = $1;
+                my $fuka_name = $2;
+                $nickname =~ s/\s//g;
+
+                if (exists($self->{NicknameToEno}{$nickname})) {
+                    $fuka_e_no = $self->{NicknameToEno}{$nickname};
+                    $fuka_acter_type = 0;
+
+                } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
+                    $fuka_enemy_id = $self->{NicknameToEnemyId}{$nickname};
+                    $fuka_acter_type = 1;
+                }
+
+                my @right = $node->right;
+
+                if ($right[1] =~ /HASH/ && $right[1]->attr("class") && $right[1]->attr("class") =~ /SK\d/) {
+                    $fuka_name = $right[1]->as_text;
+                    $fuka_name =~ s/^\>\>//g;
+                }
+
+                $fuka_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($fuka_name);
+
+                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
+                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $fuka_acter_type, $fuka_e_no, $fuka_enemy_id, 0) ));
+
+                $self->{ActNo} += 1;
+                $self->{ActSubNo} += 1;
+
+            } elsif ($node_text =~ /通常攻撃！/) {
+                $act_type = 0;
+
+                $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, ["通常攻撃", 0, 0, 0, 0, 0, " "]);
+
+                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id) ));
+                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
+
+                $self->{ActNo} += 1;
+                $self->{ActSubNo} += 1;
+            }
+
+        }
+    }
+
+    return;
+}
+#-----------------------------------#
+#    戦闘開始時・行動番号をリセット
+#------------------------------------
+#    引数｜
+#-----------------------------------#
+sub GetActerNickname{
+    my $self = shift;
+    my $node = shift;
+
+    $self->{NicknameToEno}     = {};
+    $self->{NicknameToEnemyId} = {};
+
+    my $div_INIJN_nodes = &GetNode::GetNode_Tag_Attr("div", "class", 'INIJN', \$node);
+
+    foreach my $div_INIJN_node (@$div_INIJN_nodes) {
+        my $link_nodes = &GetNode::GetNode_Tag("a", \$div_INIJN_node);
+        if (scalar(@$link_nodes)) {
+            my $nickname = $$link_nodes[0]->as_text;
+            my $src = $$link_nodes[0]->attr("href");
+
+            $nickname =~ s/\s//g;
+
+            if ($src =~ /r(\d+)\.html/) {
+                $self->{NicknameToEno}{$nickname} = $1;
+            }
+
+        } else {
+            my @child_nodes = $div_INIJN_node->content_list;
+            my $enemy_name = $child_nodes[2];
+            $enemy_name =~ s/\s//g;
+            my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
+
+            $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
+        }
+    }
+}
+
+#-----------------------------------#
+#    戦闘開始時・行動番号をリセット
+#------------------------------------
+#    引数｜
+#-----------------------------------#
+sub BattleStart{
+    my $self = shift;
+    $self->{BattleId} = shift;
+
+    $self->{ActNo} = 0;
+    $self->{ActSubNo} = 0;
+    $self->{NicknameToEno}  = {};
+    $self->{NicknameToEnemyId} = {};
+}
+
+#-----------------------------------#
+#    出力
+#------------------------------------
+#    引数｜
+#-----------------------------------#
+sub Output{
+    my $self = shift;
+    
+    foreach my $object( values %{ $self->{Datas} } ) {
+        $object->Output();
+    }
+    return;
+}
+1;
