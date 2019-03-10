@@ -186,7 +186,7 @@ sub GetBattleAction{
 
             my $skill_name = $node->as_text;
 
-            if ($skill_name =~ /このターン、|領域効果/) {
+            if ($skill_name =~ /このターン、|領域効果|この列の全領域値が減少/) {
                 next;
             }
 
@@ -310,9 +310,15 @@ sub GetEnemyNickname{
     my @b_child_nodes = $child_nodes[0]->content_list;
     my $enemy_name = $b_child_nodes[2];
     $enemy_name =~ s/\s//g;
+    my $nickname = $enemy_name;
+
+    if ($enemy_name =~ /[A-Z]$/) {
+        chop($enemy_name);
+    }
+
     my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
 
-    $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
+    $self->{NicknameToEnemyId}{$nickname} = $enemy_id;
 }
 
 #-----------------------------------#
