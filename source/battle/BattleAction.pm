@@ -258,8 +258,9 @@ sub GetBattleAction{
 
     return;
 }
+
 #-----------------------------------#
-#    戦闘開始時・行動番号をリセット
+#    戦闘参加者の愛称を取得
 #------------------------------------
 #    引数｜
 #-----------------------------------#
@@ -285,14 +286,50 @@ sub GetActerNickname{
             }
 
         } else {
-            my @child_nodes = $div_INIJN_node->content_list;
-            my $enemy_name = $child_nodes[2];
-            $enemy_name =~ s/\s//g;
-            my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
+            if ($self->{ResultNo} > 1) {
+                $self->GetEnemyNickname($div_INIJN_node);
 
-            $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
+            } else {
+                $self->GetEnemyNickname_0_1($div_INIJN_node);
+            }
+
         }
     }
+}
+
+#-----------------------------------#
+#    敵の愛称を取得
+#------------------------------------
+#    引数｜
+#-----------------------------------#
+sub GetEnemyNickname{
+    my $self = shift;
+    my $node = shift;
+
+    my @child_nodes = $node->content_list;
+    my @b_child_nodes = $child_nodes[0]->content_list;
+    my $enemy_name = $b_child_nodes[2];
+    $enemy_name =~ s/\s//g;
+    my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
+
+    $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
+}
+
+#-----------------------------------#
+#    敵の愛称を取得
+#------------------------------------
+#    引数｜
+#-----------------------------------#
+sub GetEnemyNickname_0_1{
+    my $self = shift;
+    my $node = shift;
+
+    my @child_nodes = $node->content_list;
+    my $enemy_name = $child_nodes[2];
+    $enemy_name =~ s/\s//g;
+    my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
+
+    $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
 }
 
 #-----------------------------------#
