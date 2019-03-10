@@ -186,6 +186,10 @@ sub GetBattleAction{
 
             my $skill_name = $node->as_text;
 
+            if ($skill_name =~ /このターン、|領域効果/) {
+                next;
+            }
+
             my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
 
             if (scalar(@$sk_nodes)) {
