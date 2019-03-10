@@ -50,9 +50,9 @@ sub Main{
     
     push(@objects, ProperName->new()); # 固有名詞読み込み・保持
                                {push(@objects, UploadedCheck->new());} #データ更新状況チェック用データ作成
-    if (ConstData::EXE_CHARA)  {push(@objects, Character->new());} #キャラページ読み込み
-    if (ConstData::EXE_BATTLE) {push(@objects, Battle->new());}    #キャラページ読み込み
-    if (ConstData::EXE_ACT)    {push(@objects, Act->new());}       #宣言ページ読み込み
+    if (ConstData::EXE_CHARA)  {push(@objects, Character->new());}     #キャラページ読み込み
+    if (ConstData::EXE_BATTLE) {push(@objects, Battle->new());}        #キャラページ読み込み
+    if (ConstData::EXE_ACT)    {push(@objects, Act->new());}           #宣言ページ読み込み
 
     &Init(\@objects, $result_no, $generate_no, \%common_datas);
     &Execute(\@objects);
