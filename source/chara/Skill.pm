@@ -71,14 +71,7 @@ sub GetData{
 
     my $div_skill_node = $self->SearchNodeFromTitleImg($div_y870_nodes, "t_skill");
 
-    if (!$div_skill_node) {return;}
-
-    if ($self->{ResultNo} > 1) {
-        $self->GetSkillData($div_skill_node);
-
-    } else {
-        $self->GetSkillData_0_1($div_skill_node);
-    }
+    $self->GetSkillData($div_skill_node);
     
     return;
 }
