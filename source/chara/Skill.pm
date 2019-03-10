@@ -73,7 +73,12 @@ sub GetData{
 
     if (!$div_skill_node) {return;}
 
-    $self->GetSkillData($div_skill_node);
+    if ($self->{ResultNo} > 1) {
+        $self->GetSkillData($div_skill_node);
+
+    } else {
+        $self->GetSkillData_0_1($div_skill_node);
+    }
     
     return;
 }
@@ -89,6 +94,10 @@ sub GetSkillData{
 
     my $table_nodes = &GetNode::GetNode_Tag("table",\$div_node);
  
+    if ($self->{ResultNo} <= 1) {
+        $self->ParseTrData = $self->ParseTrData_0_1;
+    }
+
     $self->ParseTrData($$table_nodes[1]);
     $self->ParseTrData($$table_nodes[2]);
 
@@ -101,6 +110,59 @@ sub GetSkillData{
 #    引数｜スキルテーブルノード
 #-----------------------------------#
 sub ParseTrData{
+    my $self  = shift;
+    my $table_node = shift;
+
+    my $tr_nodes = &GetNode::GetNode_Tag("tr",\$table_node);
+    shift(@$tr_nodes);
+ 
+    foreach my $tr_node (@$tr_nodes){
+        my ($name, $skill_id, $lv) = ("", 0, 0);
+        my ($skill_name, $type_id, $element_id, $timing_id, $text) = ("", 0, 0, 0, "");
+
+        my $td_nodes = &GetNode::GetNode_Tag("td",\$tr_node);
+
+        my $td0_text = $$td_nodes[1]->as_text;
+        my @td0_child = $$td_nodes[1]->content_list;
+
+        if (scalar(@td0_child) > 1) {
+            $name       = $td0_child[0];
+            $skill_name = $td0_child[2]->as_text;
+            $skill_name =~ s/（//g;
+            $skill_name =~ s/）//g;
+
+        } else {
+            $name       = $$td_nodes[1]->as_text;
+            $skill_name = $$td_nodes[1]->as_text;
+        }
+
+        my $td0_class = $$td_nodes[1]->attr("class");
+        if ($td0_class && $td0_class =~ /Z(\d)/) {
+            $element_id = $1;
+        }
+
+        $text = $$td_nodes[5]->as_text;
+        if ($text =~ s/(【.+】)//) {
+            $type_id   = 1;
+            $timing_id = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
+        }
+
+        $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, $type_id, $element_id, $$td_nodes[3]->as_text, $$td_nodes[4]->as_text, $timing_id, $text]);
+        $lv = $$td_nodes[2]->as_text;
+
+        $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $skill_id, $lv)));
+    }
+
+    return;
+}
+
+
+#-----------------------------------#
+#    tableノード解析・取得(第1新規登録、第1回更新結果レイアウト)
+#------------------------------------
+#    引数｜スキルテーブルノード
+#-----------------------------------#
+sub ParseTrData_0_1{
     my $self  = shift;
     my $table_node = shift;
 
