@@ -88,6 +88,8 @@ sub GetData{
     my $ne0_tr = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ne0");
     my $ne_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ne");
 
+    $self->{CommonDatas}{Party}{$self->{ENo}} = $self->{ENo};
+
     $self->GetParty    ($ne0_tr, 0);
     $self->GetPartyInfo($ne0_tr, 0);
 
