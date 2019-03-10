@@ -87,12 +87,14 @@ sub GetSkillData{
 
     my $table_nodes = &GetNode::GetNode_Tag("table",\$div_node);
  
-    if ($self->{ResultNo} <= 1) {
-        $self->ParseTrData = $self->ParseTrData_0_1;
-    }
+    if ($self->{ResultNo} > 1) {
+        $self->ParseTrData($$table_nodes[1]);
+        $self->ParseTrData($$table_nodes[2]);
 
-    $self->ParseTrData($$table_nodes[1]);
-    $self->ParseTrData($$table_nodes[2]);
+    } else {
+        $self->ParseTrData_0_1($$table_nodes[1]);
+        $self->ParseTrData_0_1($$table_nodes[2]);
+    }
 
     return;
 }

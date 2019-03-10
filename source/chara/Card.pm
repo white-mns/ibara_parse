@@ -88,12 +88,13 @@ sub GetCardData{
     my $div_node = shift;
 
     my $table_nodes = &GetNode::GetNode_Tag("table",\$div_node);
- 
-    if ($self->{ResultNo} <= 1) {
-        $self->ParseTrData = $self->ParseTrData_0_1;
-    }
 
-    $self->ParseTrData($$table_nodes[0]);
+    if ($self->{ResultNo} > 1) {
+        $self->ParseTrData($$table_nodes[0]);
+
+    } else {
+        $self->ParseTrData_0_1($$table_nodes[0]);
+    }
 
     return;
 }
