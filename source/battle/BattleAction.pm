@@ -186,7 +186,7 @@ sub GetBattleAction{
 
             my $skill_name = $node->as_text;
 
-            if ($skill_name =~ /このターン、|領域効果|この列の全領域値が減少/) {
+            if ($skill_name =~ /このターン、|領域効果|この列の全領域値が減少|前ターンのクリティカル数/) {
                 next;
             }
 

@@ -190,6 +190,8 @@ sub GetMove{
     }
 
     $self->{Datas}{Move}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $move_no, $field_id, $area, $area_column, $area_row, $landform_id) ));
+    
+    $landform_id = ($landform_id == 6) ? 1 : $landform_id; # チェックポイントの敵判定は道路として扱う
     $self->{PartyMove}{sprintf("%04d", $self->{CommonDatas}{Party}{$self->{ENo}})}{$landform_id} += 1;
 }
 
@@ -219,6 +221,8 @@ sub GetPlaceData{
     }
 
     $self->{Datas}{Move}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $move_no, $field_id, $area, $area_column, $area_row, $landform_id)));
+    
+    $landform_id = ($landform_id == 6) ? 1 : $landform_id; # チェックポイントの敵判定は道路として扱う
     $self->{PartyMove}{sprintf("%04d", $self->{CommonDatas}{Party}{$self->{ENo}})}{$landform_id} += 1;
 
     return;
@@ -233,7 +237,7 @@ sub GetLandformId{
     my $self = shift;
     my $text = shift;
 
-    my %landforms = ("道路" => 1, "草原" => 2, "沼地" => 3, "森林" => 4, "山岳" => 5);
+    my %landforms = ("道路" => 1, "草原" => 2, "沼地" => 3, "森林" => 4, "山岳" => 5, "チェックポイント" => 6);
 
     if (exists($landforms{$text})) {
         return $landforms{$text};

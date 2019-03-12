@@ -106,7 +106,7 @@ sub GetBattleInfo{
     elsif($src =~ /nd0/) {$battle_type = 10;}
     elsif($src =~ /ng0/) {$battle_type = 11;}
 
-    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{BattlePage}, 0) ));
+    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{BattlePage}, $battle_type) ));
 
     return;
 }
