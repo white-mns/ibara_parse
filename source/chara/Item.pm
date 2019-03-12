@@ -116,43 +116,8 @@ sub GetItemData{
         $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($$td_nodes[2]->as_text);
         $strength = $$td_nodes[3]->as_text;
 
-        my $td_node4_text = $$td_nodes[4]->as_text;
-
-        if ($td_node4_text =~ s/【射程(\d+)】//g) {
-            $range = $1;
-        }
-
-        my @effect_texts = split(/［.+?］/, $td_node4_text);
-        my $loop = scalar(@effect_texts);
-
-        # 効果データの解析
-        for (my $i=1; $i < $loop; $i++) {
-            $effect_texts[$i] =~ s/\s//;
-
-            if ($effect_texts[$i] =~ /(.+)\(LV(\d+)\)/) {
-                my $effect = $1;
-                $$effects[$i-1]{"need_lv"} = $2;
-
-                if ($effect =~ /(\D+)(\d+)/) {
-                    $$effects[$i-1]{"id"}    = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
-                    $$effects[$i-1]{"value"} = $2;
-
-                } else {
-                    # 効果に数値がないとき
-                    $$effects[$i-1]{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect);
-                }
-            } else {
-                # 料理・装備等必要Lvの表記がない時
-                if ($effect_texts[$i] =~ /(\D+)(\d+)/) {
-                    $$effects[$i-1]{"id"}    = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
-                    $$effects[$i-1]{"value"} = $2;
-
-                } else {
-                    # 効果に数値がないとき
-                    $$effects[$i-1]{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect_texts[$i]);
-                }
-            }
-        }
+        if (scalar(@$td_nodes) > 5) { $self->GetCreatedItemData ($td_nodes, $effects, \$range);}
+        else                        { $self->GetMaterialItemData($td_nodes, $effects, \$range);}
 
         $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $i_no, $name, $kind_id, $strength, $range,
                                                               $$effects[0]{"id"}, $$effects[0]{"value"}, $$effects[0]{"need_lv"},
@@ -161,6 +126,96 @@ sub GetItemData{
     }
 
     return;
+}
+
+#-----------------------------------#
+#    装備・料理アイテム解析
+#------------------------------------
+#    引数｜アイテムデータノード
+#          付加効果データハッシュ
+#          射程
+#-----------------------------------#
+sub GetCreatedItemData{
+    my $self  = shift;
+    my $td_nodes = shift;
+    my $effects = shift;
+    my $range = shift;
+
+    if ($$td_nodes[7]->as_text =~ /【射程(\d+)】/) {
+        $$range = $1;
+    }
+
+    # 効果データの解析
+    for (my $i=4; $i < 7; $i++) {
+        $self->GetEffect($$effects[$i-4], $$td_nodes[$i]->as_text);
+
+    }
+}
+
+#-----------------------------------#
+#    素材・食材アイテム解析
+#------------------------------------
+#    引数｜アイテムデータノード
+#          付加効果データハッシュ
+#          射程
+#-----------------------------------#
+sub GetMaterialItemData{
+    my $self  = shift;
+    my $td_nodes = shift;
+    my $effects = shift;
+    my $range = shift;
+
+    my $td_node4_text = $$td_nodes[4]->as_text;
+
+    if ($td_node4_text =~ s/【射程(\d+)】//g) {
+        $$range = $1;
+    }
+
+    my @effect_texts = split(/［.+?］/, $td_node4_text);
+    my $loop = scalar(@effect_texts);
+
+    # 効果データの解析
+    for (my $i=1; $i < $loop; $i++) {
+        $self->GetEffect($$effects[$i-1], $effect_texts[$i]);
+  
+    }
+}
+
+#-----------------------------------#
+#    アイテム付加効果取得
+#------------------------------------
+#    引数｜アイテムデータノード
+#-----------------------------------#
+sub GetEffect{
+    my $self  = shift;
+    my $effect_hash = shift;
+    my $effect_text = shift;
+
+    $effect_text =~ s/\s//;
+
+    if ($effect_text =~ /(.+)\(LV(\d+)\)/) {
+        my $effect = $1;
+        $$effect_hash{"need_lv"} = $2;
+
+        if ($effect =~ /(\D+)(\d+)/) {
+            $$effect_hash{"id"}    = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
+            $$effect_hash{"value"} = $2;
+
+        } else {
+            # 効果に数値がないとき
+            $$effect_hash{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect);
+        }
+    } else {
+        # 料理・装備等必要Lvの表記がない時
+        if ($effect_text =~ /(\D+)(\d+)/) {
+            $$effect_hash{"id"}    = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
+            $$effect_hash{"value"} = $2;
+
+        } else {
+            # 効果に数値がないとき
+            $$effect_hash{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect_text);
+        }
+    }
 }
 
 #-----------------------------------#
