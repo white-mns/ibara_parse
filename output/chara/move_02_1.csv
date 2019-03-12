@@ -1455,7 +1455,7 @@ result_no	generate_no	e_no	move_no	field_id	area	area_column	area_row	landform_i
 02	1	395	2	39	H-5	H	5	2
 02	1	395	3	39	G-5	G	5	2
 02	1	395	4	39	F-5	F	5	1
-02	1	395	5	39	E-5	E	5	0
+02	1	395	5	39	E-5	E	5	6
 02	1	396	0	39	E-5	E	5	1
 02	1	397	0	39	E-5	E	5	1
 02	1	398	1	39	F-10	F	10	4
@@ -1658,7 +1658,7 @@ result_no	generate_no	e_no	move_no	field_id	area	area_column	area_row	landform_i
 02	1	449	2	39	F-7	F	7	2
 02	1	449	3	39	E-7	E	7	1
 02	1	449	4	39	E-6	E	6	1
-02	1	449	5	39	E-5	E	5	0
+02	1	449	5	39	E-5	E	5	6
 02	1	450	0	39	D-2	D	2	1
 02	1	451	1	39	K-5	K	5	4
 02	1	451	2	39	L-5	L	5	4
@@ -5754,7 +5754,7 @@ result_no	generate_no	e_no	move_no	field_id	area	area_column	area_row	landform_i
 02	1	1646	1	39	F-5	F	5	1
 02	1	1646	2	39	F-6	F	6	1
 02	1	1646	3	39	E-6	E	6	1
-02	1	1646	4	39	E-5	E	5	0
+02	1	1646	4	39	E-5	E	5	6
 02	1	1647	0	39	B-4	B	4	2
 02	1	1648	1	39	E-6	E	6	1
 02	1	1648	2	39	F-6	F	6	1
