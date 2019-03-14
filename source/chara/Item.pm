@@ -10,6 +10,9 @@ use strict;
 use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
+
+require "./source/new/NewItemFuka.pm";
+
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
 
@@ -39,6 +42,10 @@ sub Init{
     
     #初期化
     $self->{Datas}{Data}  = StoreData->new();
+    $self->{Datas}{New}   = NewItemFuka->new();
+
+    $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+
     my $header_list = "";
    
     $header_list = [
@@ -216,6 +223,8 @@ sub GetEffect{
             $$effect_hash{"id"} = $self->{CommonDatas}{ProperName}->GetOrAddId($effect_text);
         }
     }
+
+    $self->{Datas}{New}->RecordNewItemFukaData($$effect_hash{"id"});
 }
 
 #-----------------------------------#
