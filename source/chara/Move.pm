@@ -89,6 +89,8 @@ sub GetData{
     $self->{ENo} = $e_no;
 
     my $next_div_node = $self->SearchDivNodeFromTitleImg($div_r870_nodes, "next");
+    
+    if (!$next_div_node) { return;}
 
     $self->InitializePartyMove();
     $self->GetMoveData($next_div_node, $div_cimgnm_nodes);
