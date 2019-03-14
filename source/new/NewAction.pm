@@ -70,7 +70,7 @@ sub ReadLastNewData(){
     my $file_name = "";
     # 前回結果の確定版ファイルを探索
     for (my $i=5; $i>=0; $i--){
-        $file_name = "./output/new/all_action_" . ($self->{ResultNo} - 1) . "_" . $i . ".csv" ;
+        $file_name = "./output/new/all_action_" . sprintf("%02d", ($self->{ResultNo} - 1)) . "_" . $i . ".csv" ;
         if(-f $file_name) {last;}
     }
     
