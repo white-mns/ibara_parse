@@ -45,5 +45,6 @@ use warnings;
         use constant EXE_BATTLE_ACTER            => 1;
     use constant EXE_NEW                  => 1;
         use constant EXE_NEW_ITEM_FUKA           => 1;
+        use constant EXE_NEW_ACTION              => 1;
 
 1;
