@@ -53,6 +53,10 @@ sub Main {
         &UploadData($upload, ConstData::EXE_DATA_SKILL_DATA,      "skill_data",      "./output/data/skill_data.csv");
         &UploadData($upload, ConstData::EXE_DATA_SKILL_MASTERY,   "skill_masteries", "./output/data/skill_mastery.csv");
     }
+    if (ConstData::EXE_NEW) {
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM_FUKA,           "new_item_fukas",      "./output/new/item_fuka_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ACTION,              "new_actions",         "./output/new/action_");
+    }
     if (ConstData::EXE_CHARA) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,              "names",               "./output/chara/name_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_WORLD,             "worlds",              "./output/chara/world_");

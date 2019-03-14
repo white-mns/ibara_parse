@@ -10,6 +10,9 @@ use strict;
 use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
+
+require "./source/new/NewAction.pm";
+
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
 use source::lib::GetIbaraNode;
@@ -40,6 +43,10 @@ sub Init{
     #初期化
     $self->{Datas}{Action} = StoreData->new();
     $self->{Datas}{Acter}  = StoreData->new();
+    $self->{Datas}{New}    = NewAction->new();
+
+    $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+
     my $header_list = "";
 
     $header_list = [
@@ -205,6 +212,8 @@ sub GetBattleAction{
             $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id, -1) ));
             $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
 
+            $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+
             $self->{ActNo} += 1;
             $self->{ActSubNo} += 1;
             
@@ -243,6 +252,8 @@ sub GetBattleAction{
                 $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id, $lv) ));
                 $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $fuka_acter_type, $fuka_e_no, $fuka_enemy_id, 0) ));
 
+                $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+
                 $self->{ActNo} += 1;
                 $self->{ActSubNo} += 1;
 
@@ -253,6 +264,8 @@ sub GetBattleAction{
 
                 $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id, -1) ));
                 $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
+
+                $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
                 $self->{ActNo} += 1;
                 $self->{ActSubNo} += 1;

@@ -98,6 +98,8 @@ sub GetData{
 
     my $action_div_node = $self->SearchDivNodeFromTitleImg($nodes, "action");
 
+    if (!$action_div_node) { return;}
+
     $self->GetCompoundData($action_div_node);
     
     return;
