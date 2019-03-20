@@ -11,6 +11,7 @@ use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
 
+require "./source/battle/Damage.pm";
 require "./source/new/NewAction.pm";
 
 use ConstData;        #定数呼び出し
@@ -44,8 +45,10 @@ sub Init{
     $self->{Datas}{Action} = StoreData->new();
     $self->{Datas}{Acter}  = StoreData->new();
     $self->{Datas}{New}    = NewAction->new();
+    $self->{Datas}{Damage} = Damage->new();
 
-    $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{New}->Init   ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{Damage}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
 
     my $header_list = "";
 
@@ -61,13 +64,6 @@ sub Init{
                 "lv",
     ];
     $self->{Datas}{Action}->Init($header_list);
- 
-    $header_list = [
-                "result_no",
-                "generate_no",
-                "battle_id",
-                "party_no",
-    ];
 
     $header_list = [
                 "result_no",
@@ -80,18 +76,6 @@ sub Init{
                 "suffix_id",
     ];
     $self->{Datas}{Acter}->Init($header_list);
-
-    $header_list = [
-                "result_no",
-                "generate_no",
-                "battle_id",
-                "act_id",
-                "act_sub_id",
-                "target_type",
-                "e_no",
-                "enemy_id",
-    ];
-
   
     #出力ファイル設定
     $self->{Datas}{Action}->SetOutputName( "./output/battle/action_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
@@ -313,6 +297,8 @@ sub GetActerNickname{
 
         }
     }
+
+    $self->{Datas}{Damage}->SetActerNickname($self->{NicknameToEno}, $self->{NicknameToEnemyId});
 }
 
 #-----------------------------------#
@@ -369,6 +355,8 @@ sub BattleStart{
     $self->{ActSubNo} = 0;
     $self->{NicknameToEno}  = {};
     $self->{NicknameToEnemyId} = {};
+
+    $self->{Datas}{Damage}->BattleStart($self->{BattleId});
 }
 
 #-----------------------------------#
