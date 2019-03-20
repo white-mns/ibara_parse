@@ -104,6 +104,7 @@ sub Init{
 sub ParseDamageNode{
     my $self          = shift;
     my $b_node        = shift;
+    my $critical      = shift;
     $self->{ActId}    = shift;
     $self->{ActSubId} = shift;
 
@@ -131,6 +132,7 @@ sub ParseDamageNode{
  
     $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, $element_id, $damage) ));
     $self->{Datas}{Target}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $target_type, $e_no, $enemy_id, 0) ));
+    $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("Critical Hit"), $critical) ));
 
     return;
 }
@@ -147,6 +149,7 @@ sub ParseDamageNode{
 sub ParseDodgeNode{
     my $self          = shift;
     my $node          = shift;
+    my $critical      = shift;
     $self->{ActId}    = shift;
     $self->{ActSubId} = shift;
 
@@ -169,6 +172,7 @@ sub ParseDodgeNode{
 
     $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, 0, $damage) ));
     $self->{Datas}{Target}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $target_type, $e_no, $enemy_id, 0) ));
+    $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("Critical Hit"), $critical) ));
 
     return;
 }
@@ -188,17 +192,11 @@ sub ParseCriticalNode{
     $self->{ActId}    = shift;
     $self->{ActSubId} = shift;
 
-    my $buffer_type = $self->{CommonDatas}{ProperName}->GetOrAddId("Critical Hit");
-
-    if (!$i_node) {return;}
+    if (!$i_node) {return 0;}
 
     my $value = (() = $i_node->as_text =~ /Critical Hit!!/g);
 
-    if ($value == 0) {return;}
-
-    $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $buffer_type, $value) ));
-
-    return;
+    return $value;
 }
 
 #-----------------------------------#
@@ -226,112 +224,6 @@ sub GetENoOrEnemyIdFromNickname{
         $$enemy_id = $self->{NicknameToEnemyId}{$nickname};
         $$type = 1;
     }
-}
-
-
-#-----------------------------------#
-#    戦闘行動dlノードを解析
-#------------------------------------
-#    引数｜行動種別
-#            0:通常攻撃
-#            1:アクティブスキル
-#            2:パッシブスキル・付加
-#          ENo
-#          敵ID
-#          戦闘行動ノード
-#-----------------------------------#
-sub GetDamage{
-    my $self = shift;
-    my $acter_type = shift;
-    my $e_no = shift;
-    my $enemy_id = shift;
-    my $dl_node = shift;
-
-    my @nodes = $dl_node->content_list;
-
-    foreach my $node (@nodes) {
-        my ($act_type, $skill_id, $fuka_id) = (-1, 0, 0);
-
-        if ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F\di/) {
-            $act_type = 1;
-
-            my $skill_name = $node->as_text;
-
-            if ($skill_name =~ /このターン、|領域効果|この列の全領域値が減少|前ターンのクリティカル数/) {
-                next;
-            }
-
-            my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
-
-            if (scalar(@$sk_nodes)) {
-                $skill_name = $$sk_nodes[0]->as_text;
-                $skill_name =~ s/^\>\>//g;
-            }
-
-            $skill_name =~ s/\s//g;
-            $skill_name =~ s/！！//g;
-            $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, 0, 0, 0, 0, 0, " "]);
-
-            $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
-            $self->{Datas}{Target}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
-
-            $self->{ActId} += 1;
-            $self->{ActSubId} += 1;
-            
-        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /HK\d/) {
-            my $node_text = $node->as_text;
-            if ($node_text =~ /(.+)の(.+?)！/) {
-                my ($fuka_acter_type, $fuka_e_no, $fuka_enemy_id, $lv) = (-1, 0, 0, -1);
-                $act_type = 2;
-
-                my $nickname  = $1;
-                my $fuka_name = $2;
-                $nickname =~ s/\s//g;
-
-                if (exists($self->{NicknameToEno}{$nickname})) {
-                    $fuka_e_no = $self->{NicknameToEno}{$nickname};
-                    $fuka_acter_type = 0;
-
-                } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
-                    $fuka_enemy_id = $self->{NicknameToEnemyId}{$nickname};
-                    $fuka_acter_type = 1;
-                }
-
-                my @right = $node->right;
-
-                if ($right[1] =~ /HASH/ && $right[1]->attr("class") && $right[1]->attr("class") =~ /SK\d/) {
-                    $fuka_name = $right[1]->as_text;
-                    $fuka_name =~ s/^\>\>//g;
-                }
-
-                if ($fuka_name =~ s/LV(\d+)//) {
-                    $lv = $1;
-                }
-
-                $fuka_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($fuka_name);
-
-                $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, $lv) ));
-                $self->{Datas}{Target}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $fuka_acter_type, $fuka_e_no, $fuka_enemy_id, 0) ));
-
-                $self->{ActId} += 1;
-                $self->{ActSubId} += 1;
-
-            } elsif ($node_text =~ /通常攻撃！/) {
-                $act_type = 0;
-
-                $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, ["通常攻撃", 0, 0, 0, 0, 0, " "]);
-
-                $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
-                $self->{Datas}{Target}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
-
-                $self->{ActId} += 1;
-                $self->{ActSubId} += 1;
-            }
-
-        }
-    }
-
-    return;
 }
 
 #-----------------------------------#
