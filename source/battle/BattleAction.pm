@@ -139,7 +139,12 @@ sub ParseBattleActionNodes{
         } elsif ($node =~ /HASH/ && $node->tag eq "dl") {
             my $dl_nodes = &GetNode::GetNode_Tag("dl", \$node);
             foreach my $dl_node (@$dl_nodes) {  
+                if (!$dl_node->attr("class")) {next;} # class属性のないdlノードは、直下のdlノードに情報が全て入っているため解析・カウントを除外する
+
                 $self->GetBattleAction($acter_type, $e_no, $enemy_id, $dl_node);
+
+                $self->{ActNo} += 1;
+                $self->{ActSubNo} += 1;
             }
 
             my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
@@ -198,8 +203,6 @@ sub GetBattleAction{
 
             $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
-            $self->{ActNo} += 1;
-            $self->{ActSubNo} += 1;
             
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /HK\d/) {
             my $node_text = $node->as_text;
@@ -238,9 +241,6 @@ sub GetBattleAction{
 
                 $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
-                $self->{ActNo} += 1;
-                $self->{ActSubNo} += 1;
-
             } elsif ($node_text =~ /通常攻撃！/) {
                 $act_type = 0;
 
@@ -250,11 +250,7 @@ sub GetBattleAction{
                 $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
 
                 $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
-
-                $self->{ActNo} += 1;
-                $self->{ActSubNo} += 1;
             }
-
         }
     }
 
