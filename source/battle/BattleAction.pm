@@ -207,20 +207,21 @@ sub GetBattleAction{
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /HK\d/) {
             my $node_text = $node->as_text;
             if ($node_text =~ /(.+)の(.+?)！/) {
-                my ($fuka_acter_type, $fuka_e_no, $fuka_enemy_id, $lv) = (-1, 0, 0, -1);
                 $act_type = 2;
+                ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
+                my $lv = -1;
 
                 my $nickname  = $1;
                 my $fuka_name = $2;
                 $nickname =~ s/\s//g;
 
                 if (exists($self->{NicknameToEno}{$nickname})) {
-                    $fuka_e_no = $self->{NicknameToEno}{$nickname};
-                    $fuka_acter_type = 0;
+                    $e_no = $self->{NicknameToEno}{$nickname};
+                    $acter_type = 0;
 
                 } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
-                    $fuka_enemy_id = $self->{NicknameToEnemyId}{$nickname};
-                    $fuka_acter_type = 1;
+                    $enemy_id = $self->{NicknameToEnemyId}{$nickname};
+                    $acter_type = 1;
                 }
 
                 my @right = $node->right;
@@ -237,7 +238,7 @@ sub GetBattleAction{
                 $fuka_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($fuka_name);
 
                 $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id, $lv) ));
-                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $fuka_acter_type, $fuka_e_no, $fuka_enemy_id, 0) ));
+                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
 
                 $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
