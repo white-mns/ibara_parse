@@ -178,7 +178,7 @@ sub GetBattleAction{
     foreach my $node (@nodes) {
         my ($act_type, $skill_id, $fuka_id) = (-1, 0, 0);
 
-        if ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F\di/) {
+        if ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F[87]i/) {
             $act_type = 1;
 
             my $skill_name = $node->as_text;
@@ -256,11 +256,14 @@ sub GetBattleAction{
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /BS\d/) {
             $self->GetBattleAction($acter_type, $e_no, $enemy_id, $node);
 
-        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /^[0-9]+$/) {
+        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /^[0-9]+$/) { # ダメージの解析
             $self->{Datas}{Damage}->ParseDamageNode($node, $self->{ActId}, $self->{ActSubId});
             $self->{ActSubId} += 1;
 
-        } elsif ($node =~ /攻撃を回避！$/) {
+        } elsif ($node =~ /HASH/ && $node->tag eq "i" && $node->attr("class") && $node->attr("class") =~ /Y4/) { # クリティカル数の取得
+            $self->{Datas}{Damage}->ParseCriticalNode($node, $self->{ActId}, $self->{ActSubId});
+
+        } elsif (($node =~ /攻撃を回避！$/) || ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /攻撃を回避！$/)) {
             $self->{Datas}{Damage}->ParseDodgeNode($node, $self->{ActId}, $self->{ActSubId});
             $self->{ActSubId} += 1;
         }

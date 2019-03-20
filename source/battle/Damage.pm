@@ -41,6 +41,7 @@ sub Init{
     #初期化
     $self->{Datas}{Damage} = StoreData->new();
     $self->{Datas}{Target} = StoreData->new();
+    $self->{Datas}{Buffer} = StoreData->new();
 
     my $header_list = "";
 
@@ -51,6 +52,7 @@ sub Init{
                 "act_id",
                 "act_sub_id",
                 "damage_type",
+                "element_id",
                 "value",
     ];
     $self->{Datas}{Damage}->Init($header_list);
@@ -67,10 +69,22 @@ sub Init{
                 "suffix_id",
     ];
     $self->{Datas}{Target}->Init($header_list);
+
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "battle_id",
+                "act_id",
+                "act_sub_id",
+                "buffer_type",
+                "value",
+    ];
+    $self->{Datas}{Buffer}->Init($header_list);
   
     #出力ファイル設定
     $self->{Datas}{Damage}->SetOutputName( "./output/battle/damage_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
     $self->{Datas}{Target}->SetOutputName( "./output/battle/target_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{Buffer}->SetOutputName( "./output/battle/buffer_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
 
     return;
 }
@@ -95,6 +109,7 @@ sub ParseDamageNode{
 
     my ($target_type, $e_no, $enemy_id) = (-1, 0, 0);
     my $damage_type = -1;
+    my $element_id  = 0;
 
     if (!$b_node || !$b_node->left || !$b_node->right) {return;}
 
@@ -114,7 +129,7 @@ sub ParseDamageNode{
 
     my $damage = $b_node->as_text;
  
-    $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, $damage) ));
+    $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, $element_id, $damage) ));
     $self->{Datas}{Target}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $target_type, $e_no, $enemy_id, 0) ));
 
     return;
@@ -131,29 +146,60 @@ sub ParseDamageNode{
 #-----------------------------------#
 sub ParseDodgeNode{
     my $self          = shift;
-    my $text          = shift;
+    my $node          = shift;
     $self->{ActId}    = shift;
     $self->{ActSubId} = shift;
 
     my ($target_type, $e_no, $enemy_id) = (-1, 0, 0);
     my $damage_type = 0;
 
-    if (!$text) {return;}
+    if (!$node) {return;}
 
-    if ($text !~ /(.+)は攻撃を回避！$/) { return;}
-    my $nickname = $1;
+    my $nickname = "";
+
+    if ($node =~ /(.+)は攻撃を回避！$/)             { $nickname = $1}
+    elsif ($node->as_text =~ /(.+)は攻撃を回避！$/) { $nickname = $1}
+    else                                            { return;}
+
     $nickname =~ s/^\s//g;
 
     $self->GetENoOrEnemyIdFromNickname($nickname, \$target_type, \$e_no, \$enemy_id);
 
     my $damage = -1;
 
-    $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, $damage) ));
+    $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, 0, $damage) ));
     $self->{Datas}{Target}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $target_type, $e_no, $enemy_id, 0) ));
 
     return;
 }
 
+#-----------------------------------#
+#    クリティカルを解析
+#    ダメージ種別
+#      0:回避
+#------------------------------------
+#    引数｜ダメージノード
+#          行動番号
+#          行動サブ番号
+#-----------------------------------#
+sub ParseCriticalNode{
+    my $self          = shift;
+    my $i_node        = shift;
+    $self->{ActId}    = shift;
+    $self->{ActSubId} = shift;
+
+    my $buffer_type = $self->{CommonDatas}{ProperName}->GetOrAddId("Critical Hit");
+
+    if (!$i_node) {return;}
+
+    my $value = (() = $i_node->as_text =~ /Critical Hit!!/g);
+
+    if ($value == 0) {return;}
+
+    $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $buffer_type, $value) ));
+
+    return;
+}
 
 #-----------------------------------#
 #    対象のENoおよび敵番号を取得
@@ -171,7 +217,6 @@ sub GetENoOrEnemyIdFromNickname{
     my $type = shift;
     my $e_no = shift;
     my $enemy_id = shift;
-    print $nickname."\n";
 
     if (exists($self->{NicknameToEno}{$nickname})) {
         $$e_no = $self->{NicknameToEno}{$nickname};
