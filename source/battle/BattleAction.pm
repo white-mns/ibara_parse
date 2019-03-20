@@ -173,7 +173,6 @@ sub GetBattleAction{
     my $enemy_id = shift;
     my $dl_node = shift;
 
-
     my @nodes = $dl_node->content_list;
 
     foreach my $node (@nodes) {
@@ -253,6 +252,13 @@ sub GetBattleAction{
 
                 $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
             }
+
+        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /BS\d/) {
+            $self->GetBattleAction($acter_type, $e_no, $enemy_id, $node);
+
+        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /^[0-9]+$/) {
+            $self->{Datas}{Damage}->ParseDamageNode($node, $self->{ActId}, $self->{ActSubId});
+            $self->{ActSubId} += 1;
         }
     }
 
