@@ -114,9 +114,9 @@ sub ParseDamageNode{
 
     if (!$b_node || !$b_node->left || !$b_node->right) {return;}
 
-    if ($b_node->left !~ /(.+)[にが]/) { return;}
+    if ($b_node->left !~ /(.+)(に|が)/) { return;}
     my $nickname = $1;
-    $nickname =~ s/^\s//g;
+    $nickname =~ s/\s//g;
     $nickname =~ s/のSP//g;
     $nickname =~ s/のHP//g;
 
