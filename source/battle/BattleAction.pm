@@ -143,8 +143,8 @@ sub ParseBattleActionNodes{
 
                 $self->GetBattleAction($acter_type, $e_no, $enemy_id, $dl_node);
 
-                $self->{ActNo} += 1;
-                $self->{ActSubNo} += 1;
+                $self->{ActId} += 1;
+                $self->{ActSubId} += 1;
             }
 
             my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
@@ -173,6 +173,7 @@ sub GetBattleAction{
     my $enemy_id = shift;
     my $dl_node = shift;
 
+
     my @nodes = $dl_node->content_list;
 
     foreach my $node (@nodes) {
@@ -198,8 +199,8 @@ sub GetBattleAction{
             $skill_name =~ s/！！//g;
             $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, 0, 0, 0, 0, 0, " "]);
 
-            $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id, -1) ));
-            $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
+            $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
+            $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
 
             $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
@@ -237,8 +238,8 @@ sub GetBattleAction{
 
                 $fuka_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($fuka_name);
 
-                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id, $lv) ));
-                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
+                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, $lv) ));
+                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
 
                 $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
@@ -247,8 +248,8 @@ sub GetBattleAction{
 
                 $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, ["通常攻撃", 0, 0, 0, 0, 0, " "]);
 
-                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActNo}, $act_type, $skill_id, $fuka_id, -1) ));
-                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActNo}, $acter_type, $e_no, $enemy_id, 0) ));
+                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
+                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
 
                 $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
             }
@@ -348,8 +349,8 @@ sub BattleStart{
     my $self = shift;
     $self->{BattleId} = shift;
 
-    $self->{ActNo} = 0;
-    $self->{ActSubNo} = 0;
+    $self->{ActId} = 0;
+    $self->{ActSubId} = 0;
     $self->{NicknameToEno}  = {};
     $self->{NicknameToEnemyId} = {};
 
