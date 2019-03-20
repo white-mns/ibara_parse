@@ -40,7 +40,7 @@ sub Init{
     
     #初期化
     $self->{Datas}{Damage} = StoreData->new();
-    $self->{Datas}{Target}  = StoreData->new();
+    $self->{Datas}{Target} = StoreData->new();
 
     my $header_list = "";
 
@@ -51,7 +51,7 @@ sub Init{
                 "act_id",
                 "act_sub_id",
                 "damage_type",
-                "damage",
+                "value",
     ];
     $self->{Datas}{Damage}->Init($header_list);
 
@@ -84,6 +84,8 @@ sub Init{
 #      4:SP回復
 #------------------------------------
 #    引数｜ダメージノード
+#          行動番号
+#          行動サブ番号
 #-----------------------------------#
 sub ParseDamageNode{
     my $self          = shift;
@@ -117,16 +119,51 @@ sub ParseDamageNode{
 
     return;
 }
+
 #-----------------------------------#
-#    戦闘行動dlノードを解析
+#    回避行動を解析
+#    ダメージ種別
+#      0:回避
 #------------------------------------
-#    引数｜行動種別
-#            0:通常攻撃
-#            1:アクティブスキル
-#            2:パッシブスキル・付加
+#    引数｜ダメージノード
+#          行動番号
+#          行動サブ番号
+#-----------------------------------#
+sub ParseDodgeNode{
+    my $self          = shift;
+    my $text          = shift;
+    $self->{ActId}    = shift;
+    $self->{ActSubId} = shift;
+
+    my ($target_type, $e_no, $enemy_id) = (-1, 0, 0);
+    my $damage_type = 0;
+
+    if (!$text) {return;}
+
+    if ($text !~ /(.+)は攻撃を回避！$/) { return;}
+    my $nickname = $1;
+    $nickname =~ s/^\s//g;
+
+    $self->GetENoOrEnemyIdFromNickname($nickname, \$target_type, \$e_no, \$enemy_id);
+
+    my $damage = -1;
+
+    $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, $damage) ));
+    $self->{Datas}{Target}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $target_type, $e_no, $enemy_id, 0) ));
+
+    return;
+}
+
+
+#-----------------------------------#
+#    対象のENoおよび敵番号を取得
+#------------------------------------
+#    引数｜愛称
+#          対象種別
+#            0:PC
+#            1:NPC
 #          ENo
 #          敵ID
-#          戦闘行動ノード
 #-----------------------------------#
 sub GetENoOrEnemyIdFromNickname{
     my $self = shift;

@@ -259,6 +259,10 @@ sub GetBattleAction{
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /^[0-9]+$/) {
             $self->{Datas}{Damage}->ParseDamageNode($node, $self->{ActId}, $self->{ActSubId});
             $self->{ActSubId} += 1;
+
+        } elsif ($node =~ /攻撃を回避！$/) {
+            $self->{Datas}{Damage}->ParseDodgeNode($node, $self->{ActId}, $self->{ActSubId});
+            $self->{ActSubId} += 1;
         }
     }
 
