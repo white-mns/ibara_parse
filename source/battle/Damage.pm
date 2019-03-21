@@ -120,10 +120,10 @@ sub ParseDamageNode{
     $nickname =~ s/のSP//g;
     $nickname =~ s/のHP//g;
 
-    if ($b_node->right =~ /ダメージ！/) {$damage_type = 1;}
-    elsif ($b_node->right =~ /ダメージ！/ && $b_node->left =~ /SPに/) {$damage_type = 1;}
-    elsif ($b_node->right =~ /回復！/ && $b_node->left =~ /HPが/) {$damage_type = 3;}
-    elsif ($b_node->right =~ /回復！/ && $b_node->left =~ /SPが/) {$damage_type = 4;}
+    if    ($b_node->right =~ /ダメージ！/ && $b_node->left =~ /SPに/) {$damage_type = 2;}
+    elsif ($b_node->right =~ /ダメージ！/)                            {$damage_type = 1;}
+    elsif ($b_node->right =~ /回復！/     && $b_node->left =~ /HPが/) {$damage_type = 3;}
+    elsif ($b_node->right =~ /回復！/     && $b_node->left =~ /SPが/) {$damage_type = 4;}
     else                                {return;}
 
     $self->GetENoOrEnemyIdFromNickname($nickname, \$target_type, \$e_no, \$enemy_id);
