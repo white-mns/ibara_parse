@@ -254,7 +254,7 @@ sub GetBattleAction{
                 $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
             }
 
-        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /BS\d/) {
+        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && ($node->attr("class") =~ /BS\d/ || $node->attr("class") =~ /Z\d/)) {
             $self->GetBattleAction($acter_type, $e_no, $enemy_id, $node);
 
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /^[0-9]+$/) { # ダメージの解析
