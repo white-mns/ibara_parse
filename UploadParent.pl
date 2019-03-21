@@ -79,6 +79,9 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTION,           "battle_actions",      "./output/battle/action_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTER,            "battle_acters",       "./output/battle/acter_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DAMAGE,           "battle_damages",      "./output/battle/damage_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_TARGET,           "battle_targets",      "./output/battle/target_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_BUFFER,           "battle_buffers",      "./output/battle/buffer_");
     }
         &UploadResult($upload, $result_no, $generate_no, 1,                                      "uploaded_checks",     "./output/etc/uploaded_check_");
     print "result_no:$result_no,generate_no:$generate_no\n";
