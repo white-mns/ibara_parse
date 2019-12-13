@@ -30,6 +30,7 @@ require "./source/chara/Party.pm";
 require "./source/chara/Compound.pm";
 require "./source/chara/Move.pm";
 require "./source/chara/NextBattle.pm";
+require "./source/chara/Meal.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -75,6 +76,7 @@ sub Init{
     if (ConstData::EXE_CHARA_COMPOUND)    { $self->{DataHandlers}{Compound}   = Compound->new();}
     if (ConstData::EXE_CHARA_MOVE)        { $self->{DataHandlers}{Move}       = Move->new();}
     if (ConstData::EXE_CHARA_NEXT_BATTLE) { $self->{DataHandlers}{NextBattle} = NextBattle->new();}
+    if (ConstData::EXE_CHARA_MEAL)        { $self->{DataHandlers}{Meal}       = Meal->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -168,6 +170,7 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{Compound}))   {$self->{DataHandlers}{Compound}->GetData   ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Move}))       {$self->{DataHandlers}{Move}->GetData       ($e_no, $div_r870_nodes, $div_cimgnm_nodes)};
     if (exists($self->{DataHandlers}{NextBattle})) {$self->{DataHandlers}{NextBattle}->GetData ($e_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Meal}))       {$self->{DataHandlers}{Meal}->GetData       ($e_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }

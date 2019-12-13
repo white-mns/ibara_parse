@@ -74,6 +74,7 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MOVE_PARTY_COUNT,  "move_party_counts",   "./output/chara/move_party_count_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_BATTLE_INFO,  "next_battle_infos",   "./output/chara/next_battle_info_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_BATTLE_ENEMY, "next_battle_enemies", "./output/chara/next_battle_enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MEAL,              "meals",               "./output/chara/meal_");
     }
     if (ConstData::EXE_BATTLE) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");
