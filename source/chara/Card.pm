@@ -126,10 +126,8 @@ sub ParseTrData{
             $skill_name =~ s/（//g;
             $skill_name =~ s/）//g;
 
-        } else {
-            $name       = $$td_nodes[1]->as_text;
-            $skill_name = $$td_nodes[1]->as_text;
         }
+        if ($name =~ /HASH/) { next;}
 
         $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, -1, -1, -1, -1, 0, ""]);
 
