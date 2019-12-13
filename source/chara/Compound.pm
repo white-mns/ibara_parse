@@ -37,6 +37,7 @@ sub Init{
     my $self = shift;
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
     ($self->{LastResultNo}, $self->{LastGenerateNo}) = ($self->{ResultNo} - 1, 0);
+    $self->{LastResultNo} = sprintf ("%02d", $self->{LastResultNo});
     
     #初期化
     $self->{Datas}{Data}  = StoreData->new();
