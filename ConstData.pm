@@ -39,4 +39,6 @@ use warnings;
     use constant EXE_ACT            => 1;
         use constant EXE_ACT_SKILL_MASTERY => 1;
     use constant EXE_BATTLE         => 1;
+        use constant EXE_BATTLE_DAMAGE     => 1;
+        use constant EXE_BATTLE_RESULT     => 1;
 1;

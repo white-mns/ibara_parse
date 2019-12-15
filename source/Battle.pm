@@ -19,6 +19,7 @@ require "./source/lib/time.pm";
 
 require "./source/battle/BattleInfo.pm";
 require "./source/battle/Turn.pm";
+require "./source/battle/Result.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -52,7 +53,8 @@ sub Init{
 
     #インスタンス作成
     $self->{DataHandlers}{BattleInfo} = BattleInfo->new();
-    $self->{DataHandlers}{Turn}       = Turn->new();
+    if (ConstData::EXE_BATTLE_DAMAGE) { $self->{DataHandlers}{Turn}   = Turn->new();}
+    if (ConstData::EXE_BATTLE_RESULT) { $self->{DataHandlers}{Result} = Result->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -125,7 +127,8 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{BattleInfo})) {
         $battle_id = $self->{DataHandlers}{BattleInfo}->GetBattleId("r".$e_no."b".$battle_no, $e_no, $battle_no, $$div_r870_nodes[0]);
     }
-    if (exists($self->{DataHandlers}{Turn})) {$self->{DataHandlers}{Turn}->GetData($battle_id, $e_no, $battle_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Turn}))   {$self->{DataHandlers}{Turn}->GetData  ($battle_id, $e_no, $battle_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Result})) {$self->{DataHandlers}{Result}->GetData($battle_id, $e_no, $battle_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }
