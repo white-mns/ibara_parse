@@ -40,8 +40,19 @@ sub Init{
     $self->{LastResultNo} = sprintf ("%02d", $self->{LastResultNo});
     
     #初期化
-    $self->{Datas}{Data}  = StoreData->new();
+    $self->{Datas}{BattleResult}  = StoreData->new();
+    $self->{Datas}{BattleEnemy}   = StoreData->new();
     my $header_list = "";
+ 
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "party_no",
+                "battle_type",
+                "enemy_id",
+    ];
+
+    $self->{Datas}{BattleEnemy}->Init($header_list);
 
     $header_list = [
                 "result_no",
@@ -54,10 +65,11 @@ sub Init{
                 "battle_result",
     ];
 
-    $self->{Datas}{Data}->Init($header_list);
+    $self->{Datas}{BattleResult}->Init($header_list);
    
     #出力ファイル設定
-    $self->{Datas}{Data}->SetOutputName ( "./output/battle/result_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{BattleEnemy}->SetOutputName  ( "./output/battle/enemy_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{BattleResult}->SetOutputName ( "./output/battle/result_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
 
     $self->{LastGenerateNo} = $self->ReadLastGenerateNo();
 
@@ -111,6 +123,7 @@ sub GetResultData{
     if (!$nodes) {return;}
 
     my $battle_type = $self->GetBattleType($$nodes[0]);
+    $self->GetBattleEnemy($$nodes[0], $battle_type);
 
     my @reversed_nodes = reverse(@$nodes);
 
@@ -122,7 +135,7 @@ sub GetResultData{
     elsif (scalar(@$lose_nodes) > 0) { $result = -1;}
     elsif (scalar(@$draw_nodes) > 0) { $result =  0;}
 
-    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $battle_type, $self->{BattleId}, $result) ));
+    $self->{Datas}{BattleResult}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $battle_type, $self->{BattleId}, $result) ));
 
     return;
 }
@@ -158,6 +171,44 @@ sub GetBattleType{
     return $battle_type;
 }
 
+#-----------------------------------#
+#    出現NPCを取得
+#------------------------------------
+#    引数｜戦闘開始データノード
+#          戦闘タイプ 
+#            0:『遭遇戦』『採集』
+#            1:『開放戦』『特殊戦』
+#-----------------------------------#
+sub GetBattleEnemy{
+    my $self = shift;
+    my $node = shift;
+    my $battle_type = shift;
+    my $enemy_id = 0;
+
+    if (!$node) {return;}
+
+    my $tr_nodes = &GetNode::GetNode_Tag("tr", \$node);
+    my @td_nodes    = $$tr_nodes[0]->content_list;
+
+    my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[2]);
+    if (!scalar(@$child_table_nodes)) {return;}
+
+    my $a_nodes = &GetNode::GetNode_Tag("a", \$$child_table_nodes[0]);
+    
+    if(scalar(@$a_nodes) > 0) {return;} # 対人戦は除外
+
+    my $b_nodes = &GetNode::GetNode_Tag("b", \$$child_table_nodes[0]);
+
+    foreach my $b_node (@$b_nodes) {
+        my $enemy_text = $b_node->as_text;
+        $enemy_text =~ s/[A-Z]$//;
+        my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_text);
+
+        $self->{Datas}{BattleEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $enemy_id) ));
+    }
+
+    return;
+}
 
 #-----------------------------------#
 #    出力
