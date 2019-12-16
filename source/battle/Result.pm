@@ -10,6 +10,9 @@ use strict;
 use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
+
+require "./source/new/NewBattleEnemy.pm";
+
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
 use source::lib::GetIbaraNode;
@@ -42,6 +45,10 @@ sub Init{
     #初期化
     $self->{Datas}{BattleResult}  = StoreData->new();
     $self->{Datas}{BattleEnemy}   = StoreData->new();
+    $self->{Datas}{New}   = NewBattleEnemy->new();
+    
+    $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    
     my $header_list = "";
  
     $header_list = [
@@ -85,7 +92,7 @@ sub ReadLastGenerateNo(){
     my $file_name = "";
     # 前回結果の確定版ファイルを探索
     for (my $i=5; $i>=0; $i--){
-        $file_name = "./output/chara/item_" . ($self->{LastResultNo}) . "_" . $i . ".csv" ;
+        $file_name = "./output/battle/result_" . ($self->{LastResultNo}) . "_" . $i . ".csv" ;
 
         if(-f $file_name) {return $i;}
     }
@@ -205,6 +212,8 @@ sub GetBattleEnemy{
         my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_text);
 
         $self->{Datas}{BattleEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $enemy_id) ));
+        
+        $self->{Datas}{New}->RecordNewBattleEnemyData($enemy_id);
     }
 
     return;

@@ -56,6 +56,8 @@ sub Main {
     if (ConstData::EXE_NEW) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM_FUKA,           "new_item_fukas",      "./output/new/item_fuka_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ACTION,              "new_actions",         "./output/new/action_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_NEXT_ENEMY,          "new_next_enemies",    "./output/new/next_enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_BATTLE_ENEMY,        "new_battle_enemies",  "./output/new/battle_enemy_");
     }
     if (ConstData::EXE_CHARA) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,              "names",               "./output/chara/name_");

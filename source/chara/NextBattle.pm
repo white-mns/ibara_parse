@@ -10,6 +10,9 @@ use strict;
 use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
+
+require "./source/new/NewNextEnemy.pm";
+
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
 use source::lib::GetIbaraNode;
@@ -41,6 +44,10 @@ sub Init{
     #初期化
     $self->{Datas}{NextBattleEnemy} = StoreData->new();
     $self->{Datas}{NextBattleInfo}  = StoreData->new();
+    $self->{Datas}{New}   = NewNextEnemy->new();
+    
+    $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    
     my $header_list = "";
    
     $header_list = [
@@ -126,6 +133,8 @@ sub GetNextBattleEnemy{
         my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($b_node->as_text);
 
         $self->{Datas}{NextBattleEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $enemy_id) ));
+    
+        $self->{Datas}{New}->RecordNewNextEnemyData($enemy_id);
     }
 
     return;
