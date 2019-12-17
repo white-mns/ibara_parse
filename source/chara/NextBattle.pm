@@ -44,6 +44,7 @@ sub Init{
     #初期化
     $self->{Datas}{NextBattleEnemy} = StoreData->new();
     $self->{Datas}{NextBattleInfo}  = StoreData->new();
+    $self->{Datas}{NextDuelInfo}    = StoreData->new();
     $self->{Datas}{New}   = NewNextEnemy->new();
     
     $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
@@ -70,10 +71,22 @@ sub Init{
     ];
 
     $self->{Datas}{NextBattleInfo}->Init($header_list);
+  
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "left_party_no",
+                "right_party_no",
+                "battle_type",
+    ];
+
+    $self->{Datas}{NextDuelInfo}->Init($header_list);
    
+  
     #出力ファイル設定
     $self->{Datas}{NextBattleEnemy}->SetOutputName( "./output/chara/next_battle_enemy_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
     $self->{Datas}{NextBattleInfo}->SetOutputName ( "./output/chara/next_battle_info_"  . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{NextDuelInfo}->SetOutputName   ( "./output/chara/next_duel_info_"    . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
 
     return;
 }
@@ -92,6 +105,8 @@ sub GetData{
     
     my $ne_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ne");
     my $nm_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "nm");
+    my $nd_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "nd");
+    my $ng_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ng");
 
     if (!$self->CheckPartyHead($ne_tr)) { return;}
     
@@ -103,6 +118,15 @@ sub GetData{
     $self->GetNextBattleEnemy($nm_tr,  1);
     $self->GetNextBattleInfo ($nm_tr,  1);
     
+    if ($self->CheckPartyHead($nd_tr)) {
+        $self->GetNextDuelInfo ($nd_tr,  10);
+    }
+
+    if ($self->CheckPartyHead($ng_tr)) {
+        $self->GetNextDuelInfo ($ng_tr,  11);
+    }
+
+
     return;
 }
 
@@ -144,7 +168,7 @@ sub GetNextBattleEnemy{
 #    パーティ内で最も若いENoの時、そのEnoをパーティ番号としてパーティ情報を取得
 #------------------------------------
 #    引数｜対戦組み合わせデータノード
-#          パーティタイプ 
+#          戦闘タイプ 
 #            0:今回戦闘
 #            1:次回予告
 #-----------------------------------#
@@ -176,6 +200,37 @@ sub GetNextBattleInfo{
 
     return;
 }
+
+#-----------------------------------#
+#    左側で最も若いENoの時、対人戦情報を取得
+#------------------------------------
+#    引数｜対戦組み合わせデータノード
+#          戦闘タイプ 
+#            10:決闘
+#            11:練習試合
+#-----------------------------------#
+sub GetNextDuelInfo{
+    my $self = shift;
+    my $node = shift;
+    my $battle_type = shift;
+
+    if (!$node) {return;}
+
+    my @td_nodes    = $node->content_list;
+
+    my $left_link_nodes = &GetNode::GetNode_Tag("a", \$td_nodes[0]);
+    my $right_link_nodes = &GetNode::GetNode_Tag("a", \$td_nodes[2]);
+
+    if (!scalar(@$left_link_nodes) || !scalar(@$right_link_nodes)) {return;}
+
+    my $left_party_no  = &GetIbaraNode::GetENoFromLink($$left_link_nodes[0]);
+    my $right_party_no = &GetIbaraNode::GetENoFromLink($$right_link_nodes[0]);
+
+    $self->{Datas}{NextDuelInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $left_party_no, $right_party_no, $battle_type) ));
+
+    return;
+}
+
 
 #-----------------------------------#
 #    パーティ内で最も若いENoの時に正を返す
