@@ -181,17 +181,11 @@ sub GetNextBattleInfo{
 
     my @td_nodes    = $node->content_list;
 
-    my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[2]);
-    if (!scalar(@$child_table_nodes)) {return;}
-
-    my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
-    if (!scalar(@$child_td_nodes)) {return;}
-
     # パーティ情報の取得
     my ($name_id, $member_num) = (0, 0);
 
     my $b_nodes = &GetNode::GetNode_Tag("b", \$td_nodes[2]);
-    my $tr_nodes = &GetNode::GetNode_Tag("tr", \$$child_table_nodes[0]);
+    my $tr_nodes = &GetNode::GetNode_Tag("tr", \$td_nodes[2]);
 
     $name_id = $self->{CommonDatas}{ProperName}->GetOrAddId($$b_nodes[0]->as_text);
     $member_num = int( scalar(@$tr_nodes) );
@@ -241,20 +235,14 @@ sub CheckPartyHead{
     my $self = shift;
     my $node = shift;
 
-    if (!$node) {return;}
+    if (!$node) {return 0;}
 
     my @td_nodes    = $node->content_list;
 
-    my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
-    if (!scalar(@$child_table_nodes)) {return 0;}
-
-    my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
-    if (!scalar(@$child_td_nodes)) {return 0;}
-
-    my $child_link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
+    my $link_nodes = &GetNode::GetNode_Tag("a", \$td_nodes[0]);
 
     # 先頭ENoの判定
-    if ($self->{ENo} == &GetIbaraNode::GetENoFromLink($$child_link_nodes[0]) ) { return 1;}
+    if ($self->{ENo} == &GetIbaraNode::GetENoFromLink($$link_nodes[0]) ) { return 1;}
 
     return 0;
 }
