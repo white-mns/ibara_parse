@@ -220,7 +220,7 @@ sub GetNextDuelInfo{
     my $left_party_no  = &GetIbaraNode::GetENoFromLink($$left_link_nodes[0]);
     my $right_party_no = &GetIbaraNode::GetENoFromLink($$right_link_nodes[0]);
 
-    $self->{Datas}{NextDuelInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $left_party_no, $right_party_no, $battle_type) ));
+    $self->{Datas}{NextDuelInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $left_party_no, $right_party_no, $battle_type) ));
 
     return;
 }
