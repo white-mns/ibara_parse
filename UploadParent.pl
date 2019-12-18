@@ -56,6 +56,8 @@ sub Main {
     if (ConstData::EXE_NEW) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM_FUKA,           "new_item_fukas",      "./output/new/item_fuka_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ACTION,              "new_actions",         "./output/new/action_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_NEXT_ENEMY,          "new_next_enemies",    "./output/new/next_enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_BATTLE_ENEMY,        "new_battle_enemies",  "./output/new/battle_enemy_");
     }
     if (ConstData::EXE_CHARA) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,              "names",               "./output/chara/name_");
@@ -74,6 +76,8 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MOVE_PARTY_COUNT,  "move_party_counts",   "./output/chara/move_party_count_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_BATTLE_INFO,  "next_battle_infos",   "./output/chara/next_battle_info_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_BATTLE_ENEMY, "next_battle_enemies", "./output/chara/next_battle_enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MEAL,              "meals",               "./output/chara/meal_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_DUEL_INFO,    "next_duel_infos",     "./output/chara/next_duel_info_");
     }
     if (ConstData::EXE_BATTLE) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");
@@ -82,6 +86,9 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DAMAGE,           "battle_damages",      "./output/battle/damage_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_TARGET,           "battle_targets",      "./output/battle/target_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_BUFFER,           "battle_buffers",      "./output/battle/buffer_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_RESULT,           "battle_results",      "./output/battle/result_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ENEMY,            "battle_enemies",      "./output/battle/enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DUEL_INFO,        "duel_infos",          "./output/battle/duel_info_");
     }
         &UploadResult($upload, $result_no, $generate_no, 1,                                      "uploaded_checks",     "./output/etc/uploaded_check_");
     print "result_no:$result_no,generate_no:$generate_no\n";

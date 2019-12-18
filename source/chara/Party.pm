@@ -86,15 +86,21 @@ sub GetData{
     $self->{ENo} = $e_no;
 
     my $ne0_tr = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ne0");
+    my $nm0_tr = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "nm0");
+    my $nd0_tr = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "nd0");
+    my $ng0_tr = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ng0");
     my $ne_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ne");
+    my $nm_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "nm");
+    my $nd_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "nd");
+    my $ng_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ng");
 
     $self->{CommonDatas}{Party}{$self->{ENo}} = $self->{ENo};
 
-    $self->GetParty    ($ne0_tr, 0);
-    $self->GetPartyInfo($ne0_tr, 0);
+    $self->GetParty    ([$ne0_tr, $nm0_tr, $nd0_tr, $ng0_tr], 0);
+    $self->GetPartyInfo([$ne0_tr, $nm0_tr, $nd0_tr, $ng0_tr], 0);
 
-    $self->GetParty    ($ne_tr,  1);
-    $self->GetPartyInfo($ne_tr,  1);
+    $self->GetParty    ([$ne_tr, $nm_tr, $nd_tr, $ng_tr],  1);
+    $self->GetPartyInfo([$ne_tr, $nm_tr, $nd_tr, $ng_tr],  1);
     
     return;
 }
@@ -109,28 +115,32 @@ sub GetData{
 #-----------------------------------#
 sub GetParty{
     my $self = shift;
-    my $node = shift;
+    my $nodes = shift;
     my $party_type = shift;
 
-    if (!$node) {return;}
-
-    my @td_nodes    = $node->content_list;
-
-    my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
-    if (!scalar(@$child_table_nodes)) {return;}
-
-    my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
-    if (!scalar(@$child_td_nodes)) {return;}
-
-    my $link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
-
-    my $party = &GetIbaraNode::GetENoFromLink($$link_nodes[0]);
-
-    $self->{Datas}{Party}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $party) ));
+    foreach my $node (@$nodes) {
+        if (!$node) {next;}
     
-    $self->{CommonDatas}{Party}{$self->{ENo}} = $party;
+        my @td_nodes    = $node->content_list;
+    
+        my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
+        if (!scalar(@$child_table_nodes)) {next;}
+    
+        my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
+        if (!scalar(@$child_td_nodes)) {next;}
+    
+        my $link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
+    
+        my $party = &GetIbaraNode::GetENoFromLink($$link_nodes[0]);
+    
+        $self->{Datas}{Party}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $party) ));
+        
+        $self->{CommonDatas}{Party}{$self->{ENo}} = $party;
 
-    return;
+        return 1; #いずれかの戦闘でPT情報が取得できれば終了
+    }
+
+    return 0;
 }
 
 #-----------------------------------#
@@ -143,35 +153,39 @@ sub GetParty{
 #-----------------------------------#
 sub GetPartyInfo{
     my $self = shift;
-    my $node = shift;
+    my $nodes = shift;
     my $party_type = shift;
 
-    if (!$node) {return;}
+    foreach my $node (@$nodes) {
+        if (!$node) {next;}
+    
+        my @td_nodes    = $node->content_list;
+    
+        my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
+        if (!scalar(@$child_table_nodes)) {next;}
+    
+        my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
+        if (!scalar(@$child_td_nodes)) {next;}
+    
+        my $child_link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
+    
+        if ($self->{ENo} != &GetIbaraNode::GetENoFromLink($$child_link_nodes[0]) ) { return 0;} # 戦闘ENoの判定
+    
+        # パーティ情報の取得
+        my ($name, $member_num) = (0, 0);
+    
+        my $b_nodes = &GetNode::GetNode_Tag("b", \$td_nodes[0]);
+        my $party_all_link_nodes = &GetNode::GetNode_Tag("a", \$$child_table_nodes[0]);
+    
+        $name = $$b_nodes[0]->as_text;
+        $member_num = int( scalar(@$party_all_link_nodes)/2 );
+    
+        $self->{Datas}{PartyInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $name, $member_num) ));
+        
+        return 1; #いずれかの戦闘でPT情報が取得できれば終了
+    }
 
-    my @td_nodes    = $node->content_list;
-
-    my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
-    if (!scalar(@$child_table_nodes)) {return;}
-
-    my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
-    if (!scalar(@$child_td_nodes)) {return;}
-
-    my $child_link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
-
-    if ($self->{ENo} != &GetIbaraNode::GetENoFromLink($$child_link_nodes[0]) ) { return;} # 戦闘ENoの判定
-
-    # パーティ情報の取得
-    my ($name, $member_num) = (0, 0);
-
-    my $b_nodes = &GetNode::GetNode_Tag("b", \$td_nodes[0]);
-    my $party_all_link_nodes = &GetNode::GetNode_Tag("a", \$$child_table_nodes[0]);
-
-    $name = $$b_nodes[0]->as_text;
-    $member_num = int( scalar(@$party_all_link_nodes)/2 );
-
-    $self->{Datas}{PartyInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $name, $member_num) ));
-
-    return;
+    return 0;
 }
 
 #-----------------------------------#

@@ -63,6 +63,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	33	0	おきつねさま珍道中	1
 01	3	33	1	ハザマ観光ツアー	4
 01	3	34	0	TeamNo.34	1
+01	3	34	1	TeamNo.34	1
 01	3	35	0	山狩り	1
 01	3	35	1	山狩り	2
 01	3	36	0	TeamNo.36	1
@@ -82,9 +83,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	43	1	†デスアンジ†	4
 01	3	44	0	治安が悪いほど仲が良い	1
 01	3	45	0	TeamNo.45	1
+01	3	45	1	TeamNo.45	1
 01	3	46	0	正運極心	1
 01	3	46	1	正運極心	4
 01	3	47	0	TeamNo.47	1
+01	3	47	1	TeamNo.47	1
 01	3	48	0	TeamNo.48	1
 01	3	48	1	改造霊柩車『火車号』	3
 01	3	49	0	三幹部	1
@@ -116,6 +119,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	65	0	働きたくない	1
 01	3	65	1	働きたくない	1
 01	3	66	0	TeamNo.66	1
+01	3	66	1	TeamNo.66	1
 01	3	67	0	TeamNo.67	1
 01	3	67	1	裏切り者は狭間の夢を見るか	4
 01	3	68	0	TeamNo.68	1
@@ -144,6 +148,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	80	1	TeamNo.80	1
 01	3	81	0	餅花冬夏	1
 01	3	82	0	TeamNo.82	1
+01	3	82	1	TeamNo.82	1
 01	3	83	0	TeamNo.83	1
 01	3	84	0	PhantomGazer	1
 01	3	85	0	TeamNo.85	1
@@ -158,6 +163,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	91	0	翔射隊	1
 01	3	91	1	翔射隊	3
 01	3	92	0	TeamNo.92	1
+01	3	92	1	TeamNo.92	1
 01	3	93	0	TeamNo.93	1
 01	3	93	1	千夜天水	4
 01	3	94	0	TeamNo.94	1
@@ -203,6 +209,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	118	0	正運極心	1
 01	3	119	0	TeamNo.119	1
 01	3	120	0	TeamNo.120	1
+01	3	120	1	TeamNo.120	1
 01	3	121	0	最強大天才様御一行	1
 01	3	122	0	秘密結社『欠けた蜜蝋』	1
 01	3	122	1	秘密結社『欠けた蜜蝋』	4
@@ -236,6 +243,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	140	0	chimeRa	1
 01	3	140	1	chimeRa	4
 01	3	141	0	TeamNo.141	1
+01	3	141	1	TeamNo.141	1
 01	3	142	0	DV研究会	1
 01	3	142	1	DV研究会	2
 01	3	143	0	ブレーメン	1
@@ -270,6 +278,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	162	1	TeamNo.162	1
 01	3	163	0	BBA＆DK	1
 01	3	164	0	TeamNo.164	1
+01	3	164	1	TeamNo.164	1
 01	3	165	0	TeamNo.165	1
 01	3	165	1	TeamNo.696	4
 01	3	166	0	TeamNo.166	1
@@ -278,9 +287,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	168	0	TeamNo.168	1
 01	3	168	1	TeamNo.168	1
 01	3	169	0	TeamNo.169	1
+01	3	169	1	TeamNo.169	1
 01	3	170	0	鵺 -nue-	1
 01	3	170	1	鵺 -nue-	3
 01	3	171	0	TeamNo.171	1
+01	3	171	1	TeamNo.171	1
 01	3	172	0	くってけ屋組	1
 01	3	172	1	くってけ屋組	3
 01	3	173	0	Naughsinitet	1
@@ -304,6 +315,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	187	0	TeamNo.187	1
 01	3	187	1	TeamNo.187	4
 01	3	188	0	TeamNo.188	1
+01	3	188	1	TeamNo.188	1
 01	3	190	0	レッドストーム	1
 01	3	191	0	TeamNo.191	1
 01	3	192	0	アンデッドとナイトメア	1
@@ -313,6 +325,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	194	1	コンテナと愉快な『兄弟』達	3
 01	3	195	0	翔射隊	1
 01	3	196	0	TeamNo.196	1
+01	3	196	1	TeamNo.196	1
 01	3	197	0	創藍高校生徒一同＋１	1
 01	3	198	0	夕礼書店調査隊	1
 01	3	198	1	夕礼書店調査隊	4
@@ -322,6 +335,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	201	0	TeamNo.201	1
 01	3	201	1	TeamNo.201	1
 01	3	202	0	TeamNo.202	1
+01	3	202	1	TeamNo.202	1
 01	3	204	0	TeamNo.204	1
 01	3	204	1	TeamNo.204	1
 01	3	205	0	TeamNo.205	1
@@ -338,6 +352,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	211	0	かりかりうさぎ	1
 01	3	211	1	わるいアンジのお姉さん	4
 01	3	212	0	搬家的新地址	1
+01	3	212	1	搬家的新地址	1
 01	3	213	0	水に所縁	1
 01	3	213	1	ヤーさんと愉快な仲間たち	2
 01	3	214	0	TRIQSHOT	1
@@ -371,9 +386,12 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	231	0	TeamNo.231	1
 01	3	231	1	TeamNo.231	1
 01	3	232	0	TeamNo.232	1
+01	3	232	1	TeamNo.232	1
 01	3	233	0	【問】“i”までの距離を求めよ	1
 01	3	234	0	TeamNo.234	1
+01	3	234	1	TeamNo.234	1
 01	3	235	0	TeamNo.235	1
+01	3	235	1	TeamNo.235	1
 01	3	236	0	TeamNo.236	1
 01	3	237	0	TeamNo.237	1
 01	3	237	1	キャプテン三葉	4
@@ -400,6 +418,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	250	0	TeamNo.250	1
 01	3	250	1	TeamNo.250	1
 01	3	251	0	TeamNo.251	1
+01	3	251	1	TeamNo.251	1
 01	3	252	0	TeamNo.252	1
 01	3	253	0	TeamNo.253	1
 01	3	253	1	TeamNo.253	1
@@ -409,11 +428,13 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	256	0	TeamNo.256	1
 01	3	256	1	TeamNo.256	1
 01	3	257	0	TeamNo.257	1
+01	3	257	1	TeamNo.257	1
 01	3	258	0	TeamNo.258	1
 01	3	258	1	TeamNo.258	1
 01	3	259	0	TeamNo.259	1
 01	3	259	1	TeamNo.259	3
 01	3	260	0	TeamNo.260	1
+01	3	260	1	TeamNo.260	1
 01	3	261	0	TeamNo.261	1
 01	3	262	0	TeamNo.262	1
 01	3	262	1	TeamNo.262	1
@@ -422,15 +443,19 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	264	0	チームの親睦はこれから深め隊	1
 01	3	264	1	チームの親睦はこれから深め隊	3
 01	3	265	0	TeamNo.265	1
+01	3	265	1	TeamNo.265	1
 01	3	266	0	TeamNo.266	1
+01	3	266	1	TeamNo.266	1
 01	3	267	0	翔射隊	1
 01	3	268	0	TeamNo.268	1
+01	3	268	1	TeamNo.268	1
 01	3	269	0	職質は簡便な！	1
 01	3	269	1	職質は簡便な！	4
 01	3	270	0	TeamNo.270	1
 01	3	271	0	TeamNo.271	1
 01	3	271	1	TeamNo.271	1
 01	3	272	0	TeamNo.272	1
+01	3	272	1	TeamNo.272	1
 01	3	273	0	TeamNo.273	1
 01	3	274	0	TeamNo.274	1
 01	3	274	1	獅狼の戦士達	2
@@ -450,6 +475,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	282	1	TeamNo.282	1
 01	3	283	0	昏迷せし彷徨者	1
 01	3	284	0	TeamNo.284	1
+01	3	284	1	TeamNo.284	1
 01	3	285	0	TeamNo.285	1
 01	3	286	0	TeamNo.286	1
 01	3	286	1	TeamNo.392	3
@@ -465,6 +491,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	293	0	TeamNo.293	1
 01	3	293	1	TeamNo.293	1
 01	3	295	0	TeamNo.295	1
+01	3	295	1	TeamNo.295	1
 01	3	296	0	TeamNo.296	1
 01	3	297	0	【＆】	1
 01	3	297	1	【＆】	2
@@ -502,6 +529,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	323	0	DV研究会	1
 01	3	324	0	TeamNo.324	1
 01	3	325	0	TeamNo.325	1
+01	3	325	1	TeamNo.325	1
 01	3	326	0	名探偵マガサ 出張版	1
 01	3	327	0	TeamNo.327	1
 01	3	327	1	TeamNo.327	1
@@ -550,18 +578,21 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	362	1	TeamNo.362	1
 01	3	363	0	TeamNo.363	1
 01	3	364	0	TeamNo.364	1
+01	3	364	1	TeamNo.364	1
 01	3	365	0	TeamNo.365	1
 01	3	365	1	TeamNo.1447	4
 01	3	366	0	TeamNo.366	1
 01	3	368	0	TeamNo.368	1
 01	3	368	1	TeamNo.368	1
 01	3	369	0	TeamNo.369	1
+01	3	369	1	TeamNo.369	1
 01	3	370	0	TeamNo.370	1
 01	3	370	1	ハザマ体験ツアー	4
 01	3	371	0	TeamNo.371	1
 01	3	371	1	TeamNo.371	1
 01	3	372	0	TeamNo.372	1
 01	3	373	0	TeamNo.373	1
+01	3	373	1	TeamNo.373	1
 01	3	374	0	ゆるふわもっちり	1
 01	3	374	1	ゆるふわもっちり	1
 01	3	375	0	TeamNo.375	1
@@ -596,6 +627,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	399	0	TeamNo.399	1
 01	3	400	0	TeamNo.400	1
 01	3	401	0	TeamNo.401	1
+01	3	401	1	TeamNo.401	1
 01	3	402	0	TeamNo.402	1
 01	3	402	1	TeamNo.402	1
 01	3	403	0	ねこいっぴき	1
@@ -626,6 +658,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	416	1	1132416	2
 01	3	417	0	TeamNo.417	1
 01	3	418	0	TeamNo.418	1
+01	3	418	1	TeamNo.418	1
 01	3	419	0	TeamNo.419	1
 01	3	419	1	TeamNo.428	4
 01	3	420	0	TeamNo.420	1
@@ -636,6 +669,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	422	1	TeamNo.422	1
 01	3	423	0	TeamNo.423	1
 01	3	424	0	TeamNo.424	1
+01	3	424	1	TeamNo.424	1
 01	3	426	0	TeamNo.426	1
 01	3	426	1	TeamNo.426	1
 01	3	427	0	エレクトリック・カフェ	1
@@ -648,6 +682,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	433	0	サラリーマン外郎と愉快な仲間達	1
 01	3	434	0	本棚と男とわたし	1
 01	3	435	0	TeamNo.435	1
+01	3	435	1	TeamNo.435	1
 01	3	436	0	TeamNo.436	1
 01	3	436	1	TeamNo.436	1
 01	3	438	0	TeamNo.438	1
@@ -656,9 +691,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	440	0	TeamNo.440	1
 01	3	440	1	TeamNo.440	1
 01	3	441	0	TeamNo.441	1
+01	3	441	1	TeamNo.441	1
 01	3	442	0	TeamNo.442	1
 01	3	442	1	TeamNo.442	1
 01	3	443	0	TeamNo.443	1
+01	3	443	1	TeamNo.443	1
 01	3	444	0	ハザマ観光ツアー	1
 01	3	445	0	餅花冬夏	1
 01	3	446	0	翔ちゃんの周りはジジババしかいない。	1
@@ -668,10 +705,12 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	449	0	TeamNo.449	1
 01	3	449	1	TeamNo.449	1
 01	3	450	0	TeamNo.450	1
+01	3	450	1	TeamNo.450	1
 01	3	451	0	TeamNo.451	1
 01	3	451	1	イバラシティ防衛隊（仮）	4
 01	3	452	0	TeamNo.452	1
 01	3	453	0	TeamNo.453	1
+01	3	453	1	TeamNo.453	1
 01	3	454	0	TeamNo.454	1
 01	3	454	1	TeamNo.454	1
 01	3	455	0	タビネコ	1
@@ -697,6 +736,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	468	1	凪の水平線	2
 01	3	469	0	凪の水平線	1
 01	3	470	0	TeamNo.470	1
+01	3	470	1	TeamNo.470	1
 01	3	471	0	TeamNo.471	1
 01	3	471	1	いつか見た景色	4
 01	3	472	0	TeamNo.472	1
@@ -713,6 +753,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	479	0	TeamNo.479	1
 01	3	479	1	TeamNo.479	1
 01	3	480	0	TeamNo.480	1
+01	3	480	1	TeamNo.480	1
 01	3	481	0	TeamNo.481	1
 01	3	481	1	TeamNo.481	1
 01	3	482	0	メルヒェン・ストームヒルズ	1
@@ -781,6 +822,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	523	0	茨寿司連四包丁	1
 01	3	524	0	商人連合	1
 01	3	525	0	TeamNo.525	1
+01	3	525	1	TeamNo.525	1
 01	3	526	0	TeamNo.526	1
 01	3	526	1	はいずるものたち	4
 01	3	527	0	TeamNo.527	1
@@ -852,6 +894,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	571	1	TeamNo.571	1
 01	3	572	0	ツキガミ☆ハイム	1
 01	3	573	0	TeamNo.573	1
+01	3	573	1	TeamNo.573	1
 01	3	574	0	TeamNo.574	1
 01	3	574	1	TeamNo.574	1
 01	3	575	0	地獄	1
@@ -860,13 +903,16 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	577	0	TeamNo.577	1
 01	3	577	1	TeamNo.577	1
 01	3	578	0	TeamNo.578	1
+01	3	578	1	TeamNo.578	1
 01	3	579	0	TeamNo.579	1
 01	3	579	1	TeamNo.579	4
 01	3	580	0	TeamNo.580	1
 01	3	581	0	TeamNo.581	1
+01	3	581	1	TeamNo.581	1
 01	3	582	0	TeamNo.582	1
 01	3	583	0	TeamNo.583	1
 01	3	585	0	TeamNo.585	1
+01	3	585	1	TeamNo.585	1
 01	3	586	0	TeamNo.586	1
 01	3	586	1	TeamNo.586	1
 01	3	587	0	TeamNo.587	1
@@ -894,6 +940,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	602	0	TeamNo.602	1
 01	3	602	1	TeamNo.602	1
 01	3	603	0	TeamNo.603	1
+01	3	603	1	TeamNo.603	1
 01	3	605	0	TeamNo.605	1
 01	3	606	0	TeamNo.606	1
 01	3	606	1	TeamNo.606	1
@@ -916,6 +963,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	619	1	TeamNo.619	1
 01	3	620	0	TeamNo.620	1
 01	3	621	0	TeamNo.621	1
+01	3	621	1	TeamNo.621	1
 01	3	622	0	TeamNo.622	1
 01	3	622	1	TeamNo.622	1
 01	3	623	0	TeamNo.623	1
@@ -932,7 +980,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	630	1	TeamNo.630	1
 01	3	631	0	荊街物語	1
 01	3	632	0	TeamNo.632	1
+01	3	632	1	TeamNo.632	1
 01	3	633	0	TeamNo.633	1
+01	3	633	1	TeamNo.633	1
 01	3	634	0	TeamNo.634	1
 01	3	635	0	七転八倒九展開	1
 01	3	637	0	TeamNo.637	1
@@ -961,6 +1011,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	652	1	TeamNo.652	1
 01	3	653	0	TeamNo.653	1
 01	3	654	0	TeamNo.654	1
+01	3	654	1	TeamNo.654	1
 01	3	655	0	TeamNo.655	1
 01	3	655	1	TeamNo.655	1
 01	3	656	0	TeamNo.656	1
@@ -972,6 +1023,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	659	0	幽霊少年と発光少女	1
 01	3	659	1	幽霊少年と発光少女	1
 01	3	660	0	TeamNo.660	1
+01	3	660	1	TeamNo.660	1
 01	3	661	0	TeamNo.661	1
 01	3	661	1	TeamNo.661	1
 01	3	662	0	TeamNo.662	1
@@ -983,12 +1035,14 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	666	1	TeamNo.666	1
 01	3	668	0	TeamNo.668	1
 01	3	669	0	TeamNo.669	1
+01	3	669	1	TeamNo.669	1
 01	3	670	0	TeamNo.670	1
 01	3	670	1	TeamNo.670	1
 01	3	672	0	アンジ偉業部	1
 01	3	672	1	アンジ偉業部	1
 01	3	673	0	TeamNo.673	1
 01	3	674	0	TeamNo.674	1
+01	3	674	1	TeamNo.674	1
 01	3	675	0	TeamNo.675	1
 01	3	676	0	TeamNo.676	1
 01	3	677	0	創藍高校オカルト研究部	1
@@ -1026,16 +1080,20 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	699	0	TeamNo.699	1
 01	3	699	1	TeamNo.699	3
 01	3	700	0	TeamNo.700	1
+01	3	700	1	TeamNo.700	1
 01	3	701	0	イバラシティ防衛隊（仮）	1
 01	3	702	0	TeamNo.702	1
 01	3	702	1	TeamNo.702	1
 01	3	703	0	TeamNo.703	1
 01	3	703	1	TeamNo.703	1
 01	3	704	0	TeamNo.704	1
+01	3	704	1	TeamNo.704	1
 01	3	705	0	TeamNo.705	1
+01	3	705	1	TeamNo.705	1
 01	3	706	0	TeamNo.706	1
 01	3	706	1	TeamNo.706	1
 01	3	707	0	TeamNo.707	1
+01	3	707	1	TeamNo.707	1
 01	3	708	0	TeamNo.708	1
 01	3	709	0	星の十字教団	1
 01	3	709	1	星の十字教団	1
@@ -1080,6 +1138,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	737	1	一羽烏	1
 01	3	738	0	TeamNo.738	1
 01	3	739	0	TeamNo.739	1
+01	3	739	1	TeamNo.739	1
 01	3	740	0	TeamNo.740	1
 01	3	741	0	TeamNo.741	1
 01	3	741	1	行き当たりばったり4人組	4
@@ -1093,6 +1152,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	746	1	TeamNo.746	1
 01	3	747	0	TeamNo.747	1
 01	3	748	0	TeamNo.748	1
+01	3	748	1	TeamNo.748	1
 01	3	749	0	仮	1
 01	3	749	1	仮	2
 01	3	750	0	TeamNo.750	1
@@ -1137,6 +1197,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	774	1	TeamNo.774	1
 01	3	775	0	ガーレイファ	1
 01	3	776	0	TeamNo.776	1
+01	3	776	1	TeamNo.776	1
 01	3	777	0	TeamNo.777	1
 01	3	778	0	TeamNo.778	1
 01	3	778	1	TeamNo.778	1
@@ -1181,6 +1242,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	804	1	像の前で待ち合わせだゾウ	3
 01	3	805	0	TeamNo.805	1
 01	3	806	0	TeamNo.806	1
+01	3	806	1	TeamNo.806	1
 01	3	807	0	TeamNo.807	1
 01	3	808	0	TeamNo.808	1
 01	3	808	1	TeamNo.808	1
@@ -1198,6 +1260,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	817	0	TeamNo.817	1
 01	3	817	1	TeamNo.817	1
 01	3	818	0	TeamNo.818	1
+01	3	818	1	TeamNo.818	1
 01	3	819	0	TeamNo.819	1
 01	3	820	0	TeamNo.820	1
 01	3	821	0	TeamNo.821	1
@@ -1207,6 +1270,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	826	0	TeamNo.826	1
 01	3	826	1	TeamNo.826	1
 01	3	827	0	TeamNo.827	1
+01	3	827	1	TeamNo.827	1
 01	3	828	0	白紙の英雄譚	1
 01	3	828	1	白紙の英雄譚	2
 01	3	829	0	TeamNo.829	1
@@ -1237,6 +1301,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	846	1	TeamNo.846	1
 01	3	847	0	TeamNo.847	1
 01	3	848	0	TeamNo.848	1
+01	3	848	1	TeamNo.848	1
 01	3	849	0	TeamNo.849	1
 01	3	850	0	TeamNo.850	1
 01	3	850	1	TeamNo.850	1
@@ -1264,9 +1329,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	865	0	TeamNo.865	1
 01	3	865	1	TeamNo.865	1
 01	3	866	0	TeamNo.866	1
+01	3	866	1	TeamNo.866	1
 01	3	867	0	TeamNo.867	1
 01	3	868	0	TeamNo.868	1
 01	3	869	0	TeamNo.869	1
+01	3	869	1	TeamNo.869	1
 01	3	870	0	TeamNo.870	1
 01	3	871	0	TeamNo.871	1
 01	3	872	0	TeamNo.872	1
@@ -1283,12 +1350,16 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	880	0	TeamNo.880	1
 01	3	880	1	TeamNo.880	1
 01	3	881	0	TeamNo.881	1
+01	3	881	1	TeamNo.881	1
 01	3	882	0	TeamNo.882	1
+01	3	882	1	TeamNo.882	1
 01	3	883	0	おれたちのぼうけんのしょ	1
 01	3	884	0	めぇ～	1
 01	3	885	0	TeamNo.885	1
+01	3	885	1	TeamNo.885	1
 01	3	886	0	TeamNo.886	1
 01	3	887	0	TeamNo.887	1
+01	3	887	1	TeamNo.887	1
 01	3	888	0	友達あつまれ	1
 01	3	889	0	TeamNo.889	1
 01	3	890	0	TeamNo.890	1
@@ -1325,10 +1396,12 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	914	0	TeamNo.914	1
 01	3	914	1	TeamNo.914	1
 01	3	915	0	TeamNo.915	1
+01	3	915	1	TeamNo.915	1
 01	3	916	0	TeamNo.916	1
 01	3	917	0	TeamNo.917	1
 01	3	917	1	TeamNo.917	1
 01	3	918	0	TeamNo.918	1
+01	3	918	1	TeamNo.918	1
 01	3	919	0	TeamNo.919	1
 01	3	919	1	TeamNo.919	1
 01	3	920	0	TeamNo.920	1
@@ -1383,12 +1456,15 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	961	0	TeamNo.961	1
 01	3	961	1	TeamNo.994	3
 01	3	962	0	TeamNo.962	1
+01	3	962	1	TeamNo.962	1
 01	3	963	0	TeamNo.963	1
 01	3	963	1	TeamNo.963	1
 01	3	964	0	TeamNo.964	1
+01	3	964	1	TeamNo.964	1
 01	3	965	0	虚ろの彩宴	1
 01	3	965	1	虚ろの彩宴	1
 01	3	966	0	TeamNo.966	1
+01	3	966	1	TeamNo.966	1
 01	3	967	0	TeamNo.967	1
 01	3	968	0	TeamNo.968	1
 01	3	969	0	TeamNo.969	1
@@ -1406,11 +1482,13 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	978	0	境界に振れる爪先	1
 01	3	978	1	境界に振れる爪先	1
 01	3	979	0	TeamNo.979	1
+01	3	979	1	TeamNo.979	1
 01	3	980	0	TeamNo.980	1
 01	3	980	1	TeamNo.980	1
 01	3	981	0	TeamNo.981	1
 01	3	981	1	TeamNo.981	1
 01	3	982	0	TeamNo.982	1
+01	3	982	1	TeamNo.982	1
 01	3	983	0	キャプテン三葉	1
 01	3	984	0	TeamNo.984	1
 01	3	985	0	TeamNo.985	1
@@ -1418,6 +1496,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	986	1	TeamNo.986	1
 01	3	988	0	TeamNo.988	1
 01	3	989	0	TeamNo.989	1
+01	3	989	1	TeamNo.989	1
 01	3	990	0	TeamNo.990	1
 01	3	990	1	TeamNo.990	1
 01	3	991	0	TeamNo.991	1
@@ -1464,6 +1543,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1017	0	陸海空イバラ征服するなんて	1
 01	3	1018	0	TeamNo.1018	1
 01	3	1019	0	TeamNo.1019	1
+01	3	1019	1	TeamNo.1019	1
 01	3	1020	0	TeamNo.1020	1
 01	3	1021	0	TeamNo.1021	1
 01	3	1022	0	秘密結社フリーパーソン	1
@@ -1475,6 +1555,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1027	0	TeamNo.1027	1
 01	3	1027	1	TeamNo.1027	1
 01	3	1028	0	TeamNo.1028	1
+01	3	1028	1	TeamNo.1028	1
 01	3	1029	0	TeamNo.1029	1
 01	3	1029	1	TeamNo.1029	1
 01	3	1030	0	TeamNo.1030	1
@@ -1484,6 +1565,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1033	0	TeamNo.1033	1
 01	3	1033	1	TeamNo.1033	1
 01	3	1034	0	TeamNo.1034	1
+01	3	1034	1	TeamNo.1034	1
 01	3	1035	0	TeamNo.1035	1
 01	3	1036	0	TeamNo.1036	1
 01	3	1037	0	TeamNo.1037	1
@@ -1491,6 +1573,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1038	0	TeamNo.1038	1
 01	3	1039	0	影の海楽団	1
 01	3	1040	0	TeamNo.1040	1
+01	3	1040	1	TeamNo.1040	1
 01	3	1041	0	TeamNo.1041	1
 01	3	1041	1	TeamNo.1041	1
 01	3	1042	0	TeamNo.1042	1
@@ -1524,6 +1607,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1059	0	TeamNo.1059	1
 01	3	1061	0	TeamNo.1061	1
 01	3	1062	0	TeamNo.1062	1
+01	3	1062	1	TeamNo.1062	1
 01	3	1064	0	そこにお前がいたもので。	1
 01	3	1064	1	そこにお前がいたもので。	2
 01	3	1065	0	そこにお前がいたもので。	1
@@ -1545,6 +1629,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1076	0	荊棘	1
 01	3	1076	1	荊棘	1
 01	3	1077	0	TeamNo.1077	1
+01	3	1077	1	TeamNo.1077	1
 01	3	1078	0	TeamNo.1078	1
 01	3	1078	1	TeamNo.1078	1
 01	3	1079	0	TeamNo.1079	1
@@ -1576,8 +1661,10 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1093	0	TeamNo.1093	1
 01	3	1093	1	TeamNo.1093	1
 01	3	1094	0	TeamNo.1094	1
+01	3	1094	1	TeamNo.1094	1
 01	3	1095	0	TeamNo.1095	1
 01	3	1096	0	TeamNo.1096	1
+01	3	1096	1	TeamNo.1096	1
 01	3	1097	0	TeamNo.1097	1
 01	3	1098	0	犬ぞり	1
 01	3	1098	1	犬ぞり	2
@@ -1610,6 +1697,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1118	0	TeamNo.1118	1
 01	3	1118	1	TeamNo.1118	1
 01	3	1119	0	TeamNo.1119	1
+01	3	1119	1	TeamNo.1119	1
 01	3	1120	0	TeamNo.1120	1
 01	3	1120	1	TeamNo.1120	1
 01	3	1122	0	TeamNo.1122	1
@@ -1644,11 +1732,13 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1142	0	TeamNo.1142	1
 01	3	1142	1	TeamNo.1142	1
 01	3	1143	0	TeamNo.1143	1
+01	3	1143	1	TeamNo.1143	1
 01	3	1144	0	TeamNo.1144	1
 01	3	1145	0	TeamNo.1145	1
 01	3	1146	0	TeamNo.1146	1
 01	3	1146	1	TeamNo.1146	1
 01	3	1147	0	TeamNo.1147	1
+01	3	1147	1	TeamNo.1147	1
 01	3	1148	0	TeamNo.1148	1
 01	3	1148	1	TeamNo.1148	1
 01	3	1149	0	TeamNo.1149	1
@@ -1660,6 +1750,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1152	0	TeamNo.1152	1
 01	3	1153	0	TeamNo.1153	1
 01	3	1154	0	TeamNo.1154	1
+01	3	1154	1	TeamNo.1154	1
 01	3	1155	0	TeamNo.1155	1
 01	3	1156	0	TeamNo.1156	1
 01	3	1156	1	TeamNo.1156	1
@@ -1705,15 +1796,18 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1185	0	先生が引率しますね	1
 01	3	1185	1	先生が引率しますね	4
 01	3	1186	0	TeamNo.1186	1
+01	3	1186	1	TeamNo.1186	1
 01	3	1187	0	TeamNo.1187	1
 01	3	1188	0	TeamNo.1188	1
 01	3	1189	0	TeamNo.1189	1
 01	3	1190	0	TeamNo.1190	1
+01	3	1190	1	TeamNo.1190	1
 01	3	1191	0	TeamNo.1191	1
 01	3	1191	1	TeamNo.1191	1
 01	3	1192	0	TeamNo.1192	1
 01	3	1192	1	TeamNo.1192	1
 01	3	1193	0	TeamNo.1193	1
+01	3	1193	1	TeamNo.1193	1
 01	3	1194	0	TeamNo.1194	1
 01	3	1195	0	TeamNo.1195	1
 01	3	1196	0	TeamNo.1196	1
@@ -1776,7 +1870,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1237	0	TeamNo.1237	1
 01	3	1237	1	TeamNo.1237	1
 01	3	1238	0	TeamNo.1238	1
+01	3	1238	1	TeamNo.1238	1
 01	3	1239	0	TeamNo.1239	1
+01	3	1239	1	TeamNo.1239	1
 01	3	1240	0	TeamNo.1240	1
 01	3	1240	1	TeamNo.1240	1
 01	3	1242	0	TeamNo.1242	1
@@ -1794,6 +1890,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1249	0	コガラ研究会	1
 01	3	1249	1	コガラ研究会	2
 01	3	1250	0	TeamNo.1250	1
+01	3	1250	1	TeamNo.1250	1
 01	3	1251	0	TeamNo.1251	1
 01	3	1253	0	TeamNo.1253	1
 01	3	1254	0	TeamNo.1254	1
@@ -1808,6 +1905,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1261	0	TeamNo.1261	1
 01	3	1261	1	TeamNo.1261	1
 01	3	1262	0	TeamNo.1262	1
+01	3	1262	1	TeamNo.1262	1
 01	3	1263	0	TeamNo.1263	1
 01	3	1263	1	TeamNo.1263	1
 01	3	1264	0	TeamNo.1264	1
@@ -1827,6 +1925,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1274	0	TeamNo.1274	1
 01	3	1274	1	TeamNo.1274	1
 01	3	1275	0	TeamNo.1275	1
+01	3	1275	1	TeamNo.1275	1
 01	3	1276	0	プロるざいにんず	1
 01	3	1276	1	プロるざいにんず	1
 01	3	1277	0	TeamNo.1277	1
@@ -1839,6 +1938,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1281	1	TeamNo.1281	1
 01	3	1282	0	TeamNo.1282	1
 01	3	1283	0	TeamNo.1283	1
+01	3	1283	1	TeamNo.1283	1
 01	3	1284	0	TeamNo.1284	1
 01	3	1284	1	TeamNo.1284	1
 01	3	1285	0	TeamNo.1285	1
@@ -2101,6 +2201,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1471	0	TeamNo.1471	1
 01	3	1471	1	TeamNo.1471	1
 01	3	1472	0	TeamNo.1472	1
+01	3	1472	1	TeamNo.1472	1
 01	3	1473	0	魔族討伐隊	1
 01	3	1473	1	魔族討伐隊	3
 01	3	1474	0	店主とJK	1
@@ -2120,21 +2221,27 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1483	0	TeamNo.1483	1
 01	3	1483	1	TeamNo.1483	1
 01	3	1484	0	TeamNo.1484	1
+01	3	1484	1	TeamNo.1484	1
 01	3	1485	0	TeamNo.1485	1
 01	3	1487	0	うどん火車	1
 01	3	1487	1	うどん火車	1
 01	3	1488	0	TeamNo.1488	1
+01	3	1488	1	TeamNo.1488	1
 01	3	1489	0	TeamNo.1489	1
 01	3	1490	0	TeamNo.1490	1
 01	3	1491	0	TeamNo.1491	1
+01	3	1491	1	TeamNo.1491	1
 01	3	1492	0	TeamNo.1492	1
+01	3	1492	1	TeamNo.1492	1
 01	3	1493	0	TeamNo.1493	1
 01	3	1494	0	TeamNo.1494	1
+01	3	1494	1	TeamNo.1494	1
 01	3	1495	0	べとれいやー	1
 01	3	1496	0	TeamNo.1496	1
 01	3	1496	1	TeamNo.1496	1
 01	3	1497	0	TeamNo.1497	1
 01	3	1498	0	TeamNo.1498	1
+01	3	1498	1	TeamNo.1498	1
 01	3	1499	0	TeamNo.1499	1
 01	3	1500	0	TeamNo.1500	1
 01	3	1500	1	TeamNo.1500	1
@@ -2143,6 +2250,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1502	0	TeamNo.1502	1
 01	3	1502	1	TeamNo.1502	1
 01	3	1503	0	TeamNo.1503	1
+01	3	1503	1	TeamNo.1503	1
 01	3	1504	0	TeamNo.1504	1
 01	3	1505	0	霧の終着駅	1
 01	3	1505	1	霧の終着駅	1
@@ -2152,6 +2260,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1508	0	TeamNo.1508	1
 01	3	1508	1	TeamNo.1508	1
 01	3	1509	0	TeamNo.1509	1
+01	3	1509	1	TeamNo.1509	1
 01	3	1510	0	TeamNo.1510	1
 01	3	1510	1	TeamNo.1510	1
 01	3	1511	0	TeamNo.1511	1
@@ -2190,6 +2299,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1533	0	TeamNo.1533	1
 01	3	1534	0	かしこいネズミにできぬ事は無い	1
 01	3	1535	0	TeamNo.1535	1
+01	3	1535	1	TeamNo.1535	1
 01	3	1536	0	TeamNo.1536	1
 01	3	1537	0	TeamNo.1537	1
 01	3	1538	0	TeamNo.1538	1
@@ -2217,7 +2327,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1551	0	店主とバイト	1
 01	3	1551	1	店主とバイト	1
 01	3	1552	0	TeamNo.1552	1
+01	3	1552	1	TeamNo.1552	1
 01	3	1553	0	TeamNo.1553	1
+01	3	1553	1	TeamNo.1553	1
 01	3	1554	0	TeamNo.1554	1
 01	3	1555	0	TeamNo.1555	1
 01	3	1555	1	TeamNo.1555	1
@@ -2270,6 +2382,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1584	0	きつねさんぽみち	1
 01	3	1584	1	きつねさんぽみち	1
 01	3	1585	0	TeamNo.1585	1
+01	3	1585	1	TeamNo.1585	1
 01	3	1586	0	TeamNo.1586	1
 01	3	1587	0	TeamNo.1587	1
 01	3	1587	1	TeamNo.1587	1
@@ -2288,6 +2401,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1595	0	TeamNo.1595	1
 01	3	1595	1	TeamNo.1595	1
 01	3	1596	0	TeamNo.1596	1
+01	3	1596	1	TeamNo.1596	1
 01	3	1597	0	TeamNo.1597	1
 01	3	1597	1	TeamNo.1597	1
 01	3	1598	0	TeamNo.1598	1
@@ -2299,7 +2413,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1601	0	TeamNo.1601	1
 01	3	1601	1	TeamNo.1601	1
 01	3	1602	0	TeamNo.1602	1
+01	3	1602	1	TeamNo.1602	1
 01	3	1603	0	TeamNo.1603	1
+01	3	1603	1	TeamNo.1603	1
 01	3	1604	0	TeamNo.1604	1
 01	3	1604	1	TeamNo.1604	1
 01	3	1605	0	TeamNo.1605	1
@@ -2307,6 +2423,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1607	0	寡黙な放浪者	1
 01	3	1607	1	寡黙な放浪者	1
 01	3	1608	0	TeamNo.1608	1
+01	3	1608	1	TeamNo.1608	1
 01	3	1609	0	TeamNo.1609	1
 01	3	1609	1	TeamNo.1609	1
 01	3	1610	0	TeamNo.1610	1
@@ -2326,11 +2443,13 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1617	0	TeamNo.1617	1
 01	3	1617	1	TeamNo.1617	1
 01	3	1618	0	TeamNo.1618	1
+01	3	1618	1	TeamNo.1618	1
 01	3	1619	0	TeamNo.1619	1
 01	3	1619	1	TeamNo.1619	1
 01	3	1620	0	TeamNo.1620	1
 01	3	1620	1	TeamNo.1620	1
 01	3	1621	0	TeamNo.1621	1
+01	3	1621	1	TeamNo.1621	1
 01	3	1622	0	TeamNo.1622	1
 01	3	1622	1	TeamNo.1622	1
 01	3	1623	0	夜道にはご注意を	1
@@ -2347,3 +2466,4 @@ result_no	generate_no	party_no	party_type	name	member_num
 01	3	1629	0	TeamNo.1629	1
 01	3	1629	1	TeamNo.1629	1
 01	3	1630	0	TeamNo.1630	1
+01	3	1630	1	TeamNo.1630	1

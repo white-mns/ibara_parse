@@ -25,6 +25,7 @@ sub SearchMatchingTrNodeFromTitleImg{
         my $title   = $$img_nodes[0]->attr("src");
         if ($title =~ /$img_text.png/) {
             my $table_nodes = &GetNode::GetNode_Tag("table", \$node);
+            if (!scalar(@$table_nodes)) {next;}
             my $tr_nodes = &GetNode::GetNode_Tag("tr", \$$table_nodes[0]);
 
             return $$tr_nodes[0];

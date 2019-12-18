@@ -225,8 +225,15 @@ sub GetBattleAction{
                     $acter_type = 1;
                 }
 
-                my @right = $node->right;
+                # 第3回からのタグ構成
+                my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
+                if (scalar(@$sk_nodes)) {
+                    $fuka_name = $$sk_nodes[0]->as_text;
+                    $fuka_name =~ s/^\>\>//g;
+                }
 
+                # 第2回までのタグ構成
+                my @right = $node->right;
                 if ($right[1] =~ /HASH/ && $right[1]->attr("class") && $right[1]->attr("class") =~ /SK\d/) {
                     $fuka_name = $right[1]->as_text;
                     $fuka_name =~ s/^\>\>//g;
