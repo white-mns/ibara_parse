@@ -309,13 +309,7 @@ sub GetActerNickname{
             }
 
         } else {
-            if ($self->{ResultNo} > 1) {
-                $self->GetEnemyNickname($div_INIJN_node);
-
-            } else {
-                $self->GetEnemyNickname_0_1($div_INIJN_node);
-            }
-
+            $self->GetEnemyNickname($div_INIJN_node);
         }
     }
 
@@ -344,23 +338,6 @@ sub GetEnemyNickname{
     my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
 
     $self->{NicknameToEnemyId}{$nickname} = $enemy_id;
-}
-
-#-----------------------------------#
-#    敵の愛称を取得
-#------------------------------------
-#    引数｜
-#-----------------------------------#
-sub GetEnemyNickname_0_1{
-    my $self = shift;
-    my $node = shift;
-
-    my @child_nodes = $node->content_list;
-    my $enemy_name = $child_nodes[2];
-    $enemy_name =~ s/\s//g;
-    my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
-
-    $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
 }
 
 #-----------------------------------#

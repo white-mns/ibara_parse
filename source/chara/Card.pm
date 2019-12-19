@@ -89,12 +89,7 @@ sub GetCardData{
 
     my $table_nodes = &GetNode::GetNode_Tag("table",\$div_node);
 
-    if ($self->{ResultNo} > 1) {
-        $self->ParseTrData($$table_nodes[0]);
-
-    } else {
-        $self->ParseTrData_0_1($$table_nodes[0]);
-    }
+    $self->ParseTrData($$table_nodes[0]);
 
     return;
 }
@@ -136,47 +131,6 @@ sub ParseTrData{
 
     return;
 }
-
-#-----------------------------------#
-#    tableノード解析・取得(第1新規登録、第1回更新結果レイアウト)
-#------------------------------------
-#    引数｜カードテーブルノード
-#-----------------------------------#
-sub ParseTrData_0_1{
-    my $self  = shift;
-    my $table_node = shift;
-
-    my $tr_nodes = &GetNode::GetNode_Tag("tr",\$table_node);
-    shift(@$tr_nodes);
- 
-    foreach my $tr_node (@$tr_nodes){
-        my ($name, $skill_id) = ("", 0);
-        my $skill_name = "";
-
-        my $td_nodes = &GetNode::GetNode_Tag("td",\$tr_node);
-
-        my $td0_text = $$td_nodes[0]->as_text;
-        my @td0_child = $$td_nodes[0]->content_list;
-
-        if (scalar(@td0_child) > 2) {
-            $name       = $td0_child[1];
-            $skill_name = $td0_child[3]->as_text;
-            $skill_name =~ s/（//g;
-            $skill_name =~ s/）//g;
-
-        } else {
-            $name       = $$td_nodes[0]->as_text;
-            $skill_name = $$td_nodes[0]->as_text;
-        }
-
-        $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, -1, -1, -1, -1, 0, ""]);
-
-        $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $skill_id)));
-    }
-
-    return;
-}
-
 
 #-----------------------------------#
 #    タイトル画像からノードを探索
