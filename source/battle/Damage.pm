@@ -114,8 +114,21 @@ sub ParseDamageNode{
 
     if (!$b_node || !$b_node->left || !$b_node->right) {return;}
 
-    if ($b_node->left !~ /(.+)(に|が)/) { return;}
-    my $nickname = $1;
+    my $nickname = "";
+
+    if ($b_node->left =~ /(.+)(に|が)/) {
+        my $nickname = $1;
+    } elsif ($b_node->left =~ /(に|が)/) {
+        #愛称の着色がある場合、一度親ノードを取得し、その子ノードとして愛称を取得する
+        my $parent_node = $b_node->parent;
+        my $nickname_nodes = &GetNode::GetNode_Tag("span", \$parent_node);
+
+        if (!scalar(@$nickname_nodes)) {return;}
+
+        $nickname = $$nickname_nodes[0]->as_text;
+    }
+    else {return;}
+
     $nickname =~ s/\s//g;
     $nickname =~ s/のSP//g;
     $nickname =~ s/のHP//g;
@@ -142,7 +155,7 @@ sub ParseDamageNode{
 #    ダメージ種別
 #      0:回避
 #------------------------------------
-#    引数｜ダメージノード
+#    引数｜回避テキストノード
 #          行動番号
 #          行動サブ番号
 #-----------------------------------#
@@ -160,8 +173,9 @@ sub ParseDodgeNode{
 
     my $nickname = "";
 
-    if ($node =~ /(.+)は攻撃を回避！$/)             { $nickname = $1}
-    elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /(.+)は攻撃を回避！$/) { $nickname = $1}
+    if ($node =~ /(.+)は攻撃を回避！$/)             { $nickname = $1;}
+    elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /(.+)は攻撃を回避！$/) { $nickname = $1;}
+    elsif ($node =~ /HASH/ && $node->tag eq "span" && $node->right =~ /は攻撃を回避！$/)  { $nickname = $node->as_text;}
     else                                            { return;}
 
     $nickname =~ s/^\s//g;
