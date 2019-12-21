@@ -117,7 +117,11 @@ sub ParseBattleActionNodes{
     foreach my $node (@nodes) {
 
         if ($node =~ /HASH/ && $node->tag eq "div" && $node->attr("class") && $node->attr("class") eq "R870") {last;}
-        if ($node =~ /HASH/ && $node->tag eq "b" &&  $node->right =~ /HASH/ && $node->right->tag eq "dl") {
+
+        if ($node =~ /HASH/ && $node->tag eq "a" &&  $node->right =~ /HASH/ &&
+            (($node->right->attr("class") && $node->right->attr("class") eq "B2") || 
+             ($node->right->right =~ /HASH/ && $node->right->right->tag eq "dl"))) {
+
             if ($node->as_text =~ /(.+)の行動/) {
                 ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
 
@@ -272,7 +276,7 @@ sub GetBattleAction{
         } elsif ($node =~ /HASH/ && $node->tag eq "i" && $node->attr("class") && $node->attr("class") =~ /Y4/) { # クリティカル数の取得
             $self->{Critical} = $self->{Datas}{Damage}->ParseCriticalNode($node, $self->{ActId}, $self->{ActSubId});
 
-        } elsif (($node =~ /攻撃を回避！$/) || ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /攻撃を回避！$/)) {
+        } elsif (($node =~ /攻撃を回避！$/) || ($node =~ /HASH/ && (($node->tag eq "b" && $node->as_text =~ /攻撃を回避！$/) || $node->right =~ /攻撃を回避！$/))) {
             $self->{Datas}{Damage}->ParseDodgeNode($node, $self->{Critical}, $self->{ActId}, $self->{ActSubId});
             $self->{ActSubId} += 1;
             $self->{Critical} = 0;
@@ -309,13 +313,7 @@ sub GetActerNickname{
             }
 
         } else {
-            if ($self->{ResultNo} > 1) {
-                $self->GetEnemyNickname($div_INIJN_node);
-
-            } else {
-                $self->GetEnemyNickname_0_1($div_INIJN_node);
-            }
-
+            $self->GetEnemyNickname($div_INIJN_node);
         }
     }
 
@@ -344,23 +342,6 @@ sub GetEnemyNickname{
     my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
 
     $self->{NicknameToEnemyId}{$nickname} = $enemy_id;
-}
-
-#-----------------------------------#
-#    敵の愛称を取得
-#------------------------------------
-#    引数｜
-#-----------------------------------#
-sub GetEnemyNickname_0_1{
-    my $self = shift;
-    my $node = shift;
-
-    my @child_nodes = $node->content_list;
-    my $enemy_name = $child_nodes[2];
-    $enemy_name =~ s/\s//g;
-    my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_name);
-
-    $self->{NicknameToEnemyId}{$enemy_name} = $enemy_id;
 }
 
 #-----------------------------------#

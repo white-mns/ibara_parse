@@ -71,7 +71,7 @@ sub Execute{
 
     my $directory = "./data/act";
 
-    $self->ParsePage($directory."/act_skill_".$self->{ResultNo}.".html");
+    $self->ParsePage($directory."/act_skill_".$self->{ResultNo}.".html.gz");
     
     return ;
 }
@@ -87,7 +87,7 @@ sub ParsePage{
 
     #結果の読み込み
     my $content = "";
-    $content = &IO::FileRead($file_name);
+    $content = &IO::GzipRead($file_name);
 
     if (!$content) { return;}
 

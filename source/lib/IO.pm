@@ -85,6 +85,24 @@ sub FileRead{
 
 #-----------------------------------#
 #
+#        読み込み
+#
+#-----------------------------------#
+sub GzipRead{
+    my($fileName) = @_;
+    
+    open(FILEHANDLE , "zcat $fileName 2>/dev/null |");
+    my @in = <FILEHANDLE>;
+    close FILEHANDLE;
+    
+    my $content = join('', @in);
+    
+    return $content;
+}
+
+
+#-----------------------------------#
+#
 #        存在のチェック
 #
 #-----------------------------------#
