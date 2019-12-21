@@ -161,7 +161,7 @@ sub ParseDodgeNode{
     my $nickname = "";
 
     if ($node =~ /(.+)は攻撃を回避！$/)             { $nickname = $1}
-    elsif ($node->as_text =~ /(.+)は攻撃を回避！$/) { $nickname = $1}
+    elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /(.+)は攻撃を回避！$/) { $nickname = $1}
     else                                            { return;}
 
     $nickname =~ s/^\s//g;
