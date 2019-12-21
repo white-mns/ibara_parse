@@ -45,10 +45,6 @@ sub Init{
     my $header_list = "";
 
     $header_list = [
-                "result_no",
-                "generate_no",
-                "party_no",
-                "battle_type",
     ];
 
     $self->{Datas}{Data}->Init($header_list);
@@ -105,9 +101,6 @@ sub ParseTurnNodes{
 
         $self->{Datas}{BattleAction}->GetData($turn, $node);
     }
-
-
-    #$self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $name_id, $member_num) ));
 
     return;
 }
