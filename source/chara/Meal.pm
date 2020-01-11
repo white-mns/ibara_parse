@@ -10,8 +10,10 @@ use strict;
 use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
+
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
+use source::lib::GetIbaraNode;
 
 
 #------------------------------------------------------------------#
@@ -103,7 +105,7 @@ sub GetData{
     
     $self->{ENo} = $e_no;
 
-    my $ready_div_node = $self->SearchDivNodeFromTitleImg($div_r870_nodes, "ready");
+    my $ready_div_node = &GetIbaraNode::SearchDivNodeFromTitleImg($div_r870_nodes, "ready");
     
     if (!$ready_div_node) { return;}
 
@@ -113,35 +115,9 @@ sub GetData{
 }
 
 #-----------------------------------#
-#    行動DIVノード取得
-#------------------------------------
-#    引数｜ブロックdivノード
-#          タイトル画像名
-#-----------------------------------#
-sub SearchDivNodeFromTitleImg{
-    my $self = shift;
-    my $nodes = shift;
-    my $img_text   = shift;
-
-    foreach my $node (@$nodes) {
-        my $img_nodes = &GetNode::GetNode_Tag("img", \$node);
-
-        if (!scalar(@$img_nodes)) { next;}
-
-        my $title   = $$img_nodes[0]->attr("src");
-        if ($title =~ /$img_text.png/) {
-
-            return $node;
-        }
-    }
-
-    return;
-}
-
-#-----------------------------------#
 #    食事結果ノード取得
 #------------------------------------
-#    引数｜ブロックdivノード
+#    引数｜準備divノード
 #-----------------------------------#
 sub GetMealData{
     my $self = shift;
@@ -161,7 +137,7 @@ sub GetMealData{
 #-----------------------------------#
 #    食事データ取得
 #------------------------------------
-#    引数｜キャラクターイメージデータノード
+#    引数｜食事アイテム名ノード
 #-----------------------------------#
 sub GetMeal{
     my $self = shift;

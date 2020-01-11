@@ -10,8 +10,10 @@ use strict;
 use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
+
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
+use source::lib::GetIbaraNode;
 
 
 #------------------------------------------------------------------#
@@ -78,7 +80,7 @@ sub Init{
 #-----------------------------------#
 #    データ取得
 #------------------------------------
-#    引数｜e_no,キャラクターイメージデータノード
+#    引数｜e_no,ブロックdivノード
 #-----------------------------------#
 sub GetData{
     my $self = shift;
@@ -88,7 +90,7 @@ sub GetData{
     
     $self->{ENo} = $e_no;
 
-    my $next_div_node = $self->SearchDivNodeFromTitleImg($div_r870_nodes, "next");
+    my $next_div_node = &GetIbaraNode::SearchDivNodeFromTitleImg($div_r870_nodes, "next");
     
     if (!$next_div_node) { return;}
 
@@ -101,7 +103,7 @@ sub GetData{
 #-----------------------------------#
 #    データ取得
 #------------------------------------
-#    引数｜e_no,キャラクターイメージデータノード
+#    引数｜
 #-----------------------------------#
 sub InitializePartyMove{
     my $self = shift;
@@ -115,36 +117,11 @@ sub InitializePartyMove{
     
     return;
 }
-#-----------------------------------#
-#    行動DIVノード取得
-#------------------------------------
-#    引数｜データノード
-#          タイトル画像名
-#-----------------------------------#
-sub SearchDivNodeFromTitleImg{
-    my $self = shift;
-    my $nodes = shift;
-    my $img_text   = shift;
-
-    foreach my $node (@$nodes) {
-        my $img_nodes = &GetNode::GetNode_Tag("img", \$node);
-
-        if (!scalar(@$img_nodes)) { next;}
-
-        my $title   = $$img_nodes[0]->attr("src");
-        if ($title =~ /$img_text.png/) {
-
-            return $node;
-        }
-    }
-
-    return;
-}
 
 #-----------------------------------#
 #    移動結果データ取得
 #------------------------------------
-#    引数｜キャラクターイメージデータノード
+#    引数｜NEXTdivノード
 #-----------------------------------#
 sub GetMoveData{
     my $self = shift;
@@ -170,7 +147,7 @@ sub GetMoveData{
 #-----------------------------------#
 #    移動・移動実験成功結果データ取得
 #------------------------------------
-#    引数｜キャラクターイメージデータノード
+#    引数｜移動エリア名ノード
 #-----------------------------------#
 sub GetMove{
     my $self = shift;

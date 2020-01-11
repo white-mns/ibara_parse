@@ -8,6 +8,32 @@ package GetIbaraNode;
 use source::lib::GetNode;
 
 #-----------------------------------#
+#    アクションDIVノード取得
+#    　「READY...?」「ACTION」などの一連の処理をまとめたブロックを取得
+#------------------------------------
+#    引数｜データノード
+#          タイトル画像名
+#-----------------------------------#
+sub SearchDivNodeFromTitleImg{
+    my $nodes = shift;
+    my $img_text   = shift;
+    
+    foreach my $node (@$nodes) {
+        my $img_nodes = &GetNode::GetNode_Tag("img", \$node);
+        
+        if (!scalar(@$img_nodes)) { next;}
+        
+        my $title   = $$img_nodes[0]->attr("src");
+        if ($title =~ /$img_text.png/) {
+        
+            return $node;
+        }
+    }
+    
+    return;
+}
+
+#-----------------------------------#
 #    対戦組み合わせTR取得
 #------------------------------------
 #    引数｜データノード
