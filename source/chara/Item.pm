@@ -12,6 +12,7 @@ require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
 
 require "./source/new/NewItemFuka.pm";
+require "./source/new/NewItem.pm";
 
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
@@ -41,10 +42,12 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
     
     #初期化
-    $self->{Datas}{Data}  = StoreData->new();
-    $self->{Datas}{New}   = NewItemFuka->new();
+    $self->{Datas}{Data}        = StoreData->new();
+    $self->{Datas}{NewItem}     = NewItem->new();
+    $self->{Datas}{NewItemFuka} = NewItemFuka->new();
 
-    $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{NewItem}->Init    ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{NewItemFuka}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
 
     my $header_list = "";
    
@@ -130,6 +133,10 @@ sub GetItemData{
                                                               $$effects[0]{"id"}, $$effects[0]{"value"}, $$effects[0]{"need_lv"},
                                                               $$effects[1]{"id"}, $$effects[1]{"value"}, $$effects[1]{"need_lv"},
                                                               $$effects[2]{"id"}, $$effects[2]{"value"}, $$effects[2]{"need_lv"})));
+    
+        if ($$td_nodes[2]->as_text eq "素材") {
+            $self->{Datas}{NewItem}->RecordNewItemData($name);
+        }
     }
 
     return;
@@ -224,7 +231,7 @@ sub GetEffect{
         }
     }
 
-    $self->{Datas}{New}->RecordNewItemFukaData($$effect_hash{"id"});
+    $self->{Datas}{NewItemFuka}->RecordNewItemFukaData($$effect_hash{"id"});
 }
 
 #-----------------------------------#

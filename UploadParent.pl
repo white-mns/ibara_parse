@@ -54,6 +54,7 @@ sub Main {
         &UploadData($upload, ConstData::EXE_DATA_SKILL_MASTERY,   "skill_masteries", "./output/data/skill_mastery.csv");
     }
     if (ConstData::EXE_NEW) {
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM,                "new_items",           "./output/new/item_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM_FUKA,           "new_item_fukas",      "./output/new/item_fuka_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ACTION,              "new_actions",         "./output/new/action_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_NEXT_ENEMY,          "new_next_enemies",    "./output/new/next_enemy_");

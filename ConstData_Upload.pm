@@ -53,6 +53,7 @@ use warnings;
         use constant EXE_BATTLE_ENEMY            => 1;
         use constant EXE_BATTLE_DUEL_INFO        => 1;
     use constant EXE_NEW                  => 1;
+        use constant EXE_NEW_ITEM                => 1;
         use constant EXE_NEW_ITEM_FUKA           => 1;
         use constant EXE_NEW_ACTION              => 1;
         use constant EXE_NEW_NEXT_ENEMY          => 1;
