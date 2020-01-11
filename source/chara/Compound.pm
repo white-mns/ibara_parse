@@ -10,9 +10,10 @@ use strict;
 use warnings;
 require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
+
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
-
+use source::lib::GetIbaraNode;
 
 #------------------------------------------------------------------#
 #    パッケージの定義
@@ -97,38 +98,12 @@ sub GetData{
     
     $self->{ENo} = $e_no;
 
-    my $action_div_node = $self->SearchDivNodeFromTitleImg($nodes, "action");
+    my $action_div_node = &GetIbaraNode::SearchDivNodeFromTitleImg($nodes, "action");
 
     if (!$action_div_node) { return;}
 
     $self->GetCompoundData($action_div_node);
     
-    return;
-}
-
-#-----------------------------------#
-#    行動DIVノード取得
-#------------------------------------
-#    引数｜データノード
-#          タイトル画像名
-#-----------------------------------#
-sub SearchDivNodeFromTitleImg{
-    my $self = shift;
-    my $nodes = shift;
-    my $img_text   = shift;
-
-    foreach my $node (@$nodes) {
-        my $img_nodes = &GetNode::GetNode_Tag("img", \$node);
-
-        if (!scalar(@$img_nodes)) { next;}
-
-        my $title   = $$img_nodes[0]->attr("src");
-        if ($title =~ /$img_text.png/) {
-
-            return $node;
-        }
-    }
-
     return;
 }
 
