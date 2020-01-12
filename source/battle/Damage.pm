@@ -225,8 +225,9 @@ sub ParseProtectionNode{
 
     my @right_nodes = $b_node->right;
 
-    if ($right_nodes[2] && $right_nodes[2] =~ /HASH/ &&  $right_nodes[2]->attr("class") && $right_nodes[2]->attr("class") eq "BS2" && $right_nodes[2]->as_text =~ /（守護(\d+)減）/) {
+    if ($right_nodes[2] && $right_nodes[2] =~ /HASH/ &&  $right_nodes[2]->attr("class") && $right_nodes[2]->attr("class") =~ /BS\d/ && $right_nodes[2]->as_text =~ /（守護(\d+)減）/) {
         my $value = $1;
+        $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, 5, 0, -1) ));
         $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("守護"), $value) ));
     }
 
@@ -246,7 +247,7 @@ sub ParseReflectionNode{
 
     my @right_nodes = $b_node->right;
 
-    if ($right_nodes[2] && $right_nodes[2] =~ /HASH/ && $right_nodes[2]->attr("class") && $right_nodes[2]->attr("class") eq "BS2" && $right_nodes[2]->as_text =~ /（反射(\d+)減）/) {
+    if ($right_nodes[2] && $right_nodes[2] =~ /HASH/ && $right_nodes[2]->attr("class") && $right_nodes[2]->attr("class") =~ /BS\d/ && $right_nodes[2]->as_text =~ /（反射(\d+)減）/) {
         my $value = $1;
         $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("反射"), $value) ));
     }
