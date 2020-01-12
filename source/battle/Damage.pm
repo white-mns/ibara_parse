@@ -146,6 +146,9 @@ sub ParseDamageNode{
     $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, $element_id, $damage) ));
     $self->{Datas}{Target}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $target_type, $e_no, $enemy_id, 0) ));
     $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("Critical Hit"), $critical) ));
+    
+    $self->ParseProtectionNode($b_node);
+    $self->ParseReflectionNode($b_node);
 
     return;
 }
@@ -193,18 +196,14 @@ sub ParseDodgeNode{
 
 #-----------------------------------#
 #    クリティカルを解析
-#    ダメージ種別
-#      0:回避
 #------------------------------------
-#    引数｜ダメージノード
+#    引数｜クリティカルノード
 #          行動番号
 #          行動サブ番号
 #-----------------------------------#
 sub ParseCriticalNode{
     my $self          = shift;
     my $i_node        = shift;
-    $self->{ActId}    = shift;
-    $self->{ActSubId} = shift;
 
     if (!$i_node) {return 0;}
 
@@ -212,6 +211,49 @@ sub ParseCriticalNode{
 
     return $value;
 }
+
+#-----------------------------------#
+#    守護を解析
+#------------------------------------
+#    引数｜ダメージノード
+#-----------------------------------#
+sub ParseProtectionNode{
+    my $self          = shift;
+    my $b_node        = shift;
+
+    if (!$b_node) {return 0;}
+
+    my @right_nodes = $b_node->right;
+
+    if ($right_nodes[2] && $right_nodes[2] =~ /HASH/ &&  $right_nodes[2]->attr("class") && $right_nodes[2]->attr("class") eq "BS2" && $right_nodes[2]->as_text =~ /（守護(\d+)減）/) {
+        my $value = $1;
+        $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("守護"), $value) ));
+    }
+
+    return;
+}
+
+#-----------------------------------#
+#    反射を解析
+#------------------------------------
+#    引数｜ダメージノード
+#-----------------------------------#
+sub ParseReflectionNode{
+    my $self          = shift;
+    my $b_node        = shift;
+
+    if (!$b_node) {return 0;}
+
+    my @right_nodes = $b_node->right;
+
+    if ($right_nodes[2] && $right_nodes[2] =~ /HASH/ && $right_nodes[2]->attr("class") && $right_nodes[2]->attr("class") eq "BS2" && $right_nodes[2]->as_text =~ /（反射(\d+)減）/) {
+        my $value = $1;
+        $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("反射"), $value) ));
+    }
+
+    return;
+}
+
 
 #-----------------------------------#
 #    対象のENoおよび敵番号を取得
