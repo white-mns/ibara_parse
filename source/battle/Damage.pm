@@ -117,7 +117,7 @@ sub ParseDamageNode{
     my $nickname = "";
 
     if ($b_node->left =~ /(.+)(に|が)/) {
-        my $nickname = $1;
+        $nickname = $1;
     } elsif ($b_node->left =~ /(に|が)/) {
         #愛称の着色がある場合、一度親ノードを取得し、その子ノードとして愛称を取得する
         my $parent_node = $b_node->parent;
@@ -276,9 +276,12 @@ sub GetENoOrEnemyIdFromNickname{
         $$e_no = $self->{NicknameToEno}{$nickname};
         $$type = 0;
 
-    } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
-        $$enemy_id = $self->{NicknameToEnemyId}{$nickname};
-        $$type = 1;
+    } else {
+        $nickname =~ s/[A-Z]$//;
+        if (exists($self->{NicknameToEnemyId}{$nickname})) {
+            $$enemy_id = $self->{NicknameToEnemyId}{$nickname};
+            $$type = 1;
+        }
     }
 }
 
