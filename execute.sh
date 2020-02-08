@@ -78,3 +78,9 @@ if [ -f ./data/orig/result${ZIP_NAME}.zip ]; then
 fi
 
 cd $CURENT  #元のディレクトリに戻る
+
+if [ ! -d ./data/card/card${RESULT_NO}.zip ]; then
+    ./data/_card_download.sh $RESULT_NO
+fi
+
+cd $CURENT  #元のディレクトリに戻る
