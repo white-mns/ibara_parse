@@ -80,6 +80,7 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MEAL,              "meals",               "./output/chara/meal_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NEXT_DUEL_INFO,    "next_duel_infos",     "./output/chara/next_duel_info_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_MAKE,              "makes",               "./output/chara/make_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_AIDE,              "aides",               "./output/chara/aide_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_AIDE_CANDIDATE,    "aide_candidates",     "./output/chara/aide_candidate_");
     }
     if (ConstData::EXE_BATTLE) {

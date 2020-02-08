@@ -32,6 +32,7 @@ require "./source/chara/Move.pm";
 require "./source/chara/NextBattle.pm";
 require "./source/chara/Meal.pm";
 require "./source/chara/Make.pm";
+require "./source/chara/Aide.pm";
 require "./source/chara/AideCandidate.pm";
 
 use ConstData;        #定数呼び出し
@@ -80,6 +81,7 @@ sub Init{
     if (ConstData::EXE_CHARA_NEXT_BATTLE)    { $self->{DataHandlers}{NextBattle}    = NextBattle->new();}
     if (ConstData::EXE_CHARA_MEAL)           { $self->{DataHandlers}{Meal}          = Meal->new();}
     if (ConstData::EXE_CHARA_MAKE)           { $self->{DataHandlers}{Make}          = Make->new();}
+    if (ConstData::EXE_CHARA_AIDE)           { $self->{DataHandlers}{Aide}          = Aide->new();}
     if (ConstData::EXE_CHARA_AIDE_CANDIDATE) { $self->{DataHandlers}{AideCandidate} = AideCandidate->new();}
 
     #初期化処理
@@ -176,6 +178,7 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{NextBattle}))    {$self->{DataHandlers}{NextBattle}->GetData    ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Meal}))          {$self->{DataHandlers}{Meal}->GetData          ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Make}))          {$self->{DataHandlers}{Make}->GetData          ($e_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Aide}))          {$self->{DataHandlers}{Aide}->GetData          ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{AideCandidate})) {$self->{DataHandlers}{AideCandidate}->GetData ($e_no, $div_r870_nodes)};
 
     $tree = $tree->delete;

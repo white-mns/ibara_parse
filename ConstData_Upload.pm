@@ -42,6 +42,7 @@ use warnings;
         use constant EXE_CHARA_MEAL              => 1;
         use constant EXE_CHARA_NEXT_DUEL_INFO    => 1;
         use constant EXE_CHARA_MAKE              => 1;
+        use constant EXE_CHARA_AIDE              => 1;
         use constant EXE_CHARA_AIDE_CANDIDATE    => 1;
     use constant EXE_BATTLE               => 1;
         use constant EXE_BATTLE_INFO             => 1;
