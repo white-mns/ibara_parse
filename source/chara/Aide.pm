@@ -123,7 +123,8 @@ sub GetAideData{
             foreach my $td_node (@$td_nodes) {
                 my $text = $td_node->as_text;
                 if ($text eq "要求SP") { $cost_sp = $td_node->right->as_text; } 
-                elsif ($text eq "絆")  { $bonds = $td_node->right->as_text; }
+                elsif ($text eq "絆")  { $bonds = $td_node->right->as_text; } # 第6回までの表記
+                elsif ($text eq "キズナ")  { $bonds = $td_node->right->as_text; } #第7回からの表記
                 elsif ($text eq "MHP") { $mhp = $td_node->right->as_text; }
                 elsif ($text eq "MSP") { $msp = $td_node->right->as_text; }
                 elsif ($text eq "射程"){ $range = $td_node->right->as_text; }
