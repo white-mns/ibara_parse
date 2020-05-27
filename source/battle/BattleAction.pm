@@ -218,6 +218,26 @@ sub GetBattleAction{
 
                 my $nickname  = $1;
                 my $fuka_name = $2;
+
+                # 「〇〇の〇〇の〇」のように「の」が二つ以上存在するときの処理
+                $node_text =~ s/！$//;
+                my @no_sprits = split(/の/,$node_text);
+                if (scalar(@no_sprits) > 2) {
+                    my $sprits_length = scalar(@no_sprits);
+                    my $no_nickname = $no_sprits[0];
+
+                    for (my $i=1;$i<$sprits_length - 2; $i++){
+                        $no_nickname .= "の".$no_sprits[$i]
+                    }
+                    my $no_fuka_name = $no_sprits[$sprits_length - 2] . "の" . $no_sprits[$sprits_length - 1];
+
+                    if ($self->{CommonDatas}{SkillData}->GetId($no_fuka_name) || $self->{CommonDatas}{ProperName}->GetId($no_fuka_name)) {
+                        $nickname = $no_nickname;
+                        $fuka_name = $no_fuka_name;
+                    }
+                }
+                
+
                 $nickname =~ s/\s//g;
 
                 if (exists($self->{NicknameToEno}{$nickname})) {
