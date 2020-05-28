@@ -120,9 +120,10 @@ sub ParseOneTurnActions{
 
         if ($node =~ /HASH/ && $node->tag eq "div" && $node->attr("class") && $node->attr("class") eq "R870") {last;}
 
-        if ($node =~ /HASH/ && $node->tag eq "a" &&  $node->right =~ /HASH/ &&
+        if ($node =~ /HASH/ && ($node->tag eq "a" || $node->tag eq "b") &&  $node->right =~ /HASH/ &&
             (($node->right->attr("class") && $node->right->attr("class") eq "B2") || 
-             ($node->right->right =~ /HASH/ && $node->right->right->tag eq "dl"))) {
+             ($node->right->right =~ /HASH/ && $node->right->right->tag eq "dl")  ||
+             $node->right->tag eq "dl")) {
 
             if ($node->as_text =~ /(.+)の行動/) {
                 my $nickname = $1;
