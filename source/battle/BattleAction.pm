@@ -94,7 +94,7 @@ sub GetData{
     $self->{Turn}     = shift;
     my $node          = shift;
 
-    $self->ParseBattleActionNodes($node);
+    $self->ParseOneTurnActions($node);
     
     return;
 }
@@ -104,7 +104,7 @@ sub GetData{
 #------------------------------------
 #    引数｜Turn表記ノード
 #-----------------------------------#
-sub ParseBattleActionNodes{
+sub ParseOneTurnActions{
     my $self = shift;
     my $turn_node = shift;
 
@@ -145,7 +145,7 @@ sub ParseBattleActionNodes{
             foreach my $dl_node (@$dl_nodes) {  
                 if (!$dl_node->attr("class")) {next;} # class属性のないdlノードは、直下のdlノードに情報が全て入っているため解析・カウントを除外する
 
-                $self->GetBattleAction($acter_type, $e_no, $enemy_id, $dl_node);
+                $self->ParseBattleActionNode($acter_type, $e_no, $enemy_id, $dl_node);
 
                 $self->{ActId} += 1;
                 $self->{ActSubId} += 1;
@@ -163,15 +163,19 @@ sub ParseBattleActionNodes{
 #-----------------------------------#
 #    戦闘行動dlノードを解析
 #------------------------------------
-#    引数｜行動種別
-#            0:通常攻撃
-#            1:アクティブスキル
-#            2:パッシブスキル・付加
+#    引数｜アクター種別
+#           0:PC
+#           1:NPC
 #          ENo
 #          敵ID
 #          戦闘行動ノード
+#------------------------------------
+#          行動種別
+#            0:通常攻撃
+#            1:アクティブスキル
+#            2:パッシブスキル・付加
 #-----------------------------------#
-sub GetBattleAction{
+sub ParseBattleActionNode{
     my $self = shift;
     my $acter_type = shift;
     my $e_no = shift;
@@ -181,112 +185,20 @@ sub GetBattleAction{
     my @nodes = $dl_node->content_list;
 
     foreach my $node (@nodes) {
-        my ($act_type, $skill_id, $fuka_id) = (-1, 0, 0);
-
-        if ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F[87]i/) {
-            $act_type = 1;
-
-            my $skill_name = $node->as_text;
-
-            if ($skill_name =~ /このターン、|領域効果|この列の全領域値が減少|前ターンのクリティカル数/) {
-                next;
-            }
-
-            my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
-
-            if (scalar(@$sk_nodes)) {
-                $skill_name = $$sk_nodes[0]->as_text;
-                $skill_name =~ s/^\>\>//g;
-            }
-
-            $skill_name =~ s/\s//g;
-            $skill_name =~ s/！！//g;
-            $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, 0, 0, 0, 0, 0, " "]);
-
-            $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
-            $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
-
-            $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
-
+        if ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F[87]i/) { # アクティブスキルの取得
+            $self->ParseActiveAction($acter_type, $e_no, $enemy_id, $node);
             
-        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /HK\d/) {
+        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /HK\d/) { # パッシブスキル・付加の取得
             my $node_text = $node->as_text;
             if ($node_text =~ /(.+)の(.+?)！/) {
-                $act_type = 2;
-                ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
-                my $lv = -1;
-
-                my $nickname  = $1;
-                my $fuka_name = $2;
-
-                # 「〇〇の〇〇の〇」のように「の」が二つ以上存在するときの処理
-                $node_text =~ s/！$//;
-                my @no_sprits = split(/の/,$node_text);
-                if (scalar(@no_sprits) > 2) {
-                    my $sprits_length = scalar(@no_sprits);
-                    my $no_nickname = $no_sprits[0];
-
-                    for (my $i=1;$i<$sprits_length - 2; $i++){
-                        $no_nickname .= "の".$no_sprits[$i]
-                    }
-                    my $no_fuka_name = $no_sprits[$sprits_length - 2] . "の" . $no_sprits[$sprits_length - 1];
-
-                    if ($self->{CommonDatas}{SkillData}->GetId($no_fuka_name) || $self->{CommonDatas}{ProperName}->GetId($no_fuka_name)) {
-                        $nickname = $no_nickname;
-                        $fuka_name = $no_fuka_name;
-                    }
-                }
-                
-
-                $nickname =~ s/\s//g;
-
-                if (exists($self->{NicknameToEno}{$nickname})) {
-                    $e_no = $self->{NicknameToEno}{$nickname};
-                    $acter_type = 0;
-
-                } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
-                    $enemy_id = $self->{NicknameToEnemyId}{$nickname};
-                    $acter_type = 1;
-                }
-
-                # 第3回からのタグ構成
-                my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
-                if (scalar(@$sk_nodes)) {
-                    $fuka_name = $$sk_nodes[0]->as_text;
-                    $fuka_name =~ s/^\>\>//g;
-                }
-
-                # 第2回までのタグ構成
-                my @right = $node->right;
-                if ($right[1] =~ /HASH/ && $right[1]->attr("class") && $right[1]->attr("class") =~ /SK\d/) {
-                    $fuka_name = $right[1]->as_text;
-                    $fuka_name =~ s/^\>\>//g;
-                }
-
-                if ($fuka_name =~ s/LV(\d+)//) {
-                    $lv = $1;
-                }
-
-                $fuka_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($fuka_name);
-
-                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, $lv) ));
-                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
-
-                $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+                $self->ParsePassiveAction($node);
 
             } elsif ($node_text =~ /通常攻撃！/) {
-                $act_type = 0;
-
-                $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, ["通常攻撃", 0, 0, 0, 0, 0, " "]);
-
-                $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
-                $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
-
-                $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+                $self->RecordNormalAction($acter_type, $e_no, $enemy_id, $node);
             }
 
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && ($node->attr("class") =~ /BS\d/ || $node->attr("class") =~ /Z\d/)) {
-            $self->GetBattleAction($acter_type, $e_no, $enemy_id, $node);
+            $self->ParseBattleActionNode($acter_type, $e_no, $enemy_id, $node); # 入れ子ノードを再起で解析
 
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /^[0-9]+$/) { # ダメージの解析
             $self->{Datas}{Damage}->ParseDamageNode($node, $self->{Critical}, $self->{ActId}, $self->{ActSubId});
@@ -305,6 +217,157 @@ sub GetBattleAction{
 
     return;
 }
+
+#-----------------------------------#
+#    アクティブスキルを解析・記録
+#------------------------------------
+#    引数｜行動種別
+#            0:通常攻撃
+#            1:アクティブスキル
+#            2:パッシブスキル・付加
+#          ENo
+#          敵ID
+#          戦闘行動ノード
+#-----------------------------------#
+sub ParseActiveAction{
+    my $self = shift;
+    my $acter_type = shift;
+    my $e_no = shift;
+    my $enemy_id = shift;
+    my $node = shift;
+
+    my $act_type = 1;
+
+    my $skill_name = $node->as_text;
+
+    if ($skill_name =~ /このターン、|領域効果|この列の全領域値が減少|前ターンのクリティカル数/) {
+        return;
+    }
+
+    my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
+
+    if (scalar(@$sk_nodes)) {
+        $skill_name = $$sk_nodes[0]->as_text;
+        $skill_name =~ s/^\>\>//g;
+    }
+
+    $skill_name =~ s/\s//g;
+    $skill_name =~ s/！！//g;
+    my $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, 0, 0, 0, 0, 0, " "]);
+    my $fuka_id  = 0;
+
+    $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
+    $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
+
+    $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+}
+
+#-----------------------------------#
+#    パッシブスキル・付加を解析・記録
+#------------------------------------
+#    引数｜行動種別
+#            0:通常攻撃
+#            1:アクティブスキル
+#            2:パッシブスキル・付加
+#-----------------------------------#
+sub ParsePassiveAction{
+    my $self = shift;
+    my $node = shift;
+
+    my $act_type = 2;
+    my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0); # 被命中時付加などがあるため、発動者を初期化
+    my $lv = -1;
+
+    my $node_text = $node->as_text;
+    $node_text =~ /(.+)の(.+?)！/;
+
+    my $nickname  = $1;
+    my $fuka_name = $2;
+
+    # 「〇〇の〇〇の〇」のように「の」が二つ以上存在するときの処理
+    $node_text =~ s/！$//;
+    my @no_sprits = split(/の/,$node_text);
+    if (scalar(@no_sprits) > 2) {
+        my $sprits_length = scalar(@no_sprits);
+        my $no_nickname = $no_sprits[0];
+
+        for (my $i=1;$i<$sprits_length - 2; $i++){
+            $no_nickname .= "の".$no_sprits[$i]
+        }
+        my $no_fuka_name = $no_sprits[$sprits_length - 2] . "の" . $no_sprits[$sprits_length - 1];
+
+        if ($self->{CommonDatas}{SkillData}->GetId($no_fuka_name) || $self->{CommonDatas}{ProperName}->GetId($no_fuka_name)) {
+            $nickname = $no_nickname;
+            $fuka_name = $no_fuka_name;
+        }
+    }
+
+    $nickname =~ s/\s//g;
+
+    if (exists($self->{NicknameToEno}{$nickname})) {
+        $e_no = $self->{NicknameToEno}{$nickname};
+        $acter_type = 0;
+
+    } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
+        $enemy_id = $self->{NicknameToEnemyId}{$nickname};
+        $acter_type = 1;
+    }
+
+    # 第3回からのタグ構成
+    my $sk_nodes = &GetNode::GetNode_Tag_Attr_RegExp("b", "class", 'SK\d', \$node);
+    if (scalar(@$sk_nodes)) {
+        $fuka_name = $$sk_nodes[0]->as_text;
+        $fuka_name =~ s/^\>\>//g;
+    }
+
+    # 第2回までのタグ構成
+    my @right = $node->right;
+    if ($right[1] =~ /HASH/ && $right[1]->attr("class") && $right[1]->attr("class") =~ /SK\d/) {
+        $fuka_name = $right[1]->as_text;
+        $fuka_name =~ s/^\>\>//g;
+    }
+
+    if ($fuka_name =~ s/LV(\d+)//) {
+        $lv = $1;
+    }
+
+    my $skill_id  = 0;
+    my $fuka_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($fuka_name);
+
+    $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, $lv) ));
+    $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
+
+    $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+}
+
+#-----------------------------------#
+#    通常攻撃を記録
+#------------------------------------
+#    引数｜行動種別
+#            0:通常攻撃
+#            1:アクティブスキル
+#            2:パッシブスキル・付加
+#          ENo
+#          敵ID
+#          戦闘行動ノード
+#-----------------------------------#
+sub RecordNormalAction{
+    my $self = shift;
+    my $acter_type = shift;
+    my $e_no = shift;
+    my $enemy_id = shift;
+
+    my $act_type = 0;
+
+    my $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, ["通常攻撃", 0, 0, 0, 0, 0, " "]);
+    my $fuka_id  = 0;
+
+    $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
+    $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
+
+    $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+}
+
 
 #-----------------------------------#
 #    戦闘参加者の愛称を取得
