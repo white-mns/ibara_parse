@@ -110,6 +110,8 @@ sub ParseOneTurnActions{
 
     my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
 
+    $self->{LastSkillName} = "";
+
     if (!$turn_node) {return;}
 
     my @nodes = $turn_node->right;
@@ -183,7 +185,7 @@ sub ParseBattleActionNode{
             }
 
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F5i/) { # 召喚スキルで参加したキャラクターを愛称検索データに追加
-            # 召喚スキル;
+            $self->AddSummonNicknameToIndex($node)
 
         } elsif ($node =~ /HASH/ && $node->tag eq "table") { # カード発動時、発動者を変更
             $self->ChangeActerToCardUser(\$acter_type, \$e_no, \$enemy_id, $node);
@@ -251,6 +253,8 @@ sub ParseActiveAction{
     $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
 
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
+
+    $self->{LastSkillName} = $skill_name;
 }
 
 #-----------------------------------#
@@ -423,7 +427,7 @@ sub SetActerData{
 #------------------------------------
 #    引数｜
 #-----------------------------------#
-sub SetActerNicknameIndex{
+sub SetActerNicknameToIndex{
     my $self = shift;
     my $node = shift;
 
@@ -445,7 +449,7 @@ sub SetActerNicknameIndex{
             }
 
         } else {
-            $self->SetEnemyNicknameIndex($div_INIJN_node);
+            $self->SetEnemyNicknameToIndex($div_INIJN_node);
         }
     }
 
@@ -457,7 +461,7 @@ sub SetActerNicknameIndex{
 #------------------------------------
 #    引数｜
 #-----------------------------------#
-sub SetEnemyNicknameIndex{
+sub SetEnemyNicknameToIndex{
     my $self = shift;
     my $node = shift;
 
@@ -476,6 +480,36 @@ sub SetEnemyNicknameIndex{
     $self->{NicknameToEnemyId}{$nickname} = $enemy_id;
 }
 
+#-----------------------------------#
+#    召喚したNPCの名称を索引に追加
+#------------------------------------
+#    引数｜
+#-----------------------------------#
+sub AddSummonNicknameToIndex{
+    my $self = shift;
+    my $node = shift;
+
+    my $node_text = $node->as_text;
+    if ($node_text !~ /(.+)を召喚！$/) {return;}
+
+    my $nickname = $1;
+    my $summon_name = "";
+
+    if ($self->{LastSkillName} =~ /サモン：(.+)/) {
+        $summon_name = $1;
+
+    } elsif($self->{LastSkillName} eq "スーティワルツ") {
+        $summon_name = "シルエットダンサー";
+    }
+
+    if ($summon_name ne "") {
+        my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($summon_name);
+
+        $self->{NicknameToEnemyId}{$nickname} = $enemy_id;
+    }
+
+    $self->{Datas}{Damage}->SetNicknameIndex($self->{NicknameToEno}, $self->{NicknameToEnemyId});
+}
 #-----------------------------------#
 #    戦闘開始時・行動番号をリセット
 #------------------------------------
