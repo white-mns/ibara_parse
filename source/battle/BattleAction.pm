@@ -419,11 +419,11 @@ sub SetActerData{
 }
 
 #-----------------------------------#
-#    戦闘参加者の愛称を取得
+#    戦闘参加者の愛称を索引に追加
 #------------------------------------
 #    引数｜
 #-----------------------------------#
-sub GetActerNickname{
+sub SetActerNicknameIndex{
     my $self = shift;
     my $node = shift;
 
@@ -445,19 +445,19 @@ sub GetActerNickname{
             }
 
         } else {
-            $self->GetEnemyNickname($div_INIJN_node);
+            $self->SetEnemyNicknameIndex($div_INIJN_node);
         }
     }
 
-    $self->{Datas}{Damage}->SetActerNickname($self->{NicknameToEno}, $self->{NicknameToEnemyId});
+    $self->{Datas}{Damage}->SetNicknameIndex($self->{NicknameToEno}, $self->{NicknameToEnemyId});
 }
 
 #-----------------------------------#
-#    敵の愛称を取得
+#    NPCの名称を索引に追加
 #------------------------------------
 #    引数｜
 #-----------------------------------#
-sub GetEnemyNickname{
+sub SetEnemyNicknameIndex{
     my $self = shift;
     my $node = shift;
 

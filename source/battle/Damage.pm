@@ -287,11 +287,11 @@ sub GetENoOrEnemyIdFromNickname{
 }
 
 #-----------------------------------#
-#    戦闘参加者の愛称を設定
+#    戦闘参加者の愛称索引を設定
 #------------------------------------
 #    引数｜
 #-----------------------------------#
-sub SetActerNickname{
+sub SetNicknameIndex{
     my $self = shift;
     $self->{NicknameToEno}     = shift;
     $self->{NicknameToEnemyId} = shift;
