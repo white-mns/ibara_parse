@@ -123,21 +123,9 @@ sub ParseOneTurnActions{
              ($node->right->right =~ /HASH/ && $node->right->right->tag eq "dl"))) {
 
             if ($node->as_text =~ /(.+)の行動/) {
-                ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
-
                 my $nickname = $1;
-                $nickname =~ s/^▼//;
-                $nickname =~ s/\s//g;
 
-                if (exists($self->{NicknameToEno}{$nickname})) {
-                    $e_no = $self->{NicknameToEno}{$nickname};
-                    $acter_type = 0;
-
-                } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
-                    $enemy_id = $self->{NicknameToEnemyId}{$nickname};
-                    $acter_type = 1;
-                }
-
+                $self->SetActerData($nickname, \$acter_type, \$e_no, \$enemy_id);
             }
 
         } elsif ($node =~ /HASH/ && $node->tag eq "dl") {
@@ -155,6 +143,39 @@ sub ParseOneTurnActions{
             my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
         }
 
+    }
+
+    return;
+}
+
+#-----------------------------------#
+#    発動者を取得し保存する
+#------------------------------------
+#    引数｜アクター種別
+#           0:PC
+#           1:NPC
+#          ENo
+#          敵ID
+#-----------------------------------#
+sub SetActerData{
+    my $self = shift;
+    my $nickname = shift;
+    my $acter_type = shift;
+    my $e_no = shift;
+    my $enemy_id = shift;
+    
+    ($$acter_type, $$e_no, $$enemy_id) = (-1, 0, 0);
+
+    $nickname =~ s/^▼//;
+    $nickname =~ s/\s//g;
+
+    if (exists($self->{NicknameToEno}{$nickname})) {
+        $$e_no = $self->{NicknameToEno}{$nickname};
+        $$acter_type = 0;
+
+    } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
+        $$enemy_id = $self->{NicknameToEnemyId}{$nickname};
+        $$acter_type = 1;
     }
 
     return;
