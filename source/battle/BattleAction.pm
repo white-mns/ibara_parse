@@ -139,45 +139,9 @@ sub ParseOneTurnActions{
                 $self->{ActSubId} += 1;
                 $self->{Critical} = 0;
             }
-
             my ($acter_type, $e_no, $enemy_id) = (-1, 0, 0);
         }
-
     }
-
-    return;
-}
-
-#-----------------------------------#
-#    発動者を取得し保存する
-#------------------------------------
-#    引数｜アクター種別
-#           0:PC
-#           1:NPC
-#          ENo
-#          敵ID
-#-----------------------------------#
-sub SetActerData{
-    my $self = shift;
-    my $nickname = shift;
-    my $acter_type = shift;
-    my $e_no = shift;
-    my $enemy_id = shift;
-    
-    ($$acter_type, $$e_no, $$enemy_id) = (-1, 0, 0);
-
-    $nickname =~ s/^▼//;
-    $nickname =~ s/\s//g;
-
-    if (exists($self->{NicknameToEno}{$nickname})) {
-        $$e_no = $self->{NicknameToEno}{$nickname};
-        $$acter_type = 0;
-
-    } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
-        $$enemy_id = $self->{NicknameToEnemyId}{$nickname};
-        $$acter_type = 1;
-    }
-
     return;
 }
 
@@ -217,6 +181,12 @@ sub ParseBattleActionNode{
             } elsif ($node_text =~ /通常攻撃！/) {
                 $self->RecordNormalAction($acter_type, $e_no, $enemy_id, $node);
             }
+
+        } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && $node->attr("class") =~ /F5i/) { # 召喚スキルで参加したキャラクターを愛称検索データに追加
+            # 召喚スキル;
+
+        } elsif ($node =~ /HASH/ && $node->tag eq "table") { # カード発動時、発動者を変更
+            $self->ChangeActerToCardUser(\$acter_type, \$e_no, \$enemy_id, $node);
 
         } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->attr("class") && ($node->attr("class") =~ /BS\d/ || $node->attr("class") =~ /Z\d/)) {
             $self->ParseBattleActionNode($acter_type, $e_no, $enemy_id, $node); # 入れ子ノードを再起で解析
@@ -389,6 +359,64 @@ sub RecordNormalAction{
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 }
 
+#-----------------------------------#
+#    カード発動時、発動者を変更
+#------------------------------------
+#    引数｜行動種別
+#            0:通常攻撃
+#            1:アクティブスキル
+#            2:パッシブスキル・付加
+#          ENo
+#          敵ID
+#          戦闘行動ノード
+#-----------------------------------#
+sub ChangeActerToCardUser{
+    my $self = shift;
+    my $acter_type = shift;
+    my $e_no = shift;
+    my $enemy_id = shift;
+    my $node = shift;
+
+    my $node_text = $node->as_text;
+    
+    if ($node_text =~ /(.*)のカード発動！$/) {
+        my $nickname = $1;
+        $self->SetActerData($nickname, $acter_type, $e_no, $enemy_id);
+    }
+}
+
+#-----------------------------------#
+#    発動者を取得し保存する
+#------------------------------------
+#    引数｜アクター種別
+#           0:PC
+#           1:NPC
+#          ENo
+#          敵ID
+#-----------------------------------#
+sub SetActerData{
+    my $self = shift;
+    my $nickname = shift;
+    my $acter_type = shift;
+    my $e_no = shift;
+    my $enemy_id = shift;
+    
+    ($$acter_type, $$e_no, $$enemy_id) = (-1, 0, 0);
+
+    $nickname =~ s/^▼//;
+    $nickname =~ s/\s//g;
+
+    if (exists($self->{NicknameToEno}{$nickname})) {
+        $$e_no = $self->{NicknameToEno}{$nickname};
+        $$acter_type = 0;
+
+    } elsif (exists($self->{NicknameToEnemyId}{$nickname})) {
+        $$enemy_id = $self->{NicknameToEnemyId}{$nickname};
+        $$acter_type = 1;
+    }
+
+    return;
+}
 
 #-----------------------------------#
 #    戦闘参加者の愛称を取得
