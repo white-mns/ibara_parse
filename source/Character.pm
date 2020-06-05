@@ -25,6 +25,7 @@ require "./source/chara/Superpower.pm";
 require "./source/chara/Skill.pm";
 require "./source/chara/Card.pm";
 require "./source/chara/Study.pm";
+require "./source/chara/OneTimeStudy.pm";
 require "./source/chara/Place.pm";
 require "./source/chara/Party.pm";
 require "./source/chara/Compound.pm";
@@ -73,7 +74,8 @@ sub Init{
     if (ConstData::EXE_CHARA_SUPERPOWER)     { $self->{DataHandlers}{Superpower}    = Superpower->new();}
     if (ConstData::EXE_CHARA_SKILL)          { $self->{DataHandlers}{Skill}         = Skill->new();}
     if (ConstData::EXE_CHARA_CARD)           { $self->{DataHandlers}{Card}          = Card->new();}
-    if (ConstData::EXE_CHARA_SKILL)          { $self->{DataHandlers}{Study}         = Study->new();}
+    if (ConstData::EXE_CHARA_STUDY)          { $self->{DataHandlers}{Study}         = Study->new();}
+    if (ConstData::EXE_CHARA_ONE_TIME_STUDY) { $self->{DataHandlers}{OneTimeStudy}  = OneTimeStudy->new();}
     if (ConstData::EXE_CHARA_PLACE)          { $self->{DataHandlers}{Place}         = Place->new();}
     if (ConstData::EXE_CHARA_PARTY)          { $self->{DataHandlers}{Party}         = Party->new();}
     if (ConstData::EXE_CHARA_COMPOUND)       { $self->{DataHandlers}{Compound}      = Compound->new();}
@@ -171,6 +173,7 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{Skill}))         {$self->{DataHandlers}{Skill}->GetData         ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Card}))          {$self->{DataHandlers}{Card}->GetData          ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{Study}))         {$self->{DataHandlers}{Study}->GetData         ($e_no, $div_y870_nodes)};
+    if (exists($self->{DataHandlers}{OneTimeStudy}))  {$self->{DataHandlers}{OneTimeStudy}->GetData  ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Place}))         {$self->{DataHandlers}{Place}->GetData         ($e_no, $$div_cimgnm4_nodes[0])};
     if (exists($self->{DataHandlers}{Party}))         {$self->{DataHandlers}{Party}->GetData         ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Compound}))      {$self->{DataHandlers}{Compound}->GetData      ($e_no, $div_r870_nodes)};
