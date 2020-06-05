@@ -53,6 +53,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	29	1	連行される元ヤン	2
 08	0	30	0	かちかち山　モデルタイラント	4
 08	0	30	1	かちかち山　モデルタイラント	4
+08	0	33	1	TeamNo.33	1
 08	0	34	0	ʕ＊°✇°＊ʔ	2
 08	0	34	1	ʕ＊°✇°＊ʔ	2
 08	0	35	0	チーム・まないた	2
@@ -98,6 +99,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	61	1	黒塗りの高級車とお兄さん達	4
 08	0	62	0	Étranger	2
 08	0	62	1	子供と保護者（事案じゃないです）	2
+08	0	64	0	TeamNo.64	1
+08	0	64	1	TeamNo.64	1
 08	0	67	0	TeamNo.67	1
 08	0	67	1	TeamNo.67	1
 08	0	69	0	【あんこう！】イバラシティ破壊計画【あんこう！】	4
@@ -108,6 +111,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	71	1	塵も積もれば鱒となる	4
 08	0	73	0	メイドアンサンブル WITH ふゆげ	4
 08	0	73	1	メイドアンサンブル WITH ふゆげ	4
+08	0	74	0	パッチワークス	2
 08	0	74	1	パッチワークス	2
 08	0	76	0	西からきた戎	1
 08	0	76	1	西からきた戎	1
@@ -218,6 +222,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	159	0	金属バット同好会	2
 08	0	161	0	ヤーさんと愉快な仲間たち	3
 08	0	161	1	ヤーさんのヤーはヤのつく自由業ではない	3
+08	0	162	0	汗ばんだりあぢばんだり	3
+08	0	162	1	I'm bloody	4
 08	0	163	0	檀花深藍	2
 08	0	163	1	檀花深藍	2
 08	0	164	0	ディストピアン	4
@@ -236,6 +242,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	174	1	避田高校D.D部	4
 08	0	176	0	Flower	1
 08	0	176	1	Flower	1
+08	0	177	1	OBUKEとまな板にサンドされたイッヌ	1
 08	0	178	0	TeamNo.178	1
 08	0	178	1	虚空剣士と共に遊具を武術で矯正す	4
 08	0	179	0	TeamNo.179	1
@@ -358,6 +365,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	306	0	TeamNo.306	1
 08	0	306	1	TeamNo.306	1
 08	0	308	1	準急M11号	4
+08	0	309	0	TeamNo.309	1
 08	0	309	1	TeamNo.309	1
 08	0	310	0	⚘⚘おはなフレンズ⚘⚘	2
 08	0	311	0	晴仁会アンジニティ支部	4
@@ -370,6 +378,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	317	1	雑草魂	1
 08	0	322	0	カゲアソビ	4
 08	0	322	1	カゲアソビ	4
+08	0	324	0	TeamNo.324	1
 08	0	324	1	TeamNo.324	1
 08	0	332	0	チグハグラプソディ	4
 08	0	332	1	チグハグラプソディ	4
@@ -399,6 +408,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	364	1	人類悪『メサイアコンプレックス』	1
 08	0	365	0	しゃのわーる出張店	3
 08	0	365	1	猫と和解せよ	3
+08	0	367	0	放課後探検クラブ	1
 08	0	367	1	放課後探検クラブ	1
 08	0	368	0	TeamNo.368	1
 08	0	368	1	TeamNo.368	1
@@ -569,6 +579,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	615	1	たったひとり	1
 08	0	620	0	風見鶏の悪魔	1
 08	0	620	1	風見鶏の悪魔	1
+08	0	621	0	冥府よりの使者（オフ）	1
 08	0	621	1	冥府よりの使者（オフ）	1
 08	0	622	0	なかよし動物園❤	4
 08	0	622	1	なかよし動物園❤	4
@@ -676,6 +687,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	819	0	鬼子母神	1
 08	0	819	1	鬼子母神	1
 08	0	823	0	TeamNo.823	1
+08	0	823	1	TeamNo.823	1
 08	0	829	0	TeamNo.829	1
 08	0	829	1	TeamNo.829	1
 08	0	837	0	Lazy & Dog	2
@@ -757,6 +769,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	939	0	TeamNo.939	1
 08	0	939	1	TeamNo.939	1
 08	0	943	0	TeamNo.943	1
+08	0	943	1	TeamNo.943	1
 08	0	947	0	ひとりぼっちの桃珠	1
 08	0	947	1	ひとりぼっちの桃珠	1
 08	0	948	0	銀髪少女？とおとぼけロッド	1
@@ -866,11 +879,13 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1130	1	TeamNo.1130	1
 08	0	1135	0	TeamNo.1135	1
 08	0	1135	1	TeamNo.1135	1
+08	0	1138	0	TeamNo.1138	1
 08	0	1138	1	TeamNo.1138	1
 08	0	1147	0	TeamNo.1147	1
 08	0	1147	1	TeamNo.1147	1
 08	0	1148	0	公園の遊具整備班	2
 08	0	1149	0	TeamNo.1149	1
+08	0	1149	1	TeamNo.1149	1
 08	0	1150	0	詩人ターリヤの世界	1
 08	0	1150	1	詩人ターリヤの世界	1
 08	0	1152	0	公園でバーベキュー	1
@@ -894,6 +909,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1184	0	TeamNo.1184	1
 08	0	1184	1	TeamNo.1184	1
 08	0	1185	0	TeamNo.1185	1
+08	0	1185	1	TeamNo.1185	1
 08	0	1187	0	TeamNo.1187	1
 08	0	1187	1	TeamNo.1187	1
 08	0	1188	0	TeamNo.1188	1
@@ -903,6 +919,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1192	0	魂求めるもの	1
 08	0	1192	1	魂求めるもの	1
 08	0	1198	0	TeamNo.1198	1
+08	0	1198	1	TeamNo.1198	1
 08	0	1199	0	TeamNo.1199	1
 08	0	1199	1	TeamNo.1199	1
 08	0	1200	0	TeamNo.1200	1
@@ -918,6 +935,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1222	1	TeamNo.1222	1
 08	0	1224	0	TeamNo.1224	1
 08	0	1224	1	TeamNo.1224	1
+08	0	1228	0	TeamNo.1228	1
+08	0	1228	1	TeamNo.1228	1
 08	0	1231	0	TeamNo.1231	1
 08	0	1231	1	TeamNo.1231	1
 08	0	1233	0	TeamNo.1233	1
@@ -1007,6 +1026,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1355	1	わくわく動物ランド	1
 08	0	1356	0	ひつじのおさんぽ	1
 08	0	1356	1	ひつじのおさんぽ	1
+08	0	1358	0	TeamNo.1358	1
 08	0	1358	1	TeamNo.1358	1
 08	0	1364	0	TeamNo.1364	1
 08	0	1364	1	TeamNo.1364	1
@@ -1056,6 +1076,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1424	1	TeamNo.1424	1
 08	0	1425	0	TeamNo.1425	1
 08	0	1425	1	TeamNo.1425	1
+08	0	1427	0	ボイブンバ大明神	1
 08	0	1427	1	ボイブンバ大明神	1
 08	0	1430	0	TeamNo.1430	1
 08	0	1432	0	TeamNo.1432	1
@@ -1128,8 +1149,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1499	1	TeamNo.1499	1
 08	0	1502	0	TeamNo.1502	1
 08	0	1502	1	TeamNo.1502	1
+08	0	1503	1	TeamNo.1503	1
 08	0	1504	0	TeamNo.1504	1
 08	0	1504	1	TeamNo.1504	1
+08	0	1505	0	TeamNo.1505	1
+08	0	1505	1	TeamNo.1505	1
 08	0	1506	0	Strayeders	4
 08	0	1506	1	Strayeders	4
 08	0	1507	0	TeamNo.1507	1
@@ -1158,13 +1182,18 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1549	1	ねると愉快なオバケたち	1
 08	0	1550	0	TeamNo.1550	1
 08	0	1550	1	TeamNo.1550	1
+08	0	1563	0	TeamNo.1563	1
+08	0	1563	1	TeamNo.1563	1
 08	0	1567	0	TeamNo.1567	1
 08	0	1567	1	TeamNo.1567	1
+08	0	1568	0	TeamNo.1568	1
+08	0	1568	1	TeamNo.1568	1
 08	0	1571	0	TeamNo.1571	1
 08	0	1571	1	TeamNo.1571	1
 08	0	1573	0	TeamNo.1573	1
 08	0	1573	1	TeamNo.1573	1
 08	0	1574	0	クニツカミ	1
+08	0	1574	1	クニツカミ	1
 08	0	1577	0	TeamNo.1577	1
 08	0	1577	1	TeamNo.1577	1
 08	0	1578	0	TeamNo.1578	1
@@ -1185,6 +1214,10 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1588	1	TeamNo.1588	1
 08	0	1590	0	TeamNo.1590	1
 08	0	1590	1	TeamNo.1590	1
+08	0	1591	0	TeamNo.1591	1
+08	0	1591	1	TeamNo.1591	1
+08	0	1592	0	TeamNo.1592	1
+08	0	1592	1	TeamNo.1592	1
 08	0	1593	0	TeamNo.1593	1
 08	0	1593	1	TeamNo.1593	1
 08	0	1594	0	密猟者『長耳狩り』	1
@@ -1206,7 +1239,10 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1608	0	縺ゅ↑縺溘↓莨壹＞縺ｫ譚･縺	1
 08	0	1608	1	縺ゅ↑縺溘↓莨壹＞縺ｫ譚･縺	1
 08	0	1609	1	TeamNo.1609	1
+08	0	1611	0	TeamNo.1611	1
 08	0	1611	1	TeamNo.1611	1
+08	0	1612	0	TeamNo.1612	1
+08	0	1612	1	TeamNo.1612	1
 08	0	1613	0	TeamNo.1613	1
 08	0	1614	0	TeamNo.1614	1
 08	0	1614	1	TeamNo.1614	1
@@ -1222,10 +1258,15 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1620	1	TeamNo.1620	1
 08	0	1621	0	TeamNo.1621	1
 08	0	1621	1	TeamNo.1621	1
+08	0	1623	0	TeamNo.1623	1
+08	0	1623	1	TeamNo.1623	1
+08	0	1624	1	TeamNo.1624	1
 08	0	1626	0	たんていごっこ	2
 08	0	1626	1	たんていごっこ	3
 08	0	1627	1	TeamNo.1627	1
 08	0	1629	0	TeamNo.1629	1
+08	0	1629	1	TeamNo.1629	1
+08	0	1630	0	TeamNo.1630	1
 08	0	1630	1	TeamNo.1630	1
 08	0	1631	0	TeamNo.1631	1
 08	0	1634	0	仮組	2
@@ -1234,6 +1275,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1635	1	TeamNo.1635	1
 08	0	1636	0	星に願いを	2
 08	0	1636	1	星に願いを	2
+08	0	1637	0	TeamNo.1637	1
+08	0	1637	1	TeamNo.1637	1
+08	0	1638	0	TeamNo.1638	1
+08	0	1638	1	TeamNo.1638	1
+08	0	1640	0	TeamNo.1640	1
 08	0	1640	1	TeamNo.1640	1
 08	0	1641	0	TeamNo.1641	1
 08	0	1641	1	TeamNo.1641	1
@@ -1243,11 +1289,14 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1643	1	TeamNo.1643	1
 08	0	1644	0	TeamNo.1644	1
 08	0	1644	1	TeamNo.1644	1
+08	0	1645	0	TeamNo.1645	1
+08	0	1645	1	TeamNo.1645	1
 08	0	1646	0	TeamNo.1646	1
 08	0	1646	1	TeamNo.1646	1
 08	0	1648	0	TeamNo.1648	1
 08	0	1648	1	TeamNo.1648	1
 08	0	1649	0	TeamNo.1649	1
+08	0	1649	1	TeamNo.1649	1
 08	0	1650	0	TeamNo.1650	1
 08	0	1650	1	TeamNo.1650	1
 08	0	1652	0	TeamNo.1652	1
@@ -1255,9 +1304,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 08	0	1654	0	TeamNo.1654	1
 08	0	1654	1	TeamNo.1654	1
 08	0	1655	0	TeamNo.1655	1
+08	0	1655	1	TeamNo.1655	1
 08	0	1656	0	TeamNo.1656	1
 08	0	1656	1	TeamNo.1656	1
 08	0	1657	0	TeamNo.1657	1
+08	0	1657	1	TeamNo.1657	1
 08	0	1658	0	TeamNo.1658	1
 08	0	1658	1	TeamNo.1658	1
 08	0	1659	0	TeamNo.1659	1

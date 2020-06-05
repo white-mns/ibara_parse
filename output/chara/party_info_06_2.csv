@@ -55,6 +55,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	30	0	かちかち山　モデルタイラント	4
 06	2	30	1	かちかち山　モデルタイラント	4
 06	2	33	0	TeamNo.33	1
+06	2	33	1	TeamNo.33	1
 06	2	34	0	ʕ＊°✇°＊ʔ	2
 06	2	34	1	ʕ＊°✇°＊ʔ	2
 06	2	35	0	まな板	2
@@ -99,6 +100,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	61	1	黒塗りの高級車とお兄さん達	4
 06	2	62	0	Étranger	2
 06	2	62	1	Étranger	2
+06	2	64	0	TeamNo.64	1
+06	2	64	1	TeamNo.64	1
 06	2	67	0	TeamNo.67	1
 06	2	67	1	TeamNo.67	1
 06	2	69	0	破壊！破壊！破壊！	4
@@ -110,6 +113,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	73	0	感情が重いメイド達と一撃が重いふゆげちゃん	4
 06	2	73	1	メイドアンサンブル WITH ふゆげ	4
 06	2	74	0	パッチワークス	1
+06	2	74	1	パッチワークス	2
 06	2	76	0	ヒノデ区遠征部隊	1
 06	2	76	1	EAT IN	4
 06	2	77	0	味方側第2複合パーティー	2
@@ -140,6 +144,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	93	1	うさぎ隊	3
 06	2	94	0	TeamNo.94	1
 06	2	94	1	13A13IECA.exe	4
+06	2	95	0	月世御D研究所特殊戦闘迎撃部門：チームSP	1
 06	2	96	0	TeamNo.96	1
 06	2	96	1	TeamNo.96	1
 06	2	99	0	ハイエース便／輪廻ショートカットコース	2
@@ -194,6 +199,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	139	0	aura	2
 06	2	139	1	aura	2
 06	2	140	0	TeamNo.140	1
+06	2	140	1	TeamNo.140	1
 06	2	141	0	巻き込まれ型冒険組	4
 06	2	141	1	巻き込まれ型冒険組	4
 06	2	143	0	うねうねはえっち	3
@@ -467,6 +473,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	446	1	創藍高校の制服がたなびく	2
 06	2	454	0	TeamNo.454	1
 06	2	454	1	TeamNo.454	1
+06	2	455	0	ハイエース便輪廻ショートカットコース	1
 06	2	458	1	放課後探検クラブ	1
 06	2	461	0	TeamNo.461	4
 06	2	461	1	TeamNo.461	4
@@ -494,6 +501,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	489	1	TeamNo.489	1
 06	2	491	0	TeamNo.491	1
 06	2	491	1	TeamNo.491	1
+06	2	493	0	救世を夢見て	1
 06	2	493	1	救世を夢見て	1
 06	2	496	0	BmB	2
 06	2	496	1	BmB	2
@@ -529,6 +537,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	530	1	あなたのための人形	1
 06	2	534	0	TeamNo.534	1
 06	2	534	1	TeamNo.534	1
+06	2	540	0	TeamNo.540	1
+06	2	540	1	TeamNo.540	1
 06	2	541	0	たぬきやこう	1
 06	2	541	1	たぬきやこう	1
 06	2	542	0	TeamNo.542	1
@@ -552,6 +562,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	567	1	エプロンの心はエプロン太郎	4
 06	2	570	0	TeamNo.570	1
 06	2	570	1	TeamNo.570	1
+06	2	573	0	タヌッキィ・フィンガーズ	1
+06	2	573	1	タヌッキィ・フィンガーズ	1
 06	2	575	0	differance	2
 06	2	575	1	differance	2
 06	2	577	0	TeamNo.577	2
@@ -605,6 +617,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	648	1	TeamNo.648	1
 06	2	650	0	筋肉の夜明け	1
 06	2	650	1	筋肉の夜明け	1
+06	2	652	0	TeamNo.652	1
 06	2	652	1	TeamNo.652	1
 06	2	654	0	Traitor Duo	2
 06	2	654	1	Traitor Duo	2
@@ -659,8 +672,10 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	743	1	毒蛇	2
 06	2	748	0	砲火後加害授業中	4
 06	2	748	1	砲火後加害授業中	4
+06	2	749	0	TeamNo.749	1
 06	2	749	1	TeamNo.749	1
 06	2	750	1	歩行軍手ファンクラブ	4
+06	2	752	1	TeamNo.752	2
 06	2	759	0	TeamNo.759	1
 06	2	759	1	TeamNo.759	1
 06	2	765	0	TeamNo.765	1
@@ -695,6 +710,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	817	1	TeamNo.817	1
 06	2	818	0	TeamNo.818	1
 06	2	818	1	TeamNo.818	1
+06	2	823	0	TeamNo.823	1
 06	2	823	1	TeamNo.823	1
 06	2	829	0	TeamNo.829	1
 06	2	829	1	TeamNo.829	1
@@ -891,9 +907,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1128	1	TeamNo.1128	1
 06	2	1130	0	TeamNo.1130	1
 06	2	1130	1	TeamNo.1130	1
+06	2	1133	0	TeamNo.1133	1
 06	2	1135	0	TeamNo.1135	1
 06	2	1135	1	TeamNo.1135	1
 06	2	1138	0	TeamNo.1138	1
+06	2	1138	1	TeamNo.1138	1
 06	2	1140	0	TeamNo.1140	1
 06	2	1140	1	TeamNo.1140	1
 06	2	1147	0	TeamNo.1147	1
@@ -1074,6 +1092,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1356	0	ひつじのおさんぽ	1
 06	2	1356	1	ひつじのおさんぽ	1
 06	2	1358	0	TeamNo.1333	1
+06	2	1358	1	TeamNo.1358	1
 06	2	1364	0	TeamNo.1364	1
 06	2	1364	1	TeamNo.1364	1
 06	2	1365	0	TeamNo.1365	1
@@ -1162,6 +1181,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1451	0	TeamNo.1451	1
 06	2	1451	1	TeamNo.1451	1
 06	2	1452	0	TeamNo.1452	1
+06	2	1452	1	TeamNo.1452	1
 06	2	1453	0	幼生ちネキケヹラポそむゐ	1
 06	2	1453	1	幼生ちネキケヹラポそむゐ	1
 06	2	1456	0	TeamNo.1456	1
@@ -1224,6 +1244,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1502	0	TeamNo.1502	1
 06	2	1502	1	TeamNo.1502	1
 06	2	1503	0	TeamNo.1503	1
+06	2	1503	1	TeamNo.1503	1
 06	2	1504	0	TeamNo.1504	1
 06	2	1504	1	TeamNo.1504	1
 06	2	1505	1	TeamNo.1505	1
@@ -1243,6 +1264,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1522	0	フィブラ	1
 06	2	1522	1	フィブラ	1
 06	2	1523	0	TeamNo.1523	1
+06	2	1523	1	TeamNo.1523	1
 06	2	1524	0	TeamNo.1524	1
 06	2	1524	1	TeamNo.1524	1
 06	2	1525	0	TeamNo.1525	1
@@ -1255,6 +1277,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1529	1	くの者	1
 06	2	1532	0	TeamNo.1532	1
 06	2	1532	1	TeamNo.1532	1
+06	2	1537	0	TeamNo.1537	1
+06	2	1537	1	TeamNo.1537	1
 06	2	1538	0	TeamNo.1538	1
 06	2	1538	1	TeamNo.1538	1
 06	2	1540	0	TeamNo.1540	1
@@ -1272,18 +1296,29 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1547	0	TeamNo.1547	1
 06	2	1547	1	TeamNo.1547	1
 06	2	1548	0	TeamNo.1548	1
+06	2	1548	1	TeamNo.1548	1
 06	2	1549	0	ねると愉快なオバケたち	1
 06	2	1549	1	ねると愉快なオバケたち	1
 06	2	1550	0	TeamNo.1550	1
 06	2	1550	1	TeamNo.1550	1
 06	2	1552	0	TeamNo.1552	1
+06	2	1552	1	TeamNo.1552	1
 06	2	1554	0	TeamNo.1554	1
+06	2	1554	1	TeamNo.1554	1
+06	2	1555	0	TeamNo.1555	1
+06	2	1555	1	TeamNo.1555	1
 06	2	1557	0	TeamNo.1557	1
 06	2	1557	1	TeamNo.1557	1
 06	2	1558	0	TeamNo.1558	1
 06	2	1558	1	TeamNo.1558	1
 06	2	1560	0	TeamNo.1560	1
+06	2	1560	1	TeamNo.1560	1
+06	2	1561	1	TeamNo.1561	1
+06	2	1562	1	TeamNo.1562	1
 06	2	1563	0	TeamNo.1563	1
+06	2	1563	1	TeamNo.1563	1
+06	2	1565	0	TeamNo.1565	1
+06	2	1565	1	TeamNo.1565	1
 06	2	1567	0	TeamNo.1567	1
 06	2	1567	1	TeamNo.1567	1
 06	2	1568	0	TeamNo.1568	1
@@ -1298,13 +1333,18 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1572	1	TeamNo.1572	1
 06	2	1573	0	TeamNo.1573	1
 06	2	1573	1	TeamNo.1573	1
+06	2	1574	1	TeamNo.1574	1
 06	2	1576	0	TeamNo.1576	1
+06	2	1576	1	TeamNo.1576	1
 06	2	1577	0	TeamNo.1577	1
 06	2	1577	1	TeamNo.1577	1
 06	2	1578	0	TeamNo.1578	1
 06	2	1578	1	TeamNo.1578	1
 06	2	1579	0	サイレントフローラ	2
 06	2	1579	1	サイレントフローラ	2
+06	2	1581	0	TeamNo.1581	1
+06	2	1581	1	TeamNo.1581	1
+06	2	1582	0	ハザマ旅行記	1
 06	2	1582	1	ハザマ旅行記	1
 06	2	1583	0	TeamNo.1583	1
 06	2	1583	1	TeamNo.1583	1
@@ -1312,8 +1352,12 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1586	1	TeamNo.1586	1
 06	2	1587	0	TeamNo.1587	1
 06	2	1587	1	TeamNo.1587	1
+06	2	1588	1	TeamNo.1588	1
+06	2	1590	0	TeamNo.1590	1
 06	2	1590	1	TeamNo.1590	1
 06	2	1591	0	TeamNo.1591	1
+06	2	1591	1	TeamNo.1591	1
+06	2	1592	1	TeamNo.1592	1
 06	2	1593	0	TeamNo.1593	1
 06	2	1593	1	TeamNo.1593	1
 06	2	1594	0	密猟者『長耳狩り』	1
@@ -1343,6 +1387,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 06	2	1611	0	TeamNo.1611	1
 06	2	1611	1	TeamNo.1611	1
 06	2	1612	0	TeamNo.1612	1
+06	2	1612	1	TeamNo.1612	1
 06	2	1613	0	TeamNo.1613	1
 06	2	1613	1	TeamNo.1613	1
 06	2	1614	0	TeamNo.1614	1

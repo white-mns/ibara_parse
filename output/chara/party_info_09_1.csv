@@ -54,6 +54,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	29	1	TeamNo.29	1
 09	1	30	0	かちかち山　モデルタイラント	4
 09	1	30	1	かちかち山　モデルタイラント	4
+09	1	33	0	TeamNo.33	1
+09	1	33	1	TeamNo.33	1
 09	1	34	0	ʕ＊°✇°＊ʔ	2
 09	1	34	1	ʕ＊°✇°＊ʔ	4
 09	1	35	0	チーム・まないた	2
@@ -65,6 +67,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	38	0	天才	4
 09	1	38	1	唯1人の男、アレク・リーズ！	4
 09	1	39	0	魔法少女戦隊	3
+09	1	39	1	魔法少女戦隊	3
 09	1	40	0	常夜の爪牙	4
 09	1	40	1	常夜の爪牙	4
 09	1	42	0	かつてヒナチュー美術部だったものたち	4
@@ -165,6 +168,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	117	0	１ターン目必殺おでんフィーバー	4
 09	1	117	1	1ターン目必殺おでんフィーバー	4
 09	1	119	0	スイーツ★インベーダー	1
+09	1	119	1	スイーツ★インベーダー	4
 09	1	121	0	スイーツ★インベーダー	2
 09	1	122	0	突撃！なずみの晩御飯　〜貴様のお肉で焼肉パーティ〜	4
 09	1	122	1	チーム食糧難☆今夜はあなたでバーベキューRE:	4
@@ -214,6 +218,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	159	1	大爆発信号機	3
 09	1	161	0	ヤーさんと愉快な仲間たち	3
 09	1	161	1	ヤーさんと愉快な仲間たち	3
+09	1	162	0	I'm bloody	4
 09	1	162	1	汗ばんだりあぢばんだり	4
 09	1	163	0	檀花深藍	2
 09	1	163	1	檀花深藍	2
@@ -235,6 +240,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	175	1	うねうねはえっち	2
 09	1	176	0	Flower	1
 09	1	176	1	Flower	1
+09	1	177	0	OBUKEとまな板にサンドされたイッヌ	1
+09	1	177	1	OBUKEとまな板にサンドされたイッヌ	1
 09	1	178	0	公園の遊具整備班	4
 09	1	178	1	TeamNo.178	1
 09	1	179	0	TeamNo.179	1
@@ -344,6 +351,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	289	0	TeamNo.289	1
 09	1	289	1	TeamNo.289	1
 09	1	297	0	TeamNo.297	1
+09	1	297	1	TeamNo.297	1
 09	1	301	1	熾す魂火、絶えぬ火光	4
 09	1	303	0	三位四体	4
 09	1	303	1	三位四体	4
@@ -353,6 +361,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	306	1	TeamNo.306	1
 09	1	308	0	鵺 -nue-	4
 09	1	309	0	TeamNo.309	1
+09	1	309	1	TeamNo.309	1
 09	1	310	1	週刊ゴリランド	2
 09	1	311	0	晴仁会アンジニティ支部	4
 09	1	311	1	晴仁会アンジニティ支部	4
@@ -366,6 +375,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	322	1	カゲアソビ	4
 09	1	323	1	白菊	1
 09	1	324	0	TeamNo.324	1
+09	1	324	1	TeamNo.324	1
 09	1	332	0	チグハグラプソディ	4
 09	1	332	1	チグハグラプソディ	4
 09	1	333	0	鞠餅白兎	4
@@ -646,6 +656,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	767	0	TeamNo.767	1
 09	1	767	1	TeamNo.767	1
 09	1	771	0	TeamNo.771	1
+09	1	771	1	TeamNo.771	1
 09	1	772	0	TeamNo.772	1
 09	1	772	1	TeamNo.772	1
 09	1	774	0	TeamNo.774	4
@@ -667,6 +678,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	817	1	TeamNo.817	1
 09	1	819	0	鬼子母神	1
 09	1	819	1	鬼子母神	1
+09	1	823	0	TeamNo.823	1
 09	1	823	1	TeamNo.823	1
 09	1	829	0	TeamNo.829	1
 09	1	829	1	TeamNo.829	1
@@ -726,6 +738,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	914	1	TeamNo.914	1
 09	1	915	0	TeamNo.915	1
 09	1	915	1	TeamNo.915	1
+09	1	916	1	TeamNo.916	1
 09	1	917	0	TeamNo.917	1
 09	1	917	1	TeamNo.917	1
 09	1	919	0	TeamNo.919	1
@@ -741,6 +754,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	929	1	ゆる侵同好会！	3
 09	1	932	0	道連れのけものたち	2
 09	1	932	1	道連れのけものたち	2
+09	1	943	0	TeamNo.943	1
+09	1	943	1	TeamNo.943	1
 09	1	947	0	ひとりぼっちの桃珠	1
 09	1	947	1	ひとりぼっちの桃珠	1
 09	1	948	0	銀髪少女？とおとぼけロッド	1
@@ -860,6 +875,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1172	1	■し合いをっ……して……もらいまーす♡	2
 09	1	1181	0	無貌の獣	1
 09	1	1181	1	無貌の獣	1
+09	1	1185	0	TeamNo.1185	1
 09	1	1185	1	TeamNo.1185	1
 09	1	1187	0	TeamNo.1187	1
 09	1	1187	1	TeamNo.1187	1
@@ -869,6 +885,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1190	1	TeamNo.1190	1
 09	1	1192	0	魂求めるもの	1
 09	1	1192	1	魂求めるもの	1
+09	1	1198	0	TeamNo.1198	1
+09	1	1198	1	TeamNo.1198	1
 09	1	1199	0	TeamNo.1199	1
 09	1	1199	1	TeamNo.1199	1
 09	1	1200	0	TeamNo.1200	1
@@ -879,6 +897,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1211	1	殺せ	1
 09	1	1222	0	TeamNo.1222	1
 09	1	1222	1	TeamNo.1222	1
+09	1	1228	0	TeamNo.1228	1
 09	1	1228	1	TeamNo.1228	1
 09	1	1231	0	TeamNo.1231	1
 09	1	1231	1	TeamNo.1231	1
@@ -956,6 +975,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1338	0	TeamNo.1338	1
 09	1	1338	1	TeamNo.1338	1
 09	1	1341	0	星喪騎士団	3
+09	1	1341	1	星喪騎士団	4
 09	1	1342	0	TeamNo.1342	1
 09	1	1342	1	TeamNo.1342	1
 09	1	1351	0	Re;men	1
@@ -1014,6 +1034,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1425	0	TeamNo.1425	1
 09	1	1425	1	TeamNo.1425	1
 09	1	1427	0	ボイブンバ大明神	1
+09	1	1427	1	ボイブンバ大明神	1
 09	1	1433	0	TeamNo.1433	1
 09	1	1435	0	ひとりうさぎ	1
 09	1	1435	1	ひとりうさぎ	1
@@ -1024,6 +1045,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1446	0	TeamNo.1446	1
 09	1	1446	1	TeamNo.1446	1
 09	1	1452	0	TeamNo.1452	1
+09	1	1452	1	TeamNo.1452	1
 09	1	1453	0	幼生ちネキケヹラポそむゐ	1
 09	1	1453	1	幼生ちネキケヹラポそむゐ	1
 09	1	1456	0	TeamNo.1456	1
@@ -1075,6 +1097,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1499	1	TeamNo.1499	1
 09	1	1502	0	TeamNo.1502	1
 09	1	1502	1	TeamNo.1502	1
+09	1	1503	0	TeamNo.1503	1
+09	1	1503	1	TeamNo.1503	1
 09	1	1504	0	TeamNo.1504	1
 09	1	1504	1	TeamNo.1504	1
 09	1	1506	0	Strayeders	4
@@ -1107,8 +1131,10 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1550	1	TeamNo.1550	1
 09	1	1567	0	TeamNo.1567	1
 09	1	1567	1	TeamNo.1567	1
+09	1	1568	1	TeamNo.1568	1
 09	1	1571	0	TeamNo.1571	1
 09	1	1571	1	TeamNo.1571	1
+09	1	1574	0	クニツカミ	1
 09	1	1574	1	クニツカミ	1
 09	1	1577	0	TeamNo.1577	1
 09	1	1577	1	TeamNo.1577	1
@@ -1122,6 +1148,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1587	0	TeamNo.1587	1
 09	1	1587	1	TeamNo.1587	1
 09	1	1590	0	TeamNo.1590	1
+09	1	1590	1	TeamNo.1590	1
 09	1	1593	0	TeamNo.1593	1
 09	1	1593	1	TeamNo.1593	1
 09	1	1594	0	密猟者『長耳狩り』	1
@@ -1144,6 +1171,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1609	0	TeamNo.1609	1
 09	1	1609	1	TeamNo.1609	1
 09	1	1611	0	TeamNo.1611	1
+09	1	1611	1	TeamNo.1611	1
+09	1	1612	0	TeamNo.1612	1
+09	1	1612	1	TeamNo.1612	1
 09	1	1614	0	TeamNo.1614	1
 09	1	1614	1	TeamNo.1614	1
 09	1	1615	0	TeamNo.1615	1
@@ -1155,19 +1185,25 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1620	1	TeamNo.1620	1
 09	1	1621	0	TeamNo.1621	1
 09	1	1621	1	TeamNo.1621	1
+09	1	1623	1	TeamNo.1623	1
+09	1	1624	0	TeamNo.1624	1
+09	1	1624	1	TeamNo.1624	1
 09	1	1626	0	たんていごっこ	3
 09	1	1626	1	たんていごっこ	3
 09	1	1627	0	TeamNo.1627	1
 09	1	1627	1	TeamNo.1627	1
 09	1	1629	1	TeamNo.1629	1
 09	1	1630	0	TeamNo.1630	1
+09	1	1630	1	TeamNo.1630	1
 09	1	1634	0	仮組	2
 09	1	1634	1	仮組	2
 09	1	1635	0	TeamNo.1635	1
 09	1	1635	1	TeamNo.1635	1
 09	1	1636	0	星に願いを	2
 09	1	1636	1	星に願いを	3
+09	1	1637	0	TeamNo.1637	1
 09	1	1637	1	TeamNo.1637	1
+09	1	1638	0	TeamNo.1638	1
 09	1	1638	1	TeamNo.1638	1
 09	1	1640	0	TeamNo.1640	1
 09	1	1640	1	TeamNo.1640	1
@@ -1178,18 +1214,25 @@ result_no	generate_no	party_no	party_type	name	member_num
 09	1	1643	1	TeamNo.1643	1
 09	1	1644	0	TeamNo.1644	1
 09	1	1644	1	TeamNo.1644	1
+09	1	1645	0	TeamNo.1645	1
+09	1	1645	1	TeamNo.1645	1
 09	1	1646	0	TeamNo.1646	1
 09	1	1646	1	TeamNo.1646	1
 09	1	1648	0	TeamNo.1648	1
 09	1	1648	1	TeamNo.1648	1
+09	1	1649	0	TeamNo.1649	1
+09	1	1649	1	TeamNo.1649	1
 09	1	1650	0	TeamNo.1650	1
 09	1	1650	1	TeamNo.1650	1
 09	1	1652	0	TeamNo.1652	1
 09	1	1652	1	TeamNo.1652	1
 09	1	1654	0	TeamNo.1654	1
 09	1	1654	1	TeamNo.1654	1
+09	1	1655	0	TeamNo.1655	1
+09	1	1655	1	TeamNo.1655	1
 09	1	1656	0	TeamNo.1656	1
 09	1	1656	1	TeamNo.1656	1
+09	1	1657	0	TeamNo.1657	1
 09	1	1657	1	TeamNo.1657	1
 09	1	1658	0	TeamNo.1658	1
 09	1	1658	1	TeamNo.1658	1

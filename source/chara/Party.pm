@@ -123,21 +123,28 @@ sub GetParty{
     
         my @td_nodes    = $node->content_list;
     
-        my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
-        if (!scalar(@$child_table_nodes)) {next;}
-    
-        my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
-        if (!scalar(@$child_td_nodes)) {next;}
-    
-        my $link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
-    
-        my $party = &GetIbaraNode::GetENoFromLink($$link_nodes[0]);
-    
-        $self->{Datas}{Party}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $party) ));
-        
-        $self->{CommonDatas}{Party}{$self->{ENo}} = $party;
+        foreach my $td_node (@td_nodes) {
+            if ($td_node !~ /HASH/) {next;}
 
-        return 1; #いずれかの戦闘でPT情報が取得できれば終了
+            my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_node);
+            if (!scalar(@$child_table_nodes)) {next;}
+    
+            my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "nowrap", "NOWRAP", \$$child_table_nodes[0]);
+            if (!scalar(@$child_td_nodes)) {next;}
+            
+            my $party_all_link_nodes = &GetNode::GetNode_Tag("a", \$$child_table_nodes[0]);
+            if (!$self->isExecEnoInParty($party_all_link_nodes)) {next;}
+    
+            my $link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
+    
+            my $party = &GetIbaraNode::GetENoFromLink($$link_nodes[0]);
+    
+            $self->{Datas}{Party}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $party) ));
+            
+            $self->{CommonDatas}{Party}{$self->{ENo}} = $party;
+
+            return 1; #いずれかの戦闘でPT情報が取得できれば終了
+        }
     }
 
     return 0;
@@ -161,30 +168,52 @@ sub GetPartyInfo{
     
         my @td_nodes    = $node->content_list;
     
-        my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
-        if (!scalar(@$child_table_nodes)) {next;}
+        foreach my $td_node (@td_nodes) {
+            if ($td_node !~ /HASH/) {next;}
+
+            my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_node);
+            if (!scalar(@$child_table_nodes)) {next;}
     
-        my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "align", "RIGHT", \$$child_table_nodes[0]);
-        if (!scalar(@$child_td_nodes)) {next;}
+            my $child_td_nodes = &GetNode::GetNode_Tag_Attr("td", "nowrap", "NOWRAP", \$$child_table_nodes[0]);
+            if (!scalar(@$child_td_nodes)) {next;}
     
-        my $child_link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
+            my $child_link_nodes = &GetNode::GetNode_Tag("a", \$$child_td_nodes[0]);
+   
+            if ($self->{ENo} != &GetIbaraNode::GetENoFromLink($$child_link_nodes[0]) ) { next;} # 戦闘ENoの判定
     
-        if ($self->{ENo} != &GetIbaraNode::GetENoFromLink($$child_link_nodes[0]) ) { return 0;} # 戦闘ENoの判定
+            # パーティ情報の取得
+            my ($name, $member_num) = (0, 0);
     
-        # パーティ情報の取得
-        my ($name, $member_num) = (0, 0);
+            my $b_nodes = &GetNode::GetNode_Tag("b", \$td_node);
+            my $party_all_link_nodes = &GetNode::GetNode_Tag("a", \$$child_table_nodes[0]);
     
-        my $b_nodes = &GetNode::GetNode_Tag("b", \$td_nodes[0]);
-        my $party_all_link_nodes = &GetNode::GetNode_Tag("a", \$$child_table_nodes[0]);
+            $name = $$b_nodes[0]->as_text;
+            $member_num = int( scalar(@$party_all_link_nodes)/2 );
     
-        $name = $$b_nodes[0]->as_text;
-        $member_num = int( scalar(@$party_all_link_nodes)/2 );
-    
-        $self->{Datas}{PartyInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $name, $member_num) ));
-        
-        return 1; #いずれかの戦闘でPT情報が取得できれば終了
+            $self->{Datas}{PartyInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $party_type, $name, $member_num) ));
+            
+            return 1; #いずれかの戦闘でPT情報が取得できれば終了
+        }
     }
 
+    return 0;
+}
+
+#-----------------------------------#
+#    パーティ内で最も若いENoの時、そのEnoをパーティ番号としてパーティ情報を取得
+#------------------------------------
+#    引数｜対戦組み合わせデータノード
+#          パーティタイプ 
+#            0:今回戦闘
+#            1:次回予告
+#-----------------------------------#
+sub isExecEnoInParty{
+    my $self = shift;
+    my $nodes = shift;
+
+    foreach my $node (@$nodes) {
+        if ($self->{ENo} == &GetIbaraNode::GetENoFromLink($node) ) { return 1;} # 戦闘ENoの判定
+    }
     return 0;
 }
 

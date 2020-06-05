@@ -55,6 +55,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	29	1	元ヤン	1
 02	2	30	0	かちかち山　モデルタイラント	4
 02	2	30	1	かちかち山　モデルタイラント	4
+02	2	32	0	TeamNo.32	1
+02	2	32	1	TeamNo.32	1
 02	2	33	0	TeamNo.33	1
 02	2	33	1	TeamNo.33	1
 02	2	34	0	PairBear	2
@@ -105,6 +107,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	62	1	Étranger	2
 02	2	63	0	H＆OoH WORLD	4
 02	2	63	1	H＆OoH WORLD	4
+02	2	64	0	TeamNo.64	1
+02	2	64	1	TeamNo.64	1
 02	2	66	0	まな板	1
 02	2	67	0	TeamNo.67	1
 02	2	67	1	TeamNo.67	1
@@ -206,6 +210,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	137	1	†闇†	4
 02	2	139	0	TeamNo.139	2
 02	2	139	1	TeamNo.139	2
+02	2	140	0	TeamNo.140	1
+02	2	140	1	TeamNo.140	1
 02	2	141	0	巻き込まれ型冒険組	4
 02	2	141	1	巻き込まれ型冒険組	4
 02	2	143	0	TeamNo.143	1
@@ -218,6 +224,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	147	1	誘う夢見草	1
 02	2	148	0	スターゲイザーズ	3
 02	2	148	1	スターゲイザーズ	3
+02	2	149	0	TeamNo.149	1
+02	2	149	1	TeamNo.149	1
 02	2	150	0	【問】iまでの距離を求めよ	4
 02	2	150	1	【問】iまでの距離を求めよ	4
 02	2	151	0	TeamNo.151	1
@@ -271,6 +279,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	188	1	TeamNo.188	1
 02	2	191	0	TeamNo.191	1
 02	2	191	1	TeamNo.191	1
+02	2	192	0	TeamNo.192	1
+02	2	192	1	TeamNo.192	1
 02	2	194	0	星の十字教団	4
 02	2	194	1	星の十字教団	4
 02	2	196	0	TeamNo.196	1
@@ -324,9 +334,14 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	239	1	てなもんやアベンジャーズ	4
 02	2	242	0	さぼりねこ	1
 02	2	242	1	さぼりねこ	1
+02	2	245	0	TeamNo.245	1
+02	2	245	1	TeamNo.245	1
 02	2	246	0	TeamNo.246	1
+02	2	246	1	TeamNo.246	1
 02	2	251	0	(*‘∀‘)僕たちイバラシティを守り隊(*‘∀‘)	4
 02	2	251	1	(*‘∀‘)僕たちイバラシティを守り隊(*‘∀‘)	4
+02	2	252	0	TeamNo.252	1
+02	2	252	1	TeamNo.252	1
 02	2	255	0	かに玉フィロソフィア	4
 02	2	255	1	かに玉フィロソフィア	4
 02	2	256	0	あの場所へ	3
@@ -365,10 +380,14 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	283	1	蓮華座	4
 02	2	286	0	モノクロリリィ	2
 02	2	286	1	イバラ即席パーティ	2
+02	2	287	0	TeamNo.287	1
+02	2	287	1	TeamNo.287	1
 02	2	291	0	TeamNo.291	1
 02	2	291	1	TeamNo.291	1
 02	2	292	0	TeamNo.292	3
 02	2	292	1	TeamNo.292	3
+02	2	293	0	TeamNo.293	1
+02	2	293	1	TeamNo.293	1
 02	2	294	0	TeamNo.294	1
 02	2	294	1	TeamNo.294	1
 02	2	297	0	TeamNo.297	1
@@ -393,18 +412,23 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	314	1	うさぎさんチーム	4
 02	2	317	0	雑草魂	1
 02	2	317	1	雑草魂	1
+02	2	318	0	TeamNo.318	1
+02	2	318	1	TeamNo.318	1
 02	2	320	0	TeamNo.320	1
 02	2	320	1	TeamNo.320	1
 02	2	322	0	TeamNo.890	4
 02	2	322	1	TeamNo.322	4
 02	2	325	0	TeamNo.325	1
+02	2	325	1	TeamNo.325	1
 02	2	328	0	TeamNo.328	1
+02	2	328	1	TeamNo.328	1
 02	2	332	0	チグハグラプソディ	4
 02	2	332	1	チグハグラプソディ	4
 02	2	333	0	鞠餅白兎	4
 02	2	333	1	鞠餅白兎	4
 02	2	335	0	TeamNo.335	1
 02	2	335	1	TeamNo.335	1
+02	2	338	0	TeamNo.338	1
 02	2	338	1	TeamNo.338	1
 02	2	340	0	スワップ短し歩けよサディ	1
 02	2	340	1	スワップ短し歩けよサディ	1
@@ -455,6 +479,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	387	1	TeamNo.387	1
 02	2	389	0	からあげアゲアゲ	2
 02	2	389	1	からあげアゲアゲ	2
+02	2	391	0	TeamNo.391	1
+02	2	391	1	TeamNo.391	1
 02	2	392	0	夕礼書店調査隊	4
 02	2	392	1	夕礼書店調査隊	4
 02	2	394	0	TeamNo.985	4
@@ -467,6 +493,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	397	1	TeamNo.397	1
 02	2	398	0	チェストイバラシティ	4
 02	2	398	1	チェストイバラシティ	4
+02	2	400	0	TeamNo.400	1
 02	2	404	0	TeamNo.404	1
 02	2	404	1	TeamNo.404	1
 02	2	407	0	TeamNo.407	1
@@ -489,6 +516,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	434	1	生命の【機】と共に	3
 02	2	437	0	TeamNo.437	1
 02	2	437	1	TeamNo.437	1
+02	2	438	0	TeamNo.438	1
+02	2	438	1	TeamNo.438	1
 02	2	439	0	TeamNo.439	1
 02	2	439	1	TeamNo.439	1
 02	2	443	0	【＆】	2
@@ -511,6 +540,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	469	0	TeamNo.469	1
 02	2	470	0	《アンジニティの遠楽隊》	4
 02	2	470	1	《アンジニティの遠楽隊》	4
+02	2	471	0	TeamNo.471	1
 02	2	471	1	TeamNo.471	1
 02	2	472	0	おしまい野郎oチーム	4
 02	2	472	1	おしまい野郎oチーム	4
@@ -518,8 +548,12 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	476	1	ハザマ一人旅	1
 02	2	477	0	厄災の鬼	1
 02	2	477	1	厄災の鬼	1
+02	2	478	0	TeamNo.478	1
+02	2	478	1	TeamNo.478	1
 02	2	479	0	TeamNo.479	1
 02	2	479	1	TeamNo.479	1
+02	2	482	0	TeamNo.482	1
+02	2	482	1	TeamNo.482	1
 02	2	488	0	TeamNo.488	1
 02	2	488	1	TeamNo.488	1
 02	2	489	0	TeamNo.489	1
@@ -552,9 +586,11 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	518	1	Jeune Fille Magique	4
 02	2	519	0	燐火とヤバい仲魔たち	3
 02	2	519	1	燐火とヤバい仲魔たち	3
+02	2	520	1	TeamNo.520	1
 02	2	521	0	TeamNo.521	1
 02	2	521	1	TeamNo.521	1
 02	2	522	0	TeamNo.522	1
+02	2	522	1	TeamNo.522	1
 02	2	523	0	<人を呪わば穴二つ>	1
 02	2	523	1	<人を呪わば穴二つ>	1
 02	2	524	0	TeamNo.524	1
@@ -567,6 +603,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	530	1	TeamNo.530	1
 02	2	534	0	TeamNo.534	1
 02	2	534	1	TeamNo.534	1
+02	2	540	0	TeamNo.540	1
+02	2	540	1	TeamNo.540	1
 02	2	541	0	たぬきやこう	1
 02	2	541	1	たぬきやこう	1
 02	2	542	0	TeamNo.542	1
@@ -593,12 +631,16 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	567	1	キネチカ	4
 02	2	570	0	TeamNo.570	1
 02	2	570	1	TeamNo.570	1
+02	2	574	0	TeamNo.574	1
+02	2	574	1	TeamNo.574	1
 02	2	575	0	null	1
 02	2	575	1	null	1
 02	2	576	0	TeamNo.576	1
 02	2	576	1	TeamNo.576	1
 02	2	577	0	TeamNo.577	2
 02	2	577	1	TeamNo.577	2
+02	2	578	0	TeamNo.578	1
+02	2	578	1	TeamNo.578	1
 02	2	579	0	TeamNo.579	1
 02	2	579	1	TeamNo.579	1
 02	2	580	0	TeamNo.580	1
@@ -610,6 +652,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	584	0	TeamNo.584	1
 02	2	584	1	TeamNo.584	1
 02	2	587	0	チームあげぽよ	1
+02	2	589	0	TeamNo.589	1
+02	2	589	1	TeamNo.589	1
+02	2	590	0	TeamNo.590	1
 02	2	591	0	かすかちゃん’ｓハーレム	4
 02	2	591	1	かすかちゃん’ｓハーレム	4
 02	2	593	0	Black or White?	2
@@ -625,6 +670,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	606	1	秘密結社フリーパーソン	2
 02	2	608	0	闇鍋つつき隊(仮)	2
 02	2	608	1	闇鍋つつき隊(仮)	2
+02	2	609	0	TeamNo.609	1
+02	2	609	1	TeamNo.609	1
 02	2	612	0	茨の道を歩む者	1
 02	2	612	1	茨の道を歩む者	1
 02	2	614	0	下僕のかわいい雌ガキ狼ちゃんと愉快な蜘蛛ちゃん	2
@@ -633,6 +680,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	615	1	TeamNo.615	1
 02	2	616	0	TeamNo.616	1
 02	2	616	1	TeamNo.616	1
+02	2	617	0	TeamNo.617	1
+02	2	617	1	TeamNo.617	1
 02	2	620	0	風見鶏の悪魔	1
 02	2	620	1	風見鶏の悪魔	1
 02	2	621	0	冥府よりの使者（オフ）	1
@@ -668,16 +717,21 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	650	0	筋肉の夜明け	1
 02	2	650	1	筋肉の夜明け	1
 02	2	652	0	TeamNo.652	1
+02	2	652	1	TeamNo.652	1
 02	2	654	0	Traitor Duo	2
 02	2	654	1	Traitor Duo	2
 02	2	655	1	おでんにシュークリームを入れたのは誰だ	1
+02	2	657	0	TeamNo.657	1
 02	2	657	1	TeamNo.657	1
 02	2	658	0	黄昏の星々・紅	4
 02	2	658	1	黄昏の星々・紅	4
 02	2	662	0	TeamNo.662	1
 02	2	662	1	TeamNo.662	1
+02	2	666	0	TeamNo.666	1
+02	2	666	1	TeamNo.666	1
 02	2	667	0	TeamNo.667	1
 02	2	667	1	TeamNo.667	1
+02	2	672	0	TeamNo.672	1
 02	2	672	1	TeamNo.672	1
 02	2	675	0	たからばこはミミックだった	1
 02	2	675	1	たからばこはミミックだった	1
@@ -689,11 +743,15 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	680	1	えるえるきゅんきゅん、えるきゅんきゅん。	1
 02	2	683	0	正体不明	1
 02	2	683	1	正体不明	1
+02	2	684	0	TeamNo.684	1
+02	2	684	1	TeamNo.684	1
 02	2	687	0	霞月の３人としらねーやつ	4
 02	2	687	1	頑張らないことを頑張るPT	4
 02	2	688	0	TeamNo.688	1
 02	2	688	1	TeamNo.688	1
 02	2	689	0	TeamNo.689	1
+02	2	689	1	TeamNo.689	1
+02	2	690	0	TeamNo.690	1
 02	2	690	1	TeamNo.690	1
 02	2	691	0	ハザマ探索相談所	4
 02	2	691	1	ハザマ探索相談所	4
@@ -701,18 +759,28 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	693	1	TeamNo.693	1
 02	2	699	0	やはりハザマか……いつ出発する？	2
 02	2	699	1	やはりハザマか……いつ出発する？	2
+02	2	701	0	TeamNo.701	1
+02	2	701	1	TeamNo.701	1
 02	2	702	0	“鬼憑き僧侶”は覚悟する	1
 02	2	702	1	“鬼憑き僧侶”は覚悟する	1
+02	2	703	0	TeamNo.703	1
+02	2	703	1	TeamNo.703	1
 02	2	704	0	TeamNo.704	1
 02	2	704	1	TeamNo.704	1
 02	2	705	0	けものいっぴき	1
 02	2	705	1	けものいっぴき	1
 02	2	708	0	TeamNo.708	1
 02	2	708	1	芋煮愛好者	3
+02	2	712	0	TeamNo.712	1
+02	2	712	1	TeamNo.712	1
+02	2	715	0	TeamNo.715	1
+02	2	715	1	TeamNo.715	1
 02	2	719	0	イキリ帽子屋単独行	1
 02	2	719	1	イキリ帽子屋単独行	1
 02	2	721	0	TeamNo.721	1
 02	2	721	1	TeamNo.721	1
+02	2	725	0	TeamNo.725	1
+02	2	725	1	TeamNo.725	1
 02	2	727	0	永眠亭	4
 02	2	727	1	永眠亭	4
 02	2	731	0	星に護られし者	1
@@ -730,10 +798,13 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	743	1	毒蛇	2
 02	2	745	0	TeamNo.745	1
 02	2	745	1	TeamNo.745	1
+02	2	746	0	TeamNo.746	1
+02	2	746	1	TeamNo.746	1
 02	2	748	0	砲火後加害授業中	2
 02	2	748	1	砲火後加害授業中	4
 02	2	754	0	TeamNo.754	1
 02	2	756	0	TeamNo.756	1
+02	2	756	1	TeamNo.756	1
 02	2	759	0	TeamNo.759	1
 02	2	759	1	TeamNo.759	1
 02	2	761	0	TeamNo.761	1
@@ -818,6 +889,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	846	1	TeamNo.846	1
 02	2	849	0	TeamNo.849	1
 02	2	849	1	TeamNo.849	1
+02	2	850	0	TeamNo.850	1
 02	2	850	1	TeamNo.850	1
 02	2	852	0	TeamNo.852	1
 02	2	852	1	TeamNo.852	1
@@ -898,6 +970,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	928	1	一抹	1
 02	2	929	0	TeamNo.929	1
 02	2	929	1	TeamNo.929	1
+02	2	930	0	TeamNo.930	1
 02	2	930	1	TeamNo.930	1
 02	2	932	0	ガラス細工の二人と一人	2
 02	2	932	1	道連れのけものたち	2
@@ -928,6 +1001,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	960	1	TeamNo.960	1
 02	2	961	0	ちろんなっぷやいえゆかはいくんてれけはいこしてむとり	4
 02	2	961	1	ちろんなっぷやいえゆかはいくんてれけはいこしてむとり	4
+02	2	962	0	TeamNo.962	1
 02	2	962	1	TeamNo.962	1
 02	2	963	0	芋煮愛好者	1
 02	2	965	0	反転同盟	2
@@ -990,6 +1064,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1027	1	TeamNo.1027	1
 02	2	1028	0	TeamNo.1028	1
 02	2	1029	0	TeamNo.1029	1
+02	2	1029	1	TeamNo.1029	1
 02	2	1031	0	《Living edge》	1
 02	2	1031	1	《Living edge》	1
 02	2	1035	0	トリルローズ	2
@@ -1028,6 +1103,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1066	1	【ワン】	1
 02	2	1067	0	XxX	1
 02	2	1067	1	XxX	1
+02	2	1068	0	TeamNo.1068	1
 02	2	1068	1	TeamNo.1068	1
 02	2	1069	0	TeamNo.1069	1
 02	2	1069	1	TeamNo.1069	1
@@ -1066,12 +1142,14 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1094	0	奔るものども	4
 02	2	1094	1	奔るものども	4
 02	2	1096	0	TeamNo.1096	1
+02	2	1096	1	TeamNo.1096	1
 02	2	1102	0	はぐれPPP	4
 02	2	1102	1	はぐれPPP	4
 02	2	1106	0	TeamNo.1106	1
 02	2	1106	1	TeamNo.1106	1
 02	2	1107	0	TeamNo.1107	1
 02	2	1107	1	TeamNo.1107	1
+02	2	1108	0	TeamNo.1108	1
 02	2	1108	1	TeamNo.1108	1
 02	2	1109	0	TeamNo.1109	1
 02	2	1109	1	TeamNo.1109	1
@@ -1084,33 +1162,42 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1114	1	TeamNo.1114	1
 02	2	1117	0	TeamNo.1117	1
 02	2	1117	1	TeamNo.1117	1
+02	2	1118	1	TeamNo.1118	1
+02	2	1119	0	TeamNo.1119	1
 02	2	1119	1	TeamNo.1119	1
 02	2	1120	0	TeamNo.1120	1
 02	2	1122	0	TeamNo.1122	1
 02	2	1122	1	TeamNo.1122	1
 02	2	1125	0	TeamNo.1125	1
+02	2	1125	1	TeamNo.1125	1
 02	2	1127	0	RATNA	3
 02	2	1127	1	RATNA	3
 02	2	1128	0	TeamNo.1128	1
 02	2	1128	1	TeamNo.1128	1
 02	2	1130	0	TeamNo.1130	1
+02	2	1130	1	TeamNo.1130	1
+02	2	1131	0	TeamNo.1131	1
 02	2	1131	1	TeamNo.1131	1
 02	2	1133	0	TeamNo.1133	1
 02	2	1133	1	TeamNo.1133	1
 02	2	1135	0	TeamNo.1135	1
 02	2	1135	1	TeamNo.1135	1
+02	2	1138	0	TeamNo.1138	1
 02	2	1138	1	TeamNo.1138	1
 02	2	1140	0	TeamNo.1140	1
 02	2	1140	1	TeamNo.1140	1
 02	2	1146	0	TeamNo.1146	1
+02	2	1146	1	TeamNo.1146	1
 02	2	1147	0	TeamNo.1147	1
 02	2	1147	1	TeamNo.1147	1
 02	2	1148	0	ビガータイツ・アンド・ジャリガール・ウィズ・カタナ	2
 02	2	1148	1	ビガータイツ・アンド・ジャリガール・ウィズ・カタナ	2
+02	2	1149	0	TeamNo.1149	1
 02	2	1149	1	TeamNo.1149	1
 02	2	1150	0	詩人ターリヤの世界	1
 02	2	1150	1	詩人ターリヤの世界	1
 02	2	1151	0	TeamNo.1151	1
+02	2	1151	1	TeamNo.1151	1
 02	2	1152	0	現実	1
 02	2	1152	1	現実	1
 02	2	1153	0	TeamNo.1153	1
@@ -1129,6 +1216,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1163	1	TeamNo.1163	4
 02	2	1167	0	TeamNo.1167	1
 02	2	1167	1	TeamNo.1167	1
+02	2	1168	0	TeamNo.1168	1
+02	2	1168	1	TeamNo.1168	1
 02	2	1169	0	ちくわ同好会	2
 02	2	1169	1	ちくわ同好会	2
 02	2	1171	0	二鬼夜行	2
@@ -1136,12 +1225,14 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1172	0	チーム傘地蔵	2
 02	2	1172	1	チーム傘地蔵	2
 02	2	1175	0	TeamNo.1175	1
+02	2	1175	1	TeamNo.1175	1
 02	2	1178	0	釜飯	1
 02	2	1178	1	釜飯	1
 02	2	1179	0	TeamNo.1179	1
 02	2	1179	1	TeamNo.1179	1
 02	2	1181	0	TeamNo.1181	1
 02	2	1181	1	TeamNo.1181	1
+02	2	1183	0	TeamNo.1183	1
 02	2	1183	1	TeamNo.1183	1
 02	2	1184	0	TeamNo.1184	1
 02	2	1184	1	TeamNo.1184	1
@@ -1161,6 +1252,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1193	1	TeamNo.1193	1
 02	2	1194	0	TeamNo.1194	1
 02	2	1194	1	TeamNo.1194	1
+02	2	1195	0	TeamNo.1195	1
 02	2	1195	1	TeamNo.1195	1
 02	2	1198	0	TeamNo.1198	1
 02	2	1198	1	TeamNo.1198	1
@@ -1171,6 +1263,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1204	0	TeamNo.1204	1
 02	2	1204	1	TeamNo.1204	1
 02	2	1206	0	TeamNo.1206	1
+02	2	1206	1	TeamNo.1206	1
 02	2	1208	0	TeamNo.1208	1
 02	2	1208	1	TeamNo.1208	1
 02	2	1211	0	殺せ	1
@@ -1187,6 +1280,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1218	1	TeamNo.1218	1
 02	2	1220	0	TeamNo.1220	1
 02	2	1220	1	TeamNo.1220	1
+02	2	1221	0	TeamNo.1221	1
 02	2	1221	1	TeamNo.1221	1
 02	2	1222	0	TeamNo.1222	1
 02	2	1222	1	TeamNo.1222	1
@@ -1199,6 +1293,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1234	0	ホットペッパー団	4
 02	2	1234	1	ホットペッパー団	4
 02	2	1236	0	TeamNo.1236	1
+02	2	1236	1	TeamNo.1236	1
 02	2	1237	0	いちご肉まん	4
 02	2	1237	1	いちご肉まん	4
 02	2	1241	0	TeamNo.1241	1
@@ -1231,12 +1326,14 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1270	1	TeamNo.1270	1
 02	2	1271	0	TeamNo.1271	1
 02	2	1272	0	TeamNo.1272	1
+02	2	1272	1	TeamNo.1272	1
 02	2	1273	0	TeamNo.1273	1
 02	2	1273	1	TeamNo.1273	1
 02	2	1274	0	TeamNo.1274	1
 02	2	1274	1	TeamNo.1274	1
 02	2	1276	0	black universe	2
 02	2	1276	1	black universe	2
+02	2	1277	0	TeamNo.1277	1
 02	2	1277	1	TeamNo.1277	1
 02	2	1278	0	アウトサイダー小隊	2
 02	2	1278	1	アウトサイダー小隊	2
@@ -1268,6 +1365,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1302	1	TeamNo.1302	2
 02	2	1303	0	異世界サークル～紅き姫と聖騎士～	2
 02	2	1303	1	異世界サークル～紅き姫と聖騎士～	2
+02	2	1304	0	TeamNo.1304	1
 02	2	1306	0	TeamNo.1306	1
 02	2	1306	1	TeamNo.1306	1
 02	2	1307	0	TeamNo.1307	1
@@ -1278,6 +1376,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1314	1	TeamNo.1314	1
 02	2	1315	0	TeamNo.1315	1
 02	2	1315	1	TeamNo.1315	1
+02	2	1319	0	TeamNo.1319	1
 02	2	1319	1	TeamNo.1319	1
 02	2	1320	0	Little Braver	1
 02	2	1320	1	Little Braver	1
@@ -1294,6 +1393,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1332	0	TeamNo.1332	1
 02	2	1332	1	TeamNo.1332	1
 02	2	1335	0	TeamNo.1335	1
+02	2	1335	1	TeamNo.1335	1
 02	2	1336	0	TeamNo.1336	1
 02	2	1336	1	TeamNo.1336	1
 02	2	1337	0	TeamNo.1337	1
@@ -1304,6 +1404,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1339	1	TeamNo.1339	1
 02	2	1340	0	TeamNo.1340	1
 02	2	1340	1	TeamNo.1340	1
+02	2	1341	0	星喪騎士団	1
 02	2	1341	1	星喪騎士団	4
 02	2	1342	0	TeamNo.1342	1
 02	2	1342	1	TeamNo.1342	1
@@ -1382,9 +1483,13 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1407	0	TeamNo.1408	2
 02	2	1407	1	TeamNo.1407	1
 02	2	1408	1	TeamNo.1408	1
+02	2	1409	0	TeamNo.1409	1
 02	2	1409	1	TeamNo.1409	1
+02	2	1410	0	TeamNo.1410	1
 02	2	1410	1	TeamNo.1410	1
 02	2	1411	0	TeamNo.1411	1
+02	2	1411	1	TeamNo.1411	1
+02	2	1412	0	TeamNo.1412	1
 02	2	1413	0	TeamNo.1413	1
 02	2	1413	1	TeamNo.1413	1
 02	2	1414	0	TeamNo.1414	1
@@ -1393,6 +1498,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1416	1	悪意なき黒禍	1
 02	2	1417	0	TeamNo.1417	1
 02	2	1417	1	TeamNo.1417	1
+02	2	1419	0	TeamNo.1419	1
+02	2	1419	1	TeamNo.1419	1
+02	2	1420	0	TeamNo.1420	1
 02	2	1420	1	TeamNo.1420	1
 02	2	1421	0	様子見	2
 02	2	1421	1	様子見	3
@@ -1400,6 +1508,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1424	0	TeamNo.1424	1
 02	2	1424	1	TeamNo.1424	1
 02	2	1425	0	TeamNo.1425	1
+02	2	1425	1	TeamNo.1425	1
 02	2	1430	0	TeamNo.1430	1
 02	2	1430	1	TeamNo.1430	1
 02	2	1433	0	TeamNo.1433	1
@@ -1422,6 +1531,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1446	1	TeamNo.1446	1
 02	2	1447	0	TeamNo.1447	1
 02	2	1447	1	TeamNo.1447	1
+02	2	1449	0	TeamNo.1449	1
+02	2	1449	1	TeamNo.1449	1
 02	2	1450	0	TeamNo.1450	1
 02	2	1450	1	TeamNo.1450	1
 02	2	1451	0	TeamNo.1451	1
@@ -1443,6 +1554,8 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1461	1	TeamNo.1461	1
 02	2	1462	0	TeamNo.1462	1
 02	2	1462	1	TeamNo.1462	1
+02	2	1463	0	TeamNo.1463	1
+02	2	1463	1	TeamNo.1463	1
 02	2	1464	0	TeamNo.1464	1
 02	2	1464	1	TeamNo.1464	1
 02	2	1466	0	TeamNo.1466	1
@@ -1498,6 +1611,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1493	0	TeamNo.1493	1
 02	2	1493	1	TeamNo.1493	1
 02	2	1494	0	TeamNo.1494	1
+02	2	1494	1	TeamNo.1494	1
 02	2	1496	0	TeamNo.1496	1
 02	2	1496	1	TeamNo.1496	1
 02	2	1497	0	TeamNo.1497	1
@@ -1507,7 +1621,9 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1499	0	TeamNo.1499	1
 02	2	1499	1	TeamNo.1499	1
 02	2	1500	0	TeamNo.1500	1
+02	2	1500	1	TeamNo.1500	1
 02	2	1501	0	TeamNo.1501	1
+02	2	1501	1	TeamNo.1501	1
 02	2	1502	0	TeamNo.1502	1
 02	2	1502	1	TeamNo.1502	1
 02	2	1503	0	TeamNo.1503	1
@@ -1515,6 +1631,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1504	0	TeamNo.1504	1
 02	2	1504	1	TeamNo.1504	1
 02	2	1505	0	TeamNo.1505	1
+02	2	1505	1	TeamNo.1505	1
 02	2	1506	0	仮面イバライダー	1
 02	2	1506	1	仮面イバライダー	2
 02	2	1507	0	TeamNo.1507	1
@@ -1526,24 +1643,30 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1510	0	TeamNo.1510	1
 02	2	1511	0	TeamNo.1511	1
 02	2	1512	0	TeamNo.1512	1
+02	2	1512	1	TeamNo.1512	1
 02	2	1513	0	TeamNo.1513	1
 02	2	1513	1	TeamNo.1513	1
 02	2	1514	0	TeamNo.1514	1
+02	2	1514	1	TeamNo.1514	1
 02	2	1515	0	TeamNo.1515	1
+02	2	1515	1	TeamNo.1515	1
 02	2	1516	0	TeamNo.1516	1
 02	2	1516	1	TeamNo.1516	1
 02	2	1517	0	TeamNo.1517	1
+02	2	1517	1	TeamNo.1517	1
 02	2	1518	0	TeamNo.1518	1
 02	2	1518	1	TeamNo.1518	1
 02	2	1519	0	TeamNo.1519	1
 02	2	1520	0	TeamNo.1520	1
 02	2	1520	1	TeamNo.1520	1
 02	2	1521	0	TeamNo.1521	1
+02	2	1521	1	TeamNo.1521	1
 02	2	1522	0	フィブラ	1
 02	2	1522	1	フィブラ	1
 02	2	1523	0	TeamNo.1523	1
 02	2	1523	1	TeamNo.1523	1
 02	2	1524	0	TeamNo.1524	1
+02	2	1524	1	TeamNo.1524	1
 02	2	1525	0	TeamNo.1525	1
 02	2	1525	1	TeamNo.1525	1
 02	2	1526	0	TeamNo.1526	1
@@ -1558,6 +1681,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1532	0	TeamNo.1532	1
 02	2	1532	1	TeamNo.1532	1
 02	2	1533	0	TeamNo.1533	1
+02	2	1533	1	TeamNo.1533	1
 02	2	1534	0	TeamNo.1534	1
 02	2	1535	0	TeamNo.1535	1
 02	2	1535	1	TeamNo.1535	1
@@ -1579,6 +1703,7 @@ result_no	generate_no	party_no	party_type	name	member_num
 02	2	1544	0	TeamNo.1544	1
 02	2	1544	1	TeamNo.1544	1
 02	2	1545	0	TeamNo.1545	1
+02	2	1545	1	TeamNo.1545	1
 02	2	1546	0	TeamNo.1546	1
 02	2	1546	1	TeamNo.1546	1
 02	2	1547	0	TeamNo.1547	1
