@@ -108,7 +108,7 @@ sub GetData{
     my $nd_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "nd");
     my $ng_tr  = &GetIbaraNode::SearchMatchingTrNodeFromTitleImg($nodes, "ng");
 
-    if (!$self->CheckPartyHead($ne_tr)) { return;}
+    if (!$self->CheckPartyHead($ne_tr) && !$self->CheckPartyHead($nm_tr) && !$self->CheckPartyHead($nd_tr) && !$self->CheckPartyHead($ng_tr)) { return;}
     
     $self->{PNo} = $e_no;
 
