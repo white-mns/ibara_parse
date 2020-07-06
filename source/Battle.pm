@@ -110,6 +110,7 @@ sub ParsePage{
     my $battle_no   = shift;
 
     my $battle_id = -1;
+    my $party_no = -1;
 
     #結果の読み込み
     my $content = "";
@@ -126,9 +127,10 @@ sub ParsePage{
     # データリスト取得
     if (exists($self->{DataHandlers}{BattleInfo})) {
         $battle_id = $self->{DataHandlers}{BattleInfo}->GetBattleId("r".$e_no."b".$battle_no, $e_no, $battle_no, $$div_r870_nodes[0]);
+        $party_no  = $self->{DataHandlers}{BattleInfo}->GetPartyNo($$div_r870_nodes[0]);
     }
-    if (exists($self->{DataHandlers}{Turn}))   {$self->{DataHandlers}{Turn}->GetData  ($battle_id, $e_no, $battle_no, $div_r870_nodes)};
-    if (exists($self->{DataHandlers}{Result})) {$self->{DataHandlers}{Result}->GetData($battle_id, $e_no, $battle_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Turn}))   {$self->{DataHandlers}{Turn}->GetData  ($battle_id, $party_no, $battle_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Result})) {$self->{DataHandlers}{Result}->GetData($battle_id, $party_no, $battle_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }

@@ -152,6 +152,28 @@ sub GetDuelInfo{
 }
 
 #-----------------------------------#
+#    戦闘Enoを取得
+#------------------------------------
+#    引数｜戦闘開始時ノード 
+#-----------------------------------#
+sub GetPartyNo{
+    my $self = shift;
+    my $turn_node = shift;
+
+    if (!$turn_node) {return;}
+
+    my $tr_nodes = &GetNode::GetNode_Tag("tr", \$turn_node);
+    my @td_nodes    = $$tr_nodes[0]->content_list;
+
+    my $link_nodes = &GetNode::GetNode_Tag("a", \$td_nodes[0]);
+
+    if (!scalar(@$link_nodes)) {return -1;}
+
+    my $party_no  = &GetIbaraNode::GetENoFromLink($$link_nodes[0]);
+
+    return $party_no;
+}
+#-----------------------------------#
 #    出力
 #------------------------------------
 #    引数｜
