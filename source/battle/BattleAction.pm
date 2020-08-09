@@ -202,6 +202,16 @@ sub ParseBattleActionNode{
         } elsif ($node =~ /HASH/ && $node->tag eq "i" && $node->attr("class") && $node->attr("class") =~ /Y4/) { # クリティカル数の取得
             $self->{Critical} = $self->{Datas}{Damage}->ParseCriticalNode($node);
 
+        } elsif (($node =~ /追加！$/) || ($node =~ /HASH/ && (($node->tag eq "b" && $node->as_text =~ /追加！$/) || $node->right =~ /追加！$/))) {
+            $self->{Datas}{Damage}->ParseAbnormalNode($node, $self->{Critical}, $self->{ActId}, $self->{ActSubId});
+            $self->{ActSubId} += 1;
+            $self->{Critical} = 0;
+
+        } elsif (($node =~ /抵抗！$/) || ($node =~ /HASH/ && (($node->tag eq "b" && $node->as_text =~ /抵抗！$/) || $node->right =~ /抵抗！$/))) {
+            $self->{Datas}{Damage}->ParseResistNode($node, $self->{Critical}, $self->{ActId}, $self->{ActSubId});
+            $self->{ActSubId} += 1;
+            $self->{Critical} = 0;
+
         } elsif (($node =~ /攻撃を回避！$/) || ($node =~ /HASH/ && (($node->tag eq "b" && $node->as_text =~ /攻撃を回避！$/) || $node->right =~ /攻撃を回避！$/))) {
             $self->{Datas}{Damage}->ParseDodgeNode($node, $self->{Critical}, $self->{ActId}, $self->{ActSubId});
             $self->{ActSubId} += 1;
