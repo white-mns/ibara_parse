@@ -70,6 +70,7 @@ sub Init{
                 "battle_type",
                 "battle_id",
                 "battle_result",
+                "enemy_names",
     ];
 
     $self->{Datas}{BattleResult}->Init($header_list);
@@ -130,7 +131,7 @@ sub GetResultData{
     if (!$nodes) {return;}
 
     my $battle_type = $self->GetBattleType($$nodes[0]);
-    $self->GetBattleEnemy($$nodes[0], $battle_type);
+    my $enemy_names = $self->GetBattleEnemy($$nodes[0], $battle_type);
 
     my @reversed_nodes = reverse(@$nodes);
 
@@ -142,7 +143,7 @@ sub GetResultData{
     elsif (scalar(@$lose_nodes) > 0) { $result = -1;}
     elsif (scalar(@$draw_nodes) > 0) { $result =  0;}
 
-    $self->{Datas}{BattleResult}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $battle_type, $self->{BattleId}, $result) ));
+    $self->{Datas}{BattleResult}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $battle_type, $self->{BattleId}, $result, $enemy_names) ));
 
     return;
 }
@@ -192,31 +193,36 @@ sub GetBattleEnemy{
     my $battle_type = shift;
     my $enemy_id = 0;
 
-    if (!$node) {return;}
+    if (!$node) {return "";}
 
     my $tr_nodes = &GetNode::GetNode_Tag("tr", \$node);
     my @td_nodes    = $$tr_nodes[0]->content_list;
 
     my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[2]);
-    if (!scalar(@$child_table_nodes)) {return;}
+    if (!scalar(@$child_table_nodes)) {return "";}
 
     my $a_nodes = &GetNode::GetNode_Tag("a", \$$child_table_nodes[0]);
     
-    if(scalar(@$a_nodes) > 0) {return;} # 対人戦は除外
+    if(scalar(@$a_nodes) > 0) {return "";} # 対人戦は除外
 
     my $b_nodes = &GetNode::GetNode_Tag("b", \$$child_table_nodes[0]);
+
+    my $enemy_names = "";
 
     foreach my $b_node (@$b_nodes) {
         my $enemy_text = $b_node->as_text;
         $enemy_text =~ s/[A-Z]$//;
         my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_text);
+        $enemy_names .= $enemy_text . ",";
 
         $self->{Datas}{BattleEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $enemy_id) ));
         
         $self->{Datas}{New}->RecordNewBattleEnemyData($enemy_id);
     }
 
-    return;
+    chomp($enemy_names);
+
+    return $enemy_names;
 }
 
 #-----------------------------------#

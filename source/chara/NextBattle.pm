@@ -68,6 +68,7 @@ sub Init{
                 "battle_type",
                 "enemy_party_name_id",
                 "member_num",
+                "enemy_names",
     ];
 
     $self->{Datas}{NextBattleInfo}->Init($header_list);
@@ -112,11 +113,11 @@ sub GetData{
     
     $self->{PNo} = $e_no;
 
-    $self->GetNextBattleEnemy($ne_tr,  0);
-    $self->GetNextBattleInfo ($ne_tr,  0);
+    my $ne_enemy_names = $self->GetNextBattleEnemy($ne_tr,  0);
+    $self->GetNextBattleInfo ($ne_tr,  0, $ne_enemy_names);
     
-    $self->GetNextBattleEnemy($nm_tr,  1);
-    $self->GetNextBattleInfo ($nm_tr,  1);
+    my $nm_enemy_names = $self->GetNextBattleEnemy($nm_tr,  1);
+    $self->GetNextBattleInfo ($nm_tr,  1, $nm_enemy_names);
     
     if ($self->CheckPartyHead($nd_tr)) {
         $self->GetNextDuelInfo ($nd_tr,  10);
@@ -144,24 +145,29 @@ sub GetNextBattleEnemy{
     my $battle_type = shift;
     my $enemy_id = 0;
 
-    if (!$node) {return;}
+    if (!$node) {return "";}
 
     my @td_nodes    = $node->content_list;
 
     my $child_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[2]);
-    if (!scalar(@$child_table_nodes)) {return;}
+    if (!scalar(@$child_table_nodes)) {return "";}
 
     my $b_nodes = &GetNode::GetNode_Tag("b", \$$child_table_nodes[0]);
 
+    my $enemy_names = "";
+
     foreach my $b_node (@$b_nodes) {
         my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($b_node->as_text);
+        $enemy_names .= $b_node->as_text . ",";
 
         $self->{Datas}{NextBattleEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $enemy_id) ));
     
         $self->{Datas}{New}->RecordNewNextEnemyData($enemy_id);
     }
 
-    return;
+    chomp($enemy_names);
+
+    return $enemy_names;
 }
 
 #-----------------------------------#
@@ -176,6 +182,7 @@ sub GetNextBattleInfo{
     my $self = shift;
     my $node = shift;
     my $battle_type = shift;
+    my $enemy_names = shift;
 
     if (!$node) {return;}
 
@@ -190,7 +197,7 @@ sub GetNextBattleInfo{
     $name_id = $self->{CommonDatas}{ProperName}->GetOrAddId($$b_nodes[0]->as_text);
     $member_num = int( scalar(@$tr_nodes) );
 
-    $self->{Datas}{NextBattleInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $name_id, $member_num) ));
+    $self->{Datas}{NextBattleInfo}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $name_id, $member_num, $enemy_names) ));
 
     return;
 }
