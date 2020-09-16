@@ -46,6 +46,7 @@ sub Init{
                 "result_no",
                 "generate_no",
                 "name",
+                "association_name",
     ];
 
     $self->{Datas}{NewItem}->Init($header_list);
@@ -99,10 +100,11 @@ sub ReadLastNewData(){
 sub RecordNewItemData{
     my $self    = shift;
     my $item_name = shift;
+    my $association_name = shift;
 
     if (exists($self->{AllItem}{$item_name})) {return;}
 
-    $self->{Datas}{NewItem}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $item_name) ));
+    $self->{Datas}{NewItem}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $item_name, $association_name) ));
 
     $self->{AllItem}{$item_name} = [$self->{ResultNo}, $self->{GenerateNo}, $item_name];
 

@@ -217,7 +217,7 @@ sub GetBattleEnemy{
 
         $self->{Datas}{BattleEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $enemy_id) ));
         
-        $self->{Datas}{New}->RecordNewBattleEnemyData($enemy_id);
+        $self->{Datas}{New}->RecordNewBattleEnemyData($enemy_id, $battle_type);
     }
 
     chomp($enemy_names);

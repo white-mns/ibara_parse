@@ -135,10 +135,10 @@ sub GetItemData{
                                                               $$effects[2]{"id"}, $$effects[2]{"value"}, $$effects[2]{"need_lv"})));
     
         if ($$td_nodes[2]->as_text eq "素材") {
+            $name =~ s/\+\d+//g;
             my $new_name = $name;
-            $new_name =~ s/\+\d+//g;
             $new_name =~ s/活力漲る|滑々な|魔力溢れる//g;
-            $self->{Datas}{NewItem}->RecordNewItemData($new_name);
+            $self->{Datas}{NewItem}->RecordNewItemData($new_name, $name);
         }
     }
 
