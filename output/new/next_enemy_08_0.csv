@@ -1,8 +1,8 @@
-result_no	generate_no	enemy_id	
-08	0	387
-08	0	389
-08	0	391
-08	0	392
-08	0	393
-08	0	394
-08	0	396
+result_no	generate_no	enemy_id	battle_type	
+08	0	387	1
+08	0	389	0
+08	0	391	0
+08	0	392	0
+08	0	393	0
+08	0	394	0
+08	0	396	0

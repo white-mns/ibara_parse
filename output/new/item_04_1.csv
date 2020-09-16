@@ -1,5 +1,5 @@
-result_no	generate_no	name	
-04	1	孔雀石
-04	1	木瓜
-04	1	腐木
-04	1	柳
+result_no	generate_no	name	association_name	
+04	1	孔雀石	孔雀石
+04	1	木瓜	木瓜
+04	1	腐木	腐木
+04	1	柳	柳

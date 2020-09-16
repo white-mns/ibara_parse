@@ -1,6 +1,6 @@
-result_no	generate_no	enemy_id	
-06	2	322
-06	2	327
-06	2	325
-06	2	319
-06	2	324
+result_no	generate_no	enemy_id	battle_type	
+06	2	322	0
+06	2	327	0
+06	2	325	1
+06	2	319	0
+06	2	324	0

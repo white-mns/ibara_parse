@@ -1,7 +1,7 @@
-result_no	generate_no	enemy_id	
-02	2	96
-02	2	135
-02	2	118
-02	2	128
-02	2	241
-02	2	142
+result_no	generate_no	enemy_id	battle_type	
+02	2	96	0
+02	2	135	0
+02	2	118	0
+02	2	128	0
+02	2	241	0
+02	2	142	0

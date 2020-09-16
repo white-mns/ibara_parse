@@ -1,7 +1,7 @@
-result_no	generate_no	name	
-11	0	ペットボトル
-11	0	瑪瑙
-11	0	スチール缶
-11	0	白詰草
-11	0	赤い塊
-11	0	霞石
+result_no	generate_no	name	association_name	
+11	0	ペットボトル	ペットボトル
+11	0	瑪瑙	瑪瑙
+11	0	スチール缶	スチール缶
+11	0	白詰草	白詰草
+11	0	赤い塊	赤い塊
+11	0	霞石	霞石

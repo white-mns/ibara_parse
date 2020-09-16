@@ -1,8 +1,8 @@
-result_no	generate_no	name	
-07	1	大蒜
-07	1	毒牙
-07	1	桜
-07	1	猫目石
-07	1	梅
-07	1	鉄くず
-07	1	ガラスの欠片
+result_no	generate_no	name	association_name	
+07	1	大蒜	大蒜
+07	1	毒牙	毒牙
+07	1	桜	桜
+07	1	猫目石	猫目石
+07	1	梅	梅
+07	1	鉄くず	鉄くず
+07	1	ガラスの欠片	ガラスの欠片
