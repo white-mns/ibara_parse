@@ -46,7 +46,7 @@ sub Init{
                 "result_no",
                 "generate_no",
                 "enemy_id",
-                "is_boss",
+                "battle_type",
     ];
 
     $self->{Datas}{NewNextEnemy}->Init($header_list);
@@ -100,11 +100,11 @@ sub ReadLastNewData(){
 sub RecordNewNextEnemyData{
     my $self    = shift;
     my $enemy_id = shift;
-    my $is_boss = shift;
+    my $battle_type = shift;
 
     if (exists($self->{AllNextEnemy}{$enemy_id})) {return;}
 
-    $self->{Datas}{NewNextEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $enemy_id, $is_boss) ));
+    $self->{Datas}{NewNextEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $enemy_id, $battle_type) ));
 
     $self->{AllNextEnemy}{$enemy_id} = [$self->{ResultNo}, $self->{GenerateNo}, $enemy_id];
 

@@ -53,7 +53,7 @@ sub Init{
                 "party_no",
                 "enemy_id",
                 "member_num",
-                "is_boss",
+                "battle_type",
     ];
 
     $self->{Datas}{NewDefeatEnemy}->Init($header_list);
