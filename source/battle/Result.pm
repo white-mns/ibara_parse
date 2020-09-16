@@ -12,6 +12,7 @@ require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
 
 require "./source/new/NewBattleEnemy.pm";
+require "./source/new/NewDefeatEnemy.pm";
 
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
@@ -45,9 +46,11 @@ sub Init{
     #初期化
     $self->{Datas}{BattleResult}  = StoreData->new();
     $self->{Datas}{BattleEnemy}   = StoreData->new();
-    $self->{Datas}{New}   = NewBattleEnemy->new();
+    $self->{Datas}{NewBattleEnemy} = NewBattleEnemy->new();
+    $self->{Datas}{NewDefeatEnemy} = NewDefeatEnemy->new();
     
-    $self->{Datas}{New}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{NewBattleEnemy}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{NewDefeatEnemy}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
     
     my $header_list = "";
  
@@ -130,9 +133,6 @@ sub GetResultData{
 
     if (!$nodes) {return;}
 
-    my $battle_type = $self->GetBattleType($$nodes[0]);
-    my $enemy_names = $self->GetBattleEnemy($$nodes[0], $battle_type);
-
     my @reversed_nodes = reverse(@$nodes);
 
     my $draw_nodes = &GetNode::GetNode_Tag_Attr("b", "class", "Y7i", \$reversed_nodes[0]);
@@ -142,6 +142,9 @@ sub GetResultData{
     if    (scalar(@$win_nodes) > 0)  { $result =  1;}
     elsif (scalar(@$lose_nodes) > 0) { $result = -1;}
     elsif (scalar(@$draw_nodes) > 0) { $result =  0;}
+
+    my $battle_type = $self->GetBattleType($$nodes[0]);
+    my $enemy_names = $self->GetBattleEnemy($$nodes[0], $battle_type, $result);
 
     $self->{Datas}{BattleResult}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $battle_type, $self->{BattleId}, $result, $enemy_names) ));
 
@@ -191,6 +194,7 @@ sub GetBattleEnemy{
     my $self = shift;
     my $node = shift;
     my $battle_type = shift;
+    my $battle_result = shift;
     my $enemy_id = 0;
 
     if (!$node) {return "";}
@@ -205,6 +209,10 @@ sub GetBattleEnemy{
     
     if(scalar(@$a_nodes) > 0) {return "";} # 対人戦は除外
 
+    my $child_left_table_nodes = &GetNode::GetNode_Tag("table", \$td_nodes[0]);
+    my $party_a_nodes = &GetNode::GetNode_Tag("a", \$$child_left_table_nodes[0]);
+    my $member_num = scalar(@$party_a_nodes) / 2;
+
     my $b_nodes = &GetNode::GetNode_Tag("b", \$$child_table_nodes[0]);
 
     my $enemy_names = "";
@@ -217,7 +225,12 @@ sub GetBattleEnemy{
 
         $self->{Datas}{BattleEnemy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{PNo}, $battle_type, $enemy_id) ));
         
-        $self->{Datas}{New}->RecordNewBattleEnemyData($enemy_id, $battle_type);
+        $self->{Datas}{NewBattleEnemy}->RecordNewBattleEnemyData($enemy_id, $battle_type);
+        if ($battle_result == 1) {
+
+            $self->{Datas}{NewDefeatEnemy}->RecordNewDefeatEnemyData($enemy_id, 0, $battle_type, $self->{PNo});
+            $self->{Datas}{NewDefeatEnemy}->RecordNewDefeatEnemyData($enemy_id, $member_num, $battle_type, $self->{PNo});
+        }
     }
 
     chomp($enemy_names);
