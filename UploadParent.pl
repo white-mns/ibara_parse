@@ -16,6 +16,8 @@ use HTTP::Request;
 use HTTP::Response;
 
 # 変数の初期化    ---------------#
+use FindBin qw($Bin);
+use lib "$Bin";
 use ConstData_Upload;        #定数呼び出し
 
 my $timeChecker = TimeChecker->new();
