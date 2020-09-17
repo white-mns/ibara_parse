@@ -20,13 +20,11 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	62	451	0	1
 11	0	10	0	62	451	4	1
 11	0	10	0	74	419	2	0
-11	0	10	0	99	279	4	1
 11	0	10	0	128	419	2	0
 11	0	10	0	157	452	0	1
 11	0	10	0	157	452	4	1
 11	0	10	0	183	453	0	0
 11	0	10	0	183	453	4	0
-11	0	10	0	188	396	1	0
 11	0	10	0	223	455	0	0
 11	0	10	0	223	455	2	0
 11	0	10	0	233	452	0	1
@@ -59,7 +57,6 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	472	452	3	1
 11	0	10	0	481	419	1	0
 11	0	10	0	519	432	3	0
-11	0	10	0	541	396	1	0
 11	0	10	0	541	451	0	1
 11	0	10	0	541	451	1	1
 11	0	10	0	577	373	2	0
@@ -74,7 +71,6 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	620	460	1	0
 11	0	10	0	631	452	0	1
 11	0	10	0	631	452	3	1
-11	0	10	0	648	396	1	0
 11	0	10	0	658	455	0	0
 11	0	10	0	658	455	4	0
 11	0	10	0	687	429	0	0
@@ -82,12 +78,10 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	691	432	3	0
 11	0	10	0	693	452	0	1
 11	0	10	0	693	452	4	1
-11	0	10	0	724	391	1	0
 11	0	10	0	748	429	0	0
 11	0	10	0	748	429	3	0
 11	0	10	0	837	396	2	0
 11	0	10	0	855	396	2	0
-11	0	10	0	869	396	1	0
 11	0	10	0	883	450	1	0
 11	0	10	0	885	460	0	0
 11	0	10	0	885	460	1	0
@@ -100,7 +94,6 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	990	451	1	1
 11	0	10	0	1060	429	0	0
 11	0	10	0	1060	429	4	0
-11	0	10	0	1071	396	1	0
 11	0	10	0	1112	455	0	0
 11	0	10	0	1112	455	1	0
 11	0	10	0	1152	451	0	1
@@ -113,7 +106,6 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	1298	432	1	0
 11	0	10	0	1303	452	0	1
 11	0	10	0	1303	452	2	1
-11	0	10	0	1320	396	1	0
 11	0	10	0	1364	455	0	0
 11	0	10	0	1364	455	1	0
 11	0	10	0	1369	451	0	1
@@ -121,7 +113,6 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	1386	432	3	0
 11	0	10	0	1390	427	2	0
 11	0	10	0	1403	419	1	0
-11	0	10	0	1421	377	3	0
 11	0	10	0	1461	432	1	0
 11	0	10	0	1473	419	1	0
 11	0	10	0	1478	451	0	1
@@ -134,4 +125,3 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 11	0	10	0	1490	455	1	0
 11	0	10	0	1492	455	0	0
 11	0	10	0	1492	455	1	0
-11	0	10	0	1636	277	3	1

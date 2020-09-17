@@ -53,6 +53,7 @@ sub Init{
                 "last_result_no",
                 "last_generate_no",
                 "i_no",
+                "source_name",
                 "name",
                 "kind_id",
                 "strength",
@@ -160,7 +161,7 @@ sub GetMake{
         $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
         $strength = $2;
 
-        $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $e_no, $self->{ENo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $i_no, $name, $kind_id, $strength) ));
+        $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $e_no, $self->{ENo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $i_no, $source_name, $name, $kind_id, $strength) ));
     }
 }
 

@@ -76,7 +76,11 @@ sub ReadLastNewData(){
     my $self      = shift;
     
     my $file_name = "";
-    $file_name = "./output/new/all_defeat_enemy_" . ($self->{ResultNo} - 1) . "_0.csv" ;
+    # 前回結果の確定版ファイルを探索
+    for (my $i=5; $i>=0; $i--){
+        $file_name = "./output/new/all_defeat_enemy_" . sprintf("%02d", ($self->{ResultNo} - 1)) . "_" . $i . ".csv" ;
+        if(-f $file_name) {last;}
+    }
     
     #既存データの読み込み
     my $content = &IO::FileRead ( $file_name );
