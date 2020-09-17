@@ -69,6 +69,7 @@ sub Init{
                 "effect_3_id",
                 "effect_3_value",
                 "effect_3_need_lv",
+                "plus",
     ];
 
     $self->{Datas}{Data}->Init($header_list);
@@ -114,7 +115,7 @@ sub GetItemData{
     shift(@$tr_nodes);
  
     foreach my $tr_node (@$tr_nodes){
-        my ($i_no, $name, $kind_id, $strength, $range) = (0, "", 0, 0, 0);
+        my ($i_no, $name, $kind_id, $strength, $range, $plus) = (0, "", 0, 0, 0, 0);
         my $effects = [{"id"=> 0, "value"=> 0, "need_lv"=> 0},{"id"=> 0, "value"=> 0, "need_lv"=> 0},{"id"=> 0, "value"=> 0, "need_lv"=> 0}];
 
         my $td_nodes = &GetNode::GetNode_Tag("td",\$tr_node);
@@ -125,6 +126,9 @@ sub GetItemData{
         $name = $$td_nodes[1]->as_text;
         $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($$td_nodes[2]->as_text);
         $strength = $$td_nodes[3]->as_text;
+        if ($$td_nodes[2]->as_text =~ /材/ && $name =~ /\+(\d+)$/) {
+            $plus = $1;
+        }
 
         if (scalar(@$td_nodes) > 5) { $self->GetCreatedItemData ($td_nodes, $effects, \$range);}
         else                        { $self->GetMaterialItemData($td_nodes, $effects, \$range);}
@@ -132,7 +136,7 @@ sub GetItemData{
         $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $i_no, $name, $kind_id, $strength, $range,
                                                               $$effects[0]{"id"}, $$effects[0]{"value"}, $$effects[0]{"need_lv"},
                                                               $$effects[1]{"id"}, $$effects[1]{"value"}, $$effects[1]{"need_lv"},
-                                                              $$effects[2]{"id"}, $$effects[2]{"value"}, $$effects[2]{"need_lv"})));
+                                                              $$effects[2]{"id"}, $$effects[2]{"value"}, $$effects[2]{"need_lv"}, $plus)));
     
         if ($$td_nodes[2]->as_text eq "素材") {
             $name =~ s/\+\d+//g;

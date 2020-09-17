@@ -113,8 +113,8 @@ sub RecordNewDefeatEnemyData{
     my $is_boss = shift;
     my $party_no  = shift;
 
-    my $key = $enemy_id . "_" . $member_num;
-    my $party_key = $enemy_id . "_" . $party_no . "_" . $member_num;
+    my $key = $enemy_id . "_" . $is_boss . "_" . $member_num;
+    my $party_key = $enemy_id . "_" . $is_boss . "_" . $party_no . "_" . $member_num;
 
     if (exists($self->{BeforeDefeatEnemy}{$key})) {return;}
     if (exists($self->{AllDefeatIDPnoMemNum}{$party_key})) {return;} # 戦闘中二体以上同じ敵がいたときに二体目以降を除外
