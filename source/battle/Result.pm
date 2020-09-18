@@ -215,7 +215,7 @@ sub GetBattleEnemy{
 
     my $b_nodes = &GetNode::GetNode_Tag("b", \$$child_table_nodes[0]);
 
-    my $enemy_names = "";
+    my $enemy_names = ",";
 
     foreach my $b_node (@$b_nodes) {
         my $enemy_text = $b_node->as_text;
@@ -232,8 +232,6 @@ sub GetBattleEnemy{
             $self->{Datas}{NewDefeatEnemy}->RecordNewDefeatEnemyData($enemy_id, $member_num, $battle_type, $self->{PNo});
         }
     }
-
-    chomp($enemy_names);
 
     return $enemy_names;
 }

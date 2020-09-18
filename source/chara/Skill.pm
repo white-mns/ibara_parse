@@ -38,7 +38,8 @@ sub Init{
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
     
     #初期化
-    $self->{Datas}{Data}  = StoreData->new();
+    $self->{Datas}{Skill} = StoreData->new();
+    $self->{Datas}{SkillConcatenate} = StoreData->new();
     my $header_list = "";
    
     $header_list = [
@@ -50,10 +51,20 @@ sub Init{
                 "lv",
     ];
 
-    $self->{Datas}{Data}->Init($header_list);
+    $self->{Datas}{Skill}->Init($header_list);
+
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "e_no",
+                "skill_concatenate",
+    ];
+
+    $self->{Datas}{SkillConcatenate}->Init($header_list);
     
     #出力ファイル設定
-    $self->{Datas}{Data}->SetOutputName( "./output/chara/skill_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{Skill}->SetOutputName           ( "./output/chara/skill_"             . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{SkillConcatenate}->SetOutputName( "./output/chara/skill_concatenate_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
     return;
 }
 
@@ -86,9 +97,13 @@ sub GetSkillData{
     my $div_node = shift;
 
     my $table_nodes = &GetNode::GetNode_Tag("table",\$div_node);
+
+    $self->{SkillConcatenate} = ",";
  
     $self->ParseTrData($$table_nodes[1]);
     $self->ParseTrData($$table_nodes[2]);
+
+    $self->{Datas}{SkillConcatenate}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $self->{SkillConcatenate})));
 
     return;
 }
@@ -104,6 +119,8 @@ sub ParseTrData{
 
     my $tr_nodes = &GetNode::GetNode_Tag("tr",\$table_node);
     shift(@$tr_nodes);
+
+    my $skill_concatenate = ",";
  
     foreach my $tr_node (@$tr_nodes){
         my ($name, $skill_id, $lv) = ("", 0, 0);
@@ -139,7 +156,9 @@ sub ParseTrData{
         $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, $type_id, $element_id, $$td_nodes[3]->as_text, $$td_nodes[4]->as_text, $timing_id, $text]);
         $lv = $$td_nodes[2]->as_text;
 
-        $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $skill_id, $lv)));
+        $self->{Datas}{Skill}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $skill_id, $lv)));
+
+        $self->{SkillConcatenate} .= $skill_name.",";
     }
 
     return;

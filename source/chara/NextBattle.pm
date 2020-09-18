@@ -154,7 +154,7 @@ sub GetNextBattleEnemy{
 
     my $b_nodes = &GetNode::GetNode_Tag("b", \$$child_table_nodes[0]);
 
-    my $enemy_names = "";
+    my $enemy_names = ",";
 
     foreach my $b_node (@$b_nodes) {
         my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($b_node->as_text);
@@ -164,8 +164,6 @@ sub GetNextBattleEnemy{
     
         $self->{Datas}{New}->RecordNewNextEnemyData($enemy_id, $battle_type);
     }
-
-    chomp($enemy_names);
 
     return $enemy_names;
 }
