@@ -87,6 +87,7 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_AIDE,              "aides",               "./output/chara/aide_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_AIDE_CANDIDATE,    "aide_candidates",     "./output/chara/aide_candidate_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_SKILL_CONCATENATE, "skill_concatenates",  "./output/chara/skill_concatenate_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_DROP_ITEM,         "drop_items",          "./output/chara/drop_item_");
     }
     if (ConstData::EXE_BATTLE) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");

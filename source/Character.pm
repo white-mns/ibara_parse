@@ -35,6 +35,7 @@ require "./source/chara/Meal.pm";
 require "./source/chara/Make.pm";
 require "./source/chara/Aide.pm";
 require "./source/chara/AideCandidate.pm";
+require "./source/chara/DropItem.pm";
 
 use ConstData;        #定数呼び出し
 
@@ -85,6 +86,7 @@ sub Init{
     if (ConstData::EXE_CHARA_MAKE)           { $self->{DataHandlers}{Make}          = Make->new();}
     if (ConstData::EXE_CHARA_AIDE)           { $self->{DataHandlers}{Aide}          = Aide->new();}
     if (ConstData::EXE_CHARA_AIDE_CANDIDATE) { $self->{DataHandlers}{AideCandidate} = AideCandidate->new();}
+    if (ConstData::EXE_CHARA_DROP_ITEM)      { $self->{DataHandlers}{DropItem}      = DropItem->new();}
 
     #初期化処理
     foreach my $object( values %{ $self->{DataHandlers} } ) {
@@ -183,6 +185,7 @@ sub ParsePage{
     if (exists($self->{DataHandlers}{Make}))          {$self->{DataHandlers}{Make}->GetData          ($e_no, $div_r870_nodes)};
     if (exists($self->{DataHandlers}{Aide}))          {$self->{DataHandlers}{Aide}->GetData          ($e_no, $div_y870_nodes)};
     if (exists($self->{DataHandlers}{AideCandidate})) {$self->{DataHandlers}{AideCandidate}->GetData ($e_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{DropItem}))      {$self->{DataHandlers}{DropItem}->GetData      ($e_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
 }
