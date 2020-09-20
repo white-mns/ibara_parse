@@ -36,6 +36,7 @@ sub new {
 sub Init{
     my $self = shift;
     ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas}) = @_;
+    $self->{CommonDatas}{Passive} = {};
     
     #初期化
     $self->{Datas}{Skill} = StoreData->new();
@@ -65,8 +66,46 @@ sub Init{
     #出力ファイル設定
     $self->{Datas}{Skill}->SetOutputName           ( "./output/chara/skill_"             . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
     $self->{Datas}{SkillConcatenate}->SetOutputName( "./output/chara/skill_concatenate_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+
+    $self->ReadLastData();
+
     return;
 }
+
+#-----------------------------------#
+#    既存データを読み込む
+#-----------------------------------#
+sub ReadLastData(){
+    my $self      = shift;
+    
+    my $file_name = "";
+    # 前回結果の確定版ファイルを探索
+    for (my $i=5; $i>=0; $i--){
+        $file_name = "./output/chara/skill_" . sprintf("%02d", ($self->{ResultNo} - 1)) . "_" . $i . ".csv" ;
+
+        if(-f $file_name) {last;}
+    }
+
+    #既存データの読み込み
+    my $content = &IO::FileRead ( $file_name );
+    
+    my @file_data = split(/\n/, $content);
+    shift (@file_data);
+    
+    foreach my  $data_set(@file_data){
+        my $skill_datas = []; 
+        @$skill_datas   = split(ConstData::SPLIT, $data_set);
+
+        my $e_no       = $$skill_datas[2];
+        my $skill_name = $$skill_datas[3];
+        my $skill_id   = $$skill_datas[4];
+
+        $self->{CommonDatas}{Skill}{$e_no}{$skill_name} = $skill_id;
+    }
+
+    return;
+}
+
 
 #-----------------------------------#
 #    データ取得
@@ -98,6 +137,7 @@ sub GetSkillData{
 
     my $table_nodes = &GetNode::GetNode_Tag("table",\$div_node);
 
+    $self->{CommonDatas}{Passive}{$self->{ENo}} = {};
     $self->{SkillConcatenate} = ",";
  
     $self->ParseTrData($$table_nodes[1]);
@@ -159,6 +199,10 @@ sub ParseTrData{
         $self->{Datas}{Skill}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $name, $skill_id, $lv)));
 
         $self->{SkillConcatenate} .= $skill_name.",";
+
+        if ($type_id == 1) { # パッシブスキルの時、上位生産発動判定のためにスキル名とスキルidを共通変数に記録
+            $self->{CommonDatas}{Skill}{$self->{ENo}}{$name} = $skill_id;
+        }
     }
 
     return;

@@ -90,6 +90,8 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_DROP_ITEM,         "drop_items",          "./output/chara/drop_item_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_ADDITION,          "additions",           "./output/chara/addition_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_COOK,              "cooks",               "./output/chara/cook_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_ADDITION_PASSIVE,  "addition_passives",   "./output/chara/addition_passive_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_COOK_PASSIVE,      "cook_passives",       "./output/chara/cook_passive_");
     }
     if (ConstData::EXE_BATTLE) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");

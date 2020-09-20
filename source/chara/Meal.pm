@@ -109,7 +109,7 @@ sub GetData{
     
     if (!$ready_div_node) { return;}
 
-    $self->GetMealData($ready_div_node);
+    $self->CrawlMealData($ready_div_node);
     
     return;
 }
@@ -119,7 +119,7 @@ sub GetData{
 #------------------------------------
 #    引数｜準備divノード
 #-----------------------------------#
-sub GetMealData{
+sub CrawlMealData{
     my $self = shift;
     my $ready_div_node = shift;
  

@@ -102,7 +102,7 @@ sub GetData{
 
     if (!$action_div_node) { return;}
 
-    $self->GetMakeData($action_div_node);
+    $self->CrawlMakeData($action_div_node);
     
     return;
 }
@@ -112,7 +112,7 @@ sub GetData{
 #------------------------------------
 #    引数｜アクションdivノード
 #-----------------------------------#
-sub GetMakeData{
+sub CrawlMakeData{
     my $self = shift;
     my $node = shift;
  

@@ -42,7 +42,8 @@ sub Init{
     $self->{LastResultNo} = sprintf ("%02d", $self->{LastResultNo});
     
     #初期化
-    $self->{Datas}{Data}  = StoreData->new();
+    $self->{Datas}{Cook}  = StoreData->new();
+    $self->{Datas}{Passive}  = StoreData->new();
     my $header_list = "";
    
     $header_list = [
@@ -58,11 +59,31 @@ sub Init{
                 "name",
     ];
 
-    $self->{Datas}{Data}->Init($header_list);
-    
+    $self->{Datas}{Cook}->Init($header_list);
+
+    $header_list = [
+                "result_no",
+                "generate_no",
+                "requester_e_no",
+                "cook_id",
+                "skill_id",
+                "result",
+                "increase",
+                "dice_total",
+                "dice_1",
+                "dice_2",
+                "dice_3",
+                "dice_4",
+                "dice_5",
+                "dice_6",
+    ];
+
+    $self->{Datas}{Passive}->Init($header_list);
+
     #出力ファイル設定
-    $self->{Datas}{Data}->SetOutputName( "./output/chara/cook_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
-    
+    $self->{Datas}{Cook}->SetOutputName   ("./output/chara/cook_"         . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+    $self->{Datas}{Passive}->SetOutputName("./output/chara/cook_passive_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
+
     $self->{LastGenerateNo} = $self->ReadLastGenerateNo();
 
     return;
@@ -101,7 +122,7 @@ sub GetData{
 
     if (!$action_div_node) { return;}
 
-    $self->GetCookData($action_div_node);
+    $self->CrawlCookData($action_div_node);
     
     return;
 }
@@ -111,7 +132,7 @@ sub GetData{
 #------------------------------------
 #    引数｜アクションdivノード
 #-----------------------------------#
-sub GetCookData{
+sub CrawlCookData{
     my $self = shift;
     my $node = shift;
  
@@ -161,15 +182,102 @@ sub GetCook{
 
     foreach my $node_right (@node_rights) {
         # 料理名ノードの右側にあるノードを、ENoが出てくる（＝次の生産行動が出てくる）まで走査する。（常時スキルがあるとその判定が挟まるため）
-        # 付加後の装備性能が出たところでデータを登録する
-        if ($node_right =~ /HASH/ && $node_right->tag eq "a"){return;}
-        if ($node_right =~ /／(.+)：強さ(\d+)／/) {
+        # 料理後の装備性能が出たところでデータを登録する
+        if ($node_right =~ /HASH/ && $node_right->tag eq "a") {return;}
+        if ($node_right =~ /HASH/ && $node_right->attr("class") && $node_right->attr("class") eq "Y3"){return;}
 
-            $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $e_no, $self->{ENo}, $cook_id, $self->{LastResultNo}, $self->{LastGenerateNo}, $i_no, $source_name, $name) ));
+        if ($node_right =~ /／(.+)：強さ(\d+)／/) {
+            $self->CrawlPassiveData(\@node_rights, $cook_id, $e_no);
+
+            $self->{Datas}{Cook}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $e_no, $self->{ENo}, $cook_id, $self->{LastResultNo}, $self->{LastGenerateNo}, $i_no, $source_name, $name) ));
         }
     }
 }
 
+#-----------------------------------#
+#    料理パッシブ発動走査
+#------------------------------------
+#    引数｜料理アイテム名ノード
+#-----------------------------------#
+sub CrawlPassiveData{
+    my $self = shift;
+    my $node_rights = shift;
+    my $cook_id = shift;
+    my $e_no = shift;
+
+    foreach my $node_right (@$node_rights) {
+        if ($node_right =~ /HASH/ && $node_right->tag eq "a") {return;}
+        if ($node_right =~ /HASH/ && $node_right->attr("class") && $node_right->attr("class") eq "Y3"){return;}
+
+        if ($node_right =~ /HASH/ && $node_right->tag eq "span" && $node_right->attr("class") eq "P3"){
+            $self->GetPassive($node_right, $cook_id, $e_no);
+        }
+
+        if ($node_right =~ /／(.+)：強さ(\d+)／/) {return;}
+    }
+}
+
+#-----------------------------------#
+#    料理パッシブ発動データ取得
+#------------------------------------
+#    引数｜料理アイテム名ノード
+#-----------------------------------#
+sub GetPassive{
+    my $self = shift;
+    my $node = shift;
+    my $cook_id = shift;
+    my $e_no = shift;
+
+    my ($skill_id, $result, $dice_total) = (0, -99, 0);
+    my @dice = (0, 0, 0, 0, 0, 0);
+
+    my $span_L3_nodes = &GetNode::GetNode_Tag_Attr("span", "class", "L3", \$node);
+
+    if (scalar(@$span_L3_nodes)){
+        my $name = $$span_L3_nodes[0]->as_text;
+        $name =~ s/！$//;
+
+        $skill_id = exists($self->{CommonDatas}{Skill}{$e_no}{$name}) ? $self->{CommonDatas}{Skill}{$e_no}{$name} : 0;
+    }
+
+    my @child_nodes = $node->content_list;
+    my $last_child = $child_nodes[$#child_nodes];
+
+    if ($last_child =~ /HASH/ && $last_child->tag eq "span") {
+        my $text = $last_child->as_text;
+
+        if ($text =~ /！/) {
+            my @texts = split(/！/, $text);
+
+            if    ($texts[0] eq "成功") {$result = 1;}
+            elsif ($texts[0] eq "大成功") {$result = 2;}
+            elsif ($texts[0] eq "失敗") {$result = -1;}
+            elsif ($texts[0] eq "大失敗") {$result = -2;}
+
+        }
+    }
+
+    my $b_nodes = &GetNode::GetNode_Tag("b", \$node);
+    if (scalar(@$b_nodes)) {
+        $dice_total = $$b_nodes[0]->as_text;
+    }
+
+    my $span_DC_nodes = &GetNode::GetNode_Tag_Attr("span", "class", "DC", \$node);
+    if (scalar(@$span_DC_nodes)) {
+        if ($$span_DC_nodes[0]->as_text =~ / /) {
+            my @dice_dots = split(/ /, $$span_DC_nodes[0]->as_text);
+            my $i = 0;
+
+            foreach my $dice_dot (@dice_dots) {
+                $dice[$i] = $dice_dot;
+
+                $i += 1;
+            }
+        }
+    }
+
+    $self->{Datas}{Passive}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $cook_id, $skill_id, $result, 0, $dice_total, $dice[0], $dice[1], $dice[2], $dice[3], $dice[4], $dice[5]) ));
+}
 #-----------------------------------#
 #    出力
 #------------------------------------
