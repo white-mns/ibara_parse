@@ -42,6 +42,7 @@ use warnings;
         use constant EXE_CHARA_AIDE_CANDIDATE => 1;
         use constant EXE_CHARA_DROP_ITEM      => 1;
         use constant EXE_CHARA_ADDITION       => 1;
+        use constant EXE_CHARA_COOK           => 1;
     use constant EXE_ACT            => 1;
         use constant EXE_ACT_SKILL_MASTERY    => 1;
     use constant EXE_BATTLE         => 1;

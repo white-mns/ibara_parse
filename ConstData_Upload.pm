@@ -48,6 +48,7 @@ use warnings;
         use constant EXE_CHARA_SKILL_CONCATENATE => 1;
         use constant EXE_CHARA_DROP_ITEM         => 1;
         use constant EXE_CHARA_ADDITION          => 1;
+        use constant EXE_CHARA_COOK              => 1;
     use constant EXE_BATTLE               => 1;
         use constant EXE_BATTLE_INFO             => 1;
         use constant EXE_BATTLE_ACTION           => 1;
