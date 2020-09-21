@@ -68,6 +68,7 @@ sub Init{
     $self->{Datas}{SkillConcatenate}->SetOutputName( "./output/chara/skill_concatenate_" . $self->{ResultNo} . "_" . $self->{GenerateNo} . ".csv" );
 
     $self->ReadLastData();
+    $self->ReadOutputedData();
 
     return;
 }
@@ -106,6 +107,40 @@ sub ReadLastData(){
     return;
 }
 
+#-----------------------------------#
+#    既に出力した同じ更新回のデータを読み込む
+#    ・その更新でスキル名を変更した場合、解析一周では料理・付加の依頼者側から見て正しいスキル名を取得できないパターンがあるため
+#-----------------------------------#
+sub ReadOutputedData(){
+    my $self      = shift;
+    
+    my $file_name = "";
+    # 前回結果の確定版ファイルを探索
+    for (my $i=5; $i>=0; $i--){
+        $file_name = "./output/chara/skill_" . sprintf("%02d", $self->{ResultNo}) . "_" . $i . ".csv" ;
+
+        if(-f $file_name) {last;}
+    }
+
+    #既存データの読み込み
+    my $content = &IO::FileRead ( $file_name );
+    
+    my @file_data = split(/\n/, $content);
+    shift (@file_data);
+    
+    foreach my  $data_set(@file_data){
+        my $skill_datas = []; 
+        @$skill_datas   = split(ConstData::SPLIT, $data_set);
+
+        my $e_no       = $$skill_datas[2];
+        my $skill_name = $$skill_datas[3];
+        my $skill_id   = $$skill_datas[4];
+
+        $self->{CommonDatas}{Skill}{$e_no}{$skill_name} = $skill_id;
+    }
+
+    return;
+}
 
 #-----------------------------------#
 #    データ取得
