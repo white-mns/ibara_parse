@@ -6,10 +6,6 @@
 
 package TimeChecker;
 use Cwd;
-use DateTime;
-use DateTime::Format::HTTP;
-use DateTime::Format::DateParse;
-use DateTime::TimeZone;
 use Encode 'from_to';
 
 # コンストラクタ
@@ -65,42 +61,6 @@ sub TranceToDateTime {
 
     return "$year-$mon-$mday";
 }
-
-#-----------------------------------#
-#    GMTからTokyo時刻にし、mysql用に変換する
-#-----------------------------------#
-#    引数｜HTTPヘッダの日付
-#    返値｜YYYY-MM-DD
-#-----------------------------------#
-
-sub TranceGMTToDateTime {
-    my $self     = shift;
-    my $date_str = shift;
-
-    my $dt = DateTime::Format::HTTP->parse_datetime($date_str);
-
-    return $dt->set_time_zone('Asia/Tokyo')->datetime;
-}
-
-#-----------------------------------#
-#    引数1-引数2の差分の符号を取る
-#-----------------------------------#
-#    引数｜日付
-#    返値｜分
-#-----------------------------------#
-
-sub SubDateTime {
-    my $self       = shift;
-    my $date_str1  = shift;
-    my $date_str2  = shift;
-
-    my $dt1  = DateTime::Format::DateParse->parse_datetime( $date_str1 );
-    my $dt2  = DateTime::Format::DateParse->parse_datetime( $date_str2 );
-    my $comp = DateTime->compare($dt1,$dt2);
-
-    return $comp;
-}
-
 
 #-----------------------------------#
 #
