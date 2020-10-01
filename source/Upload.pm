@@ -78,6 +78,7 @@ sub Upload {
                 @data_que =();
             }            
         }
+
         &InsertDB($self,\@data_que,$for_table);
     }
     
@@ -124,6 +125,8 @@ sub InsertDB{
     my $self        = shift;
     my $insert_data = shift;
     my $table_name  = shift;
+
+    if (!scalar(@$insert_data)) {return;}
     
     $self->{DBI}->insert($insert_data, table     => $table_name, bulk_insert => 1);
 
