@@ -126,7 +126,7 @@ sub CrawlMealData{
     my @child_nodes = $ready_div_node->content_list;
 
     for my $child_node (@child_nodes) {
-        if ($child_node =~ /HASH/ && $child_node->right && $child_node->right =~ /を美味しくいただきました！|食べました！/) {
+        if ($child_node =~ /HASH/ && $child_node->right && $child_node->right =~ /を美味しくいただきました！|食べました！|使用しました！/) {
             $self->GetMeal($child_node);
         }
     }
