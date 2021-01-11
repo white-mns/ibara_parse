@@ -17,6 +17,7 @@ require "./source/new/NewAction.pm";
 use ConstData;        #定数呼び出し
 use source::lib::GetNode;
 use source::lib::GetIbaraNode;
+use Encode qw/decode_utf8 encode_utf8/;
 
 #------------------------------------------------------------------#
 #    パッケージの定義
@@ -257,6 +258,13 @@ sub ParseActiveAction{
 
     $skill_name =~ s/\s//g;
     $skill_name =~ s/！！//g;
+
+    # 鳴き声の削除
+    $skill_name = Encode::decode_utf8($skill_name);
+    $skill_name =~ s/[\p{Hiragana}]{2,}$//g;
+    $skill_name = Encode::encode_utf8($skill_name);
+
+
     my $skill_id = $self->{CommonDatas}{SkillData}->GetOrAddId(0, [$skill_name, 0, 0, 0, 0, 0, " "]);
     my $fuka_id  = 0;
 
