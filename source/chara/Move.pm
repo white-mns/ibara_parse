@@ -233,7 +233,7 @@ sub Output{
     my $self = shift;
     
     foreach my $party_no (sort{$a cmp $b} keys %{$self->{PartyMove}}) {
-        foreach my $landform_id (keys %{$self->{PartyMove}{$party_no}}) {
+        foreach my $landform_id (sort{$a cmp $b} keys %{$self->{PartyMove}{$party_no}}) {
             my $count = $self->{PartyMove}{$party_no}{$landform_id};
     
             $self->{Datas}{MovePartyCount}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $party_no, $landform_id, $count)));

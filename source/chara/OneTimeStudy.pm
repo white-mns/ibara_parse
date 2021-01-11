@@ -128,7 +128,7 @@ sub GetOneTimeStudyData{
         }
     }
 
-    foreach my $skill_id (keys(%studies)) {
+    foreach my $skill_id (sort{$a cmp $b} keys(%studies)) {
         $self->{Datas}{OneTimeStudy}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $skill_id, $studies{$skill_id})));
     }
 
