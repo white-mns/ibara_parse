@@ -65,7 +65,7 @@ if [ -f ./data/orig/result${ZIP_NAME}.zip ]; then
     cd ../../
 
     perl ./GetData.pl      $RESULT_NO $GENERATE_NO
-    perl ./UploadParent.pl $RESULT_NO $GENERATE_NO
+    #perl ./UploadParent.pl $RESULT_NO $GENERATE_NO
 
 #------------------------------------------------------------------
 # 展開したファイルを削除
