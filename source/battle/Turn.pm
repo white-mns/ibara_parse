@@ -62,18 +62,46 @@ sub Init{
 #    引数｜戦闘管理番号,PT番号,戦闘番号,戦闘開始時・Turn表記divノード
 #-----------------------------------#
 sub GetData{
-    my $self          = shift;
-    $self->{BattleId} = shift;
-    $self->{PNo}      = shift;
-    $self->{BattleNo} = shift;
-    my $nodes         = shift;
+    my $self           = shift;
+    $self->{BattleId}  = shift;
+    $self->{PNo}       = shift;
+    $self->{BattleNo}  = shift;
+    my $div_r870_nodes = shift;
+    my $b_zz1_nodes    = shift;
+
+    if ($self->CheckBugEffect($b_zz1_nodes)) {
+        return;
+    }
     
     $self->{Datas}{BattleAction}->BattleStart($self->{BattleId});
 
-    $self->ParseTurnNodes($nodes);
+    $self->ParseTurnNodes($div_r870_nodes);
     
     return;
 }
+
+#-----------------------------------#
+#    アダムス戦でのバグ演出の検出
+#------------------------------------
+#    引数｜Turn表記ノード
+#-----------------------------------#
+sub CheckBugEffect{
+    my $self = shift;
+    my $nodes = shift;
+
+    if (!$nodes) {return 0;}
+
+    foreach my $node (@$nodes) {
+
+        my $text = $node->as_text;
+        if ($text =~/[〓■　┳┥┻┝Σ]/) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 
 #-----------------------------------#
 #    戦闘開始時・Turn表記に使われるdivノードを解析

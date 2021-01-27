@@ -122,14 +122,15 @@ sub ParsePage{
     my $tree = HTML::TreeBuilder->new;
     $tree->parse($content);
 
-    my $div_r870_nodes        = &GetNode::GetNode_Tag_Attr("div", "class", "R870",    \$tree);
+    my $div_r870_nodes = &GetNode::GetNode_Tag_Attr       ("div", "class", "R870", \$tree);
+    my $b_zz1_nodes    = &GetNode::GetNode_Tag_Attr_RegExp("b",   "class", "ZZ",  \$tree);
 
     # データリスト取得
     if (exists($self->{DataHandlers}{BattleInfo})) {
         $battle_id = $self->{DataHandlers}{BattleInfo}->GetBattleId("r".$e_no."b".$battle_no, $e_no, $battle_no, $$div_r870_nodes[0]);
         $party_no  = $self->{DataHandlers}{BattleInfo}->GetPartyNo($$div_r870_nodes[0]);
     }
-    if (exists($self->{DataHandlers}{Turn}))   {$self->{DataHandlers}{Turn}->GetData  ($battle_id, $party_no, $battle_no, $div_r870_nodes)};
+    if (exists($self->{DataHandlers}{Turn}))   {$self->{DataHandlers}{Turn}->GetData  ($battle_id, $party_no, $battle_no, $div_r870_nodes, $b_zz1_nodes)};
     if (exists($self->{DataHandlers}{Result})) {$self->{DataHandlers}{Result}->GetData($battle_id, $party_no, $battle_no, $div_r870_nodes)};
 
     $tree = $tree->delete;
