@@ -57,6 +57,7 @@ sub Init{
                 "sources_name",
                 "is_success",
                 "compound_result_id",
+                "is_equipment",
     ];
 
     $self->{Datas}{Data}->Init($header_list);
@@ -147,10 +148,11 @@ sub GetSucceedCompound{
     my $node = shift;
     my $is_success = shift;
 
-    my ($source_1_i_no, $source_1_name, $source_2_i_no, $source_2_name, $sources_name, $compound_result_id) = (-1, "", -1, "", "", 0);
+    my ($source_1_i_no, $source_1_name, $source_2_i_no, $source_2_name, $sources_name, $compound_result_id, $is_equipment) = (-1, "", -1, "", "", 0, 0);
 
     my @node_lefts = $node->left;
     @node_lefts = reverse(@node_lefts);
+    my @node_rights = $node->right;
 
     if ($node_lefts[3] =~ /HASH/ && $node_lefts[3]->as_text =~ /ItemNo.(\d+) (.+)/) {
         $source_1_i_no = $1;
@@ -164,9 +166,15 @@ sub GetSucceedCompound{
 
     $sources_name = join(" ", sort( ($source_1_name, $source_2_name) ));
 
-    $compound_result_id = $self->{CommonDatas}{ProperName}->GetOrAddId($node->as_text);
+    if ($node_rights[0] =~ /強化/) {
+        $is_equipment = 1;
 
-    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $source_1_i_no, $source_1_name, $source_2_i_no, $source_2_name, $sources_name, $is_success, $compound_result_id) ));
+    } else {
+        $compound_result_id = $self->{CommonDatas}{ProperName}->GetOrAddId($node->as_text);
+    }
+
+
+    $self->{Datas}{Data}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{ENo}, $self->{LastResultNo}, $self->{LastGenerateNo}, $source_1_i_no, $source_1_name, $source_2_i_no, $source_2_name, $sources_name, $is_success, $compound_result_id, $is_equipment) ));
 }
 
 #-----------------------------------#
