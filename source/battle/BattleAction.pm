@@ -213,6 +213,11 @@ sub ParseBattleActionNode{
             $self->{ActSubId} += 1;
             $self->{Critical} = 0;
 
+        } elsif (($node =~ /軽減！$/) || ($node =~ /HASH/ && (($node->tag eq "b" && $node->as_text =~ /軽減！$/) || $node->right =~ /軽減！$/))) {
+            $self->{Datas}{Damage}->ParseReduceNode($node, $self->{Critical}, $self->{ActId}, $self->{ActSubId});
+            $self->{ActSubId} += 1;
+            $self->{Critical} = 0;
+
         } elsif (($node =~ /攻撃を回避！$/) || ($node =~ /HASH/ && (($node->tag eq "b" && $node->as_text =~ /攻撃を回避！$/) || $node->right =~ /攻撃を回避！$/))) {
             $self->{Datas}{Damage}->ParseDodgeNode($node, $self->{Critical}, $self->{ActId}, $self->{ActSubId});
             $self->{ActSubId} += 1;

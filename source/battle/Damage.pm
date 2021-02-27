@@ -196,11 +196,11 @@ sub ParseDodgeNode{
 }
 
 #-----------------------------------#
-#    状態異常追加量を解析
+#    変調追加量を解析
 #    ダメージ種別
 #      6:状態異常追加
 #------------------------------------
-#    引数｜回避テキストノード
+#    引数｜変調テキストノード
 #          行動番号
 #          行動サブ番号
 #-----------------------------------#
@@ -250,11 +250,11 @@ sub ParseAbnormalNode{
 }
 
 #-----------------------------------#
-#    状態異常抵抗を解析
+#    変調抵抗を解析
 #    ダメージ種別
 #      7:状態異常抵抗
 #------------------------------------
-#    引数｜回避テキストノード
+#    引数｜抵抗テキストノード
 #          行動番号
 #          行動サブ番号
 #-----------------------------------#
@@ -299,6 +299,61 @@ sub ParseResistNode{
 
     return;
 }
+
+#-----------------------------------#
+#    変調軽減量を解析
+#    ダメージ種別
+#      8:状態異常軽減
+#------------------------------------
+#    引数｜軽減テキストノード
+#          行動番号
+#          行動サブ番号
+#-----------------------------------#
+sub ParseReduceNode{
+    my $self          = shift;
+    my $node          = shift;
+    my $critical      = shift;
+    $self->{ActId}    = shift;
+    $self->{ActSubId} = shift;
+
+    my ($target_type, $e_no, $enemy_id, $abnormal_id, $damage) = (-1, 0, 0, 0, -1);
+    my $damage_type = 8;
+
+    if (!$node) {return;}
+
+    my $nickname = "";
+    my $abnormal_name = "";
+
+    if ($node =~ /(.+)の(.+)深度を(\d+)軽減！$/) {
+        $nickname = $1;
+        $abnormal_name = $2;
+        $damage = $3;
+
+    } elsif ($node =~ /HASH/ && $node->tag eq "b" && $node->as_text =~ /(.+)の(.+)深度を(\d+)軽減！$/) {
+        $nickname = $1;
+        $abnormal_name = $2;
+        $damage = $3;
+
+    } elsif ($node =~ /HASH/ && $node->tag eq "span" && $node->right =~ /の(.+)深度を(\d+)軽減！$/)  {
+       $nickname = $node->as_text;
+        $abnormal_name = $1;
+        $damage = $2;
+
+    } else {return;}
+
+    $nickname =~ s/^\s//g;
+
+    $self->GetENoOrEnemyIdFromNickname($nickname, \$target_type, \$e_no, \$enemy_id);
+    $abnormal_id = ($abnormal_name ne "") ? $self->{CommonDatas}{ProperName}->GetOrAddId($abnormal_name) : 0;
+
+
+    $self->{Datas}{Damage}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $damage_type, 0, $abnormal_id, $damage) ));
+    $self->{Datas}{Target}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $target_type, $e_no, $enemy_id, 0) ));
+    $self->{Datas}{Buffer}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $self->{ActSubId}, $self->{CommonDatas}{ProperName}->GetOrAddId("Critical Hit"), $critical) ));
+
+    return;
+}
+
 
 #-----------------------------------#
 #    クリティカルを解析
