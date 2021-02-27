@@ -140,7 +140,7 @@ sub CrawlCookData{
 
     my $cook_id = 0;
     for my $child_node (@child_nodes) {
-        if ($child_node =~ /HASH/ && $child_node->right && $child_node->right =~ /つくって/) {
+        if ($child_node =~ /HASH/ && $child_node->right && $child_node->right =~ /をつく/) {
             $self->GetCook($child_node, 1, $cook_id);
             $cook_id += 1;
 
@@ -236,6 +236,7 @@ sub GetPassive{
     if (scalar(@$span_L3_nodes)){
         my $name = $$span_L3_nodes[0]->as_text;
         $name =~ s/！$//;
+        if ($name eq "謎飯チャレンジ") { $name = "謎飯作製";}
 
         $skill_id = exists($self->{CommonDatas}{Skill}{$e_no}{$name}) ? $self->{CommonDatas}{Skill}{$e_no}{$name} : 0;
     }
@@ -249,10 +250,10 @@ sub GetPassive{
         if ($text =~ /！/) {
             my @texts = split(/！/, $text);
 
-            if    ($texts[0] eq "成功") {$result = 1;}
-            elsif ($texts[0] eq "大成功") {$result = 2;}
-            elsif ($texts[0] eq "失敗") {$result = -1;}
-            elsif ($texts[0] eq "大失敗") {$result = -2;}
+            if    ($texts[0] =~ /大成功/) {$result = 2;}
+            elsif ($texts[0] =~ /成功/)   {$result = 1;}
+            elsif ($texts[0] =~ /大失敗/) {$result = -2;}
+            elsif ($texts[0] =~ /失敗/)   {$result = -1;}
 
         }
     }
