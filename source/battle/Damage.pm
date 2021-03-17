@@ -439,7 +439,6 @@ sub GetENoOrEnemyIdFromNickname{
         $$type = 0;
 
     } else {
-        $nickname =~ s/[A-Z]$//;
         if (exists($self->{NicknameToEnemyId}{$nickname})) {
             $$enemy_id = $self->{NicknameToEnemyId}{$nickname};
             $$type = 1;
