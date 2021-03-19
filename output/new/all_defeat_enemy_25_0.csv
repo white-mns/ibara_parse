@@ -969,6 +969,9 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 25	0	830_0_1
 25	0	830_0_3
 25	0	830_0_4
+25	0	831_0_0
+25	0	831_0_1
+25	0	831_0_4
 25	0	832_0_0
 25	0	832_0_1
 25	0	832_0_4
@@ -1003,9 +1006,6 @@ result_no	generate_no	before_result_no	before_generate_no	party_no	enemy_id	memb
 25	0	880_0_4
 25	0	891_0_0
 25	0	891_0_1
-25	0	906_0_0
-25	0	906_0_1
-25	0	906_0_4
 25	0	96_0_0
 25	0	96_0_1
 25	0	96_0_2
