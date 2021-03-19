@@ -219,7 +219,9 @@ sub GetBattleEnemy{
 
     foreach my $b_node (@$b_nodes) {
         my $enemy_text = $b_node->as_text;
-        $enemy_text =~ s/[A-Z]$//;
+        if ($enemy_text ne "OL") {
+            $enemy_text =~ s/[A-Z]$//;
+        }
         my $enemy_id = $self->{CommonDatas}{ProperName}->GetOrAddId($enemy_text);
         $enemy_names .= $enemy_text . ",";
 

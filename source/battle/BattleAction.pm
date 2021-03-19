@@ -495,7 +495,7 @@ sub SetEnemyNicknameToIndex{
     $enemy_name =~ s/\s//g;
     my $nickname = $enemy_name;
 
-    if ($enemy_name =~ /[A-Z]$/) {
+    if ($enemy_name ne "OL" && $enemy_name =~ /[A-Z]$/) {
         chop($enemy_name);
     }
 
