@@ -96,6 +96,7 @@ sub Main {
     if (ConstData::EXE_BATTLE) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_RESULT,           "battle_results",      "./output/battle/result_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_EQUIP,            "battle_equips",       "./output/battle/equip_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ENEMY,            "battle_enemies",      "./output/battle/enemy_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DUEL_INFO,        "duel_infos",          "./output/battle/duel_info_");
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTION,           "battle_actions",      "./output/battle/action_");
