@@ -96,6 +96,11 @@ sub GetEquipData{
     my $div_r870_node = shift;
     my ($e_no, $equip_no) = (0, 0);
 
+    # equip_no  => 0:武器、1:防具、2:装飾、3:自由
+    my %equip_kinds = ("武器" => 0, "大砲" => 0, "呪器" => 0, "魔弾" => 0, "戦盾" => 0, "暗器" => 0,
+                       "防具" => 1, "法衣" => 1, "重鎧" => 1, "衣装" => 1, "隔壁" => 1, "聖衣" => 1,
+                       "装飾" => 2, "魔晶" => 2, "護符" => 2, "御守" => 2, "薬箱" => 2, "楽器" => 2);
+
     if (!$div_r870_node) {return;}
 
     $self->SetActerNicknameToIndex($div_r870_node);
@@ -125,6 +130,15 @@ sub GetEquipData{
             if ($equip_text =~ /／(.+?)：強さ(\d+?)／/){
                 $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
                 $strength = $2;
+                if (exists($equip_kinds{$1})) {
+                    my $equip_kind_no = $equip_kinds{$1};
+                    if ($equip_no < $equip_kind_no) { # 武器・防具・装飾の未装備時の処理
+                        $equip_no = $equip_kind_no;
+
+                    } elsif ($equip_no > 0 && $equip_kind_no == 0) { # 防具・装飾の未装備時の処理
+                        $equip_no = 3;
+                    }
+                }
             }
 
             if ($equip_text =~ /／［効果1］(.+?) ［効果2］(.+?) ［効果3］(.+?)$/){
