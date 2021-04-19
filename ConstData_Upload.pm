@@ -61,6 +61,7 @@ use warnings;
         use constant EXE_BATTLE_RESULT           => 1;
         use constant EXE_BATTLE_ENEMY            => 1;
         use constant EXE_BATTLE_DUEL_INFO        => 1;
+        use constant EXE_BATTLE_EQUIP            => 1;
     use constant EXE_NEW                  => 1;
         use constant EXE_NEW_ITEM                => 1;
         use constant EXE_NEW_ITEM_FUKA           => 1;
