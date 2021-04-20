@@ -12,6 +12,7 @@ require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
 
 require "./source/battle/Damage.pm";
+require "./source/battle/UseSkillConcatenation.pm";
 require "./source/new/NewAction.pm";
 
 use ConstData;        #定数呼び出し
@@ -264,7 +265,7 @@ sub ParseActiveAction{
     $skill_name =~ s/\s//g;
     $skill_name =~ s/！！//g;
 
-    # 鳴き声の削除
+    # 「○語」による鳴き声の削除
     $skill_name = Encode::decode_utf8($skill_name);
     $skill_name =~ s/[\p{Hiragana}]{2,}$//g;
     $skill_name = Encode::encode_utf8($skill_name);
