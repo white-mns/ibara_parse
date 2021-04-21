@@ -48,9 +48,11 @@ sub Init{
     $self->{Datas}{Acter}  = StoreData->new();
     $self->{Datas}{New}    = NewAction->new();
     $self->{Datas}{Damage} = Damage->new();
+    $self->{Datas}{UseSkillConcatenation} = UseSkillConcatenation->new();
 
     $self->{Datas}{New}->Init   ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
     $self->{Datas}{Damage}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{UseSkillConcatenation}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
 
     my $header_list = "";
 
@@ -276,6 +278,7 @@ sub ParseActiveAction{
 
     $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
     $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
+    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $skill_name);
 
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
@@ -356,6 +359,7 @@ sub ParsePassiveAction{
 
     $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, $lv) ));
     $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
+    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $fuka_name);
 
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 }
@@ -551,6 +555,7 @@ sub BattleStart{
     $self->{NicknameToEnemyId} = {};
 
     $self->{Datas}{Damage}->BattleStart($self->{BattleId});
+    $self->{Datas}{UseSkillConcatenation}->BattleStart($self->{BattleId});
 }
 
 #-----------------------------------#
