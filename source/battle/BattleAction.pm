@@ -278,7 +278,7 @@ sub ParseActiveAction{
 
     $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
     $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
-    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $skill_name);
+    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $skill_name, 0);
 
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
@@ -359,7 +359,7 @@ sub ParsePassiveAction{
 
     $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, $lv) ));
     $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
-    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $fuka_name);
+    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $fuka_name, $lv);
 
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 }

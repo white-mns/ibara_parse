@@ -27,6 +27,7 @@ package UseSkillConcatenation;
 
 use constant CONCATENATION_ALL => 0;
 use constant CONCATENATION_ACTOR => 1;
+use constant CONCATENATION_ACTOR_LV_TOTAL => 2;
 use constant TIMING_ALL   => 0;
 use constant TIMING_START => 1;
 
@@ -74,6 +75,7 @@ sub Init{
     $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR} = {};
     $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{UseSkillConcatenation::TIMING_ALL} = {};
     $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{UseSkillConcatenation::TIMING_START} = {};
+    $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR_LV_TOTAL}{UseSkillConcatenation::TIMING_START} = {};
 
     return;
 }
@@ -89,6 +91,7 @@ sub AddUseSkill{
     my $turn      = shift;
     my $e_no      = shift;
     my $name      = shift;
+    my $lv        = shift;
 
     my $is_start = ($turn == 0) ? 1 : 0;
 
@@ -102,6 +105,9 @@ sub AddUseSkill{
     $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{UseSkillConcatenation::TIMING_ALL}{$battle_id}{$e_no}{$name} += 1; # キャラ別全発動スキル
     if ($is_start) {
         $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{UseSkillConcatenation::TIMING_START}{$battle_id}{$e_no}{$name} += 1; # キャラ別戦闘開始時発動スキル
+    }
+    if ($is_start) {
+        $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR_LV_TOTAL}{UseSkillConcatenation::TIMING_START}{$battle_id}{$e_no}{$name} += $lv; # キャラ別戦闘開始時発動スキル
     }
     
     return;
