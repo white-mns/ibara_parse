@@ -92,9 +92,9 @@ sub AddUseSkill{
 
     my $is_start = ($turn == 0) ? 1 : 0;
 
-    $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}{UseSkillConcatenation::TIMING_ALL}{$battle_id}{$name} += 1; # 戦闘別全発動スキル
+    $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}{UseSkillConcatenation::TIMING_ALL}{$battle_id}{0}{$name} += 1; # 戦闘別全発動スキル
     if ($is_start) {
-        $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}{UseSkillConcatenation::TIMING_START}{$battle_id}{$name} += 1; # 戦闘別戦闘開始時発動スキル
+        $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}{UseSkillConcatenation::TIMING_START}{$battle_id}{0}{$name} += 1; # 戦闘別戦闘開始時発動スキル
     }
 
     if ($e_no == 0) {return}
@@ -126,26 +126,20 @@ sub BattleStart{
 sub Output{
     my $self = shift;
 
-    foreach my $timing_type (sort { $a <=> $b } keys %{$self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}}) {
-        foreach my $battle_id (sort { $a <=> $b } keys %{$self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}{$timing_type}}){
-            my $skill_concatenation = ",";
-            foreach my $name (sort { $a cmp $b } keys %{$self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}{$timing_type}{$battle_id}}){
-                my $use_count = $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ALL}{$timing_type}{$battle_id}{$name};
-                $skill_concatenation .= "$name".",:"."$use_count,";
-            }
-            $self->{Datas}{UseSkill}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $battle_id, UseSkillConcatenation::CONCATENATION_ALL, $timing_type, 0, $skill_concatenation) ));
-        }
-    }
+    foreach my $concatenation_type (sort { $a <=> $b } keys %{$self->{UseSkill}}) {
+        foreach my $timing_type (sort { $a <=> $b } keys %{$self->{UseSkill}{$concatenation_type}}) {
+            foreach my $battle_id (sort { $a <=> $b } keys %{$self->{UseSkill}{$concatenation_type}{$timing_type}}){
+                foreach my $e_no (sort { $a <=> $b } keys %{$self->{UseSkill}{$concatenation_type}{$timing_type}{$battle_id}}){
 
-    foreach my $timing_type (sort { $a <=> $b } keys %{$self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}}) {
-        foreach my $battle_id (sort { $a <=> $b } keys %{$self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{$timing_type}}){
-            foreach my $e_no (sort { $a <=> $b } keys %{$self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{$timing_type}{$battle_id}}){
-                my $skill_concatenation = ",";
-                foreach my $name (sort { $a cmp $b } keys %{$self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{$timing_type}{$battle_id}{$e_no}}){
-                    my $use_count = $self->{UseSkill}{UseSkillConcatenation::CONCATENATION_ACTOR}{$timing_type}{$battle_id}{$e_no}{$name};
-                    $skill_concatenation .= "$name".",:"."$use_count,";
+                    # 発動スキルを文字列として結合
+                    my $skill_concatenation = ",";
+                    foreach my $name (sort { $a cmp $b } keys %{$self->{UseSkill}{$concatenation_type}{$timing_type}{$battle_id}{$e_no}}){
+                        my $use_count = $self->{UseSkill}{$concatenation_type}{$timing_type}{$battle_id}{$e_no}{$name};
+                        $skill_concatenation .= "$name".",:"."$use_count,";
+                    }
+
+                    $self->{Datas}{UseSkill}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $battle_id, $concatenation_type, $timing_type, $e_no, $skill_concatenation) ));
                 }
-                $self->{Datas}{UseSkill}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $battle_id, UseSkillConcatenation::CONCATENATION_ACTOR, $timing_type, $e_no, $skill_concatenation) ));
             }
         }
     }
