@@ -12,6 +12,7 @@ require "./source/lib/Store_Data.pm";
 require "./source/lib/Store_HashData.pm";
 
 require "./source/battle/Damage.pm";
+require "./source/battle/UseSkillConcatenation.pm";
 require "./source/new/NewAction.pm";
 
 use ConstData;        #定数呼び出し
@@ -47,9 +48,11 @@ sub Init{
     $self->{Datas}{Acter}  = StoreData->new();
     $self->{Datas}{New}    = NewAction->new();
     $self->{Datas}{Damage} = Damage->new();
+    $self->{Datas}{UseSkillConcatenation} = UseSkillConcatenation->new();
 
     $self->{Datas}{New}->Init   ($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
     $self->{Datas}{Damage}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
+    $self->{Datas}{UseSkillConcatenation}->Init($self->{ResultNo}, $self->{GenerateNo}, $self->{CommonDatas});
 
     my $header_list = "";
 
@@ -264,7 +267,7 @@ sub ParseActiveAction{
     $skill_name =~ s/\s//g;
     $skill_name =~ s/！！//g;
 
-    # 鳴き声の削除
+    # 「○語」による鳴き声の削除
     $skill_name = Encode::decode_utf8($skill_name);
     $skill_name =~ s/[\p{Hiragana}]{2,}$//g;
     $skill_name = Encode::encode_utf8($skill_name);
@@ -275,6 +278,7 @@ sub ParseActiveAction{
 
     $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, -1) ));
     $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
+    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $skill_name, 0);
 
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 
@@ -355,6 +359,7 @@ sub ParsePassiveAction{
 
     $self->{Datas}{Action}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{Turn}, $self->{ActId}, $act_type, $skill_id, $fuka_id, $lv) ));
     $self->{Datas}{Acter}->AddData (join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $self->{BattleId}, $self->{ActId}, $acter_type, $e_no, $enemy_id, 0) ));
+    $self->{Datas}{UseSkillConcatenation}->AddUseSkill ($self->{BattleId}, $self->{Turn}, $e_no, $fuka_name, $lv);
 
     $self->{Datas}{New}->RecordNewActionData($skill_id, $fuka_id);
 }
@@ -550,6 +555,7 @@ sub BattleStart{
     $self->{NicknameToEnemyId} = {};
 
     $self->{Datas}{Damage}->BattleStart($self->{BattleId});
+    $self->{Datas}{UseSkillConcatenation}->BattleStart($self->{BattleId});
 }
 
 #-----------------------------------#

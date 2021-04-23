@@ -56,12 +56,12 @@ sub Main {
         &UploadData($upload, ConstData::EXE_DATA_SKILL_MASTERY,   "skill_masteries", "./output/data/skill_mastery.csv");
     }
     if (ConstData::EXE_NEW) {
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM,                "new_items",           "./output/new/item_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM_FUKA,           "new_item_fukas",      "./output/new/item_fuka_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ACTION,              "new_actions",         "./output/new/action_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_NEXT_ENEMY,          "new_next_enemies",    "./output/new/next_enemy_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_BATTLE_ENEMY,        "new_battle_enemies",  "./output/new/battle_enemy_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_DEFEAT_ENEMY,        "new_defeat_enemies",  "./output/new/defeat_enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM,         "new_items",          "./output/new/item_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ITEM_FUKA,    "new_item_fukas",     "./output/new/item_fuka_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_ACTION,       "new_actions",        "./output/new/action_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_NEXT_ENEMY,   "new_next_enemies",   "./output/new/next_enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_BATTLE_ENEMY, "new_battle_enemies", "./output/new/battle_enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_NEW_DEFEAT_ENEMY, "new_defeat_enemies", "./output/new/defeat_enemy_");
     }
     if (ConstData::EXE_CHARA) {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_NAME,              "names",               "./output/chara/name_");
@@ -94,18 +94,19 @@ sub Main {
         &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_CHARA_COOK_PASSIVE,      "cook_passives",       "./output/chara/cook_passive_");
     }
     if (ConstData::EXE_BATTLE) {
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,             "battle_infos",        "./output/battle/info_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_RESULT,           "battle_results",      "./output/battle/result_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_EQUIP,            "battle_equips",       "./output/battle/equip_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ENEMY,            "battle_enemies",      "./output/battle/enemy_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DUEL_INFO,        "duel_infos",          "./output/battle/duel_info_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTION,           "battle_actions",      "./output/battle/action_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTER,            "battle_acters",       "./output/battle/acter_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DAMAGE,           "battle_damages",      "./output/battle/damage_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_TARGET,           "battle_targets",      "./output/battle/target_");
-        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_BUFFER,           "battle_buffers",      "./output/battle/buffer_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_INFO,                    "battle_infos",                    "./output/battle/info_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_RESULT,                  "battle_results",                  "./output/battle/result_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_EQUIP,                   "battle_equips",                   "./output/battle/equip_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ENEMY,                   "battle_enemies",                  "./output/battle/enemy_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DUEL_INFO,               "duel_infos",                      "./output/battle/duel_info_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTION,                  "battle_actions",                  "./output/battle/action_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_ACTER,                   "battle_acters",                   "./output/battle/acter_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_DAMAGE,                  "battle_damages",                  "./output/battle/damage_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_TARGET,                  "battle_targets",                  "./output/battle/target_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_BUFFER,                  "battle_buffers",                  "./output/battle/buffer_");
+        &UploadResult($upload, $result_no, $generate_no, ConstData::EXE_BATTLE_USE_SKILL_CONCATENATION, "battle_use_skill_concatenations", "./output/battle/use_skill_concatenation_");
     }
-        &UploadResult($upload, $result_no, $generate_no, 1,                                      "uploaded_checks",     "./output/etc/uploaded_check_");
+        &UploadResult($upload, $result_no, $generate_no, 1, "uploaded_checks", "./output/etc/uploaded_check_");
     print "result_no:$result_no,generate_no:$generate_no\n";
     return;
 }
