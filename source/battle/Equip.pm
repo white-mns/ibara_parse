@@ -132,10 +132,12 @@ sub GetEquipData{
                 $strength = $2;
                 if (exists($equip_kinds{$1})) {
                     my $equip_kind_no = $equip_kinds{$1};
-                    if ($equip_no < $equip_kind_no) { # 武器・防具・装飾の未装備時の処理
+
+                    # 未装備時の処理
+                    if ($equip_no < $equip_kind_no) { # 未装備の後に防具・装飾を装備した時の処理
                         $equip_no = $equip_kind_no;
 
-                    } elsif ($equip_no > 0 && $equip_kind_no == 0) { # 防具・装飾の未装備時の処理
+                    } elsif ($equip_no > $equip_kind_no) { # 未装備の後に自由を装備した時の処理
                         $equip_no = 3;
                     }
                 }
