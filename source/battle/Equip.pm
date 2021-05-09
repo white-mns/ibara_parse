@@ -118,7 +118,7 @@ sub GetEquipData{
 
         if ($node =~ /HASH/ && $node->tag eq "span" && $node->attr("class") && $node->attr("class") eq "Y3") {
             my ($name, $kind_id, $strength, $range) = ("", 0, 0, 0);
-            my $effects = [{"id"=> 0, "value"=> 0},{"id"=> 0, "value"=> 0},{"id"=> 0, "value"=> 0}];
+            my $effects = [{"id" => 0, "value" => 0},{"id" => 0, "value" => 0},{"id" => 0, "value" => 0}];
             my @right_nodes = $node->right;
             $name = $node->as_text;
 
@@ -128,10 +128,11 @@ sub GetEquipData{
             }
 
             if ($equip_text =~ /／(.+?)：強さ(\d+?)／/){
-                $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
+                my $kind_name = $1;
                 $strength = $2;
-                if (exists($equip_kinds{$1})) {
-                    my $equip_kind_no = $equip_kinds{$1};
+                $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($kind_name);
+                if (exists($equip_kinds{$kind_name})) {
+                    my $equip_kind_no = $equip_kinds{$kind_name};
 
                     # 未装備時の処理
                     if ($equip_no < $equip_kind_no) { # 未装備の後に防具・装飾を装備した時の処理
@@ -183,7 +184,7 @@ sub GetEquipData{
 #-----------------------------------#
 #    戦闘参加者の愛称を索引に追加
 #------------------------------------
-#    引数｜
+#    引数｜行動順表示ノード
 #-----------------------------------#
 sub SetActerNicknameToIndex{
     my $self = shift;
@@ -205,20 +206,14 @@ sub SetActerNicknameToIndex{
             if ($src =~ /r(\d+)\.html/) {
                 $self->{NicknameToEno}{$nickname} = $1;
             }
-
         }
     }
 }
 
 #-----------------------------------#
-#    対象のENoおよび敵番号を取得
+#    対象のENoを取得
 #------------------------------------
 #    引数｜愛称
-#          対象種別
-#            0:PC
-#            1:NPC
-#          ENo
-#          敵ID
 #-----------------------------------#
 sub GetENoFromNickname{
     my $self = shift;
@@ -226,7 +221,6 @@ sub GetENoFromNickname{
 
     if (exists($self->{NicknameToEno}{$nickname})) {
         return $self->{NicknameToEno}{$nickname};
-
     }
 
     return 0;
