@@ -51,6 +51,7 @@ use warnings;
         use constant EXE_CHARA_COOK                     => 1;
         use constant EXE_CHARA_ADDITION_PASSIVE         => 1;
         use constant EXE_CHARA_COOK_PASSIVE             => 1;
+        use constant EXE_CHARA_MAKE_CARD                => 1;
     use constant EXE_BATTLE               => 1;
         use constant EXE_BATTLE_INFO                    => 1;
         use constant EXE_BATTLE_ACTION                  => 1;
