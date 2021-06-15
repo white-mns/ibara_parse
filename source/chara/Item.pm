@@ -186,6 +186,7 @@ sub GetMaterialItemData{
     my $effects = shift;
     my $range = shift;
 
+    if (!$$td_nodes[4]) {return;}
     my $td_node4_text = $$td_nodes[4]->as_text;
 
     if ($td_node4_text =~ s/【射程(\d+)】//g) {
