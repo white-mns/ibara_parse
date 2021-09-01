@@ -186,7 +186,12 @@ sub GetCook{
         if ($node_right =~ /HASH/ && $node_right->tag eq "a") {return;}
         if ($node_right =~ /HASH/ && $node_right->attr("class") && $node_right->attr("class") eq "Y3"){return;}
 
-        if ($node_right =~ /／(.+)：強さ(\d+)／/) {
+        my $node_right_text = $node_right;
+        if ($node_right =~ /HASH/ && $node_right->as_text =~ /／(.+)：強さ(\d+)／/) {
+            $node_right_text = $node_right->as_text;
+        }
+
+        if ($node_right_text =~ /／(.+)：強さ(\d+)／/) {
             $self->CrawlPassiveData(\@node_rights, $cook_id, $e_no);
 
             $self->{Datas}{Cook}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $e_no, $self->{ENo}, $cook_id, $self->{LastResultNo}, $self->{LastGenerateNo}, $i_no, $source_name, $name) ));
@@ -213,7 +218,12 @@ sub CrawlPassiveData{
             $self->GetPassive($node_right, $cook_id, $e_no);
         }
 
-        if ($node_right =~ /／(.+)：強さ(\d+)／/) {return;}
+        my $node_right_text = $node_right;
+        if ($node_right =~ /HASH/ && $node_right->as_text =~ /／(.+)：強さ(\d+)／/) {
+            $node_right_text = $node_right->as_text;
+        }
+
+        if ($node_right_text =~ /／(.+)：強さ(\d+)／/) {return;}
     }
 }
 

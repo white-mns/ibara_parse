@@ -167,13 +167,13 @@ sub GetAddition{
     @node_lefts = reverse(@node_lefts);
     my @node_rights = $node->right;
 
-    if ($node_lefts[3] =~ /HASH/ && $node_lefts[3]->tag eq "a") { #他人に付加してもらったときは付加者のEnoを記録
+    if ($node_lefts[3] && $node_lefts[3] =~ /HASH/ && $node_lefts[3]->tag && $node_lefts[3]->tag eq "a") { #他人に付加してもらったときは付加者のEnoを記録
         $e_no = $node_lefts[3]->attr("href");
         $e_no =~ /r(\d+)\.html/;
         $e_no = $1;
     }
 
-    if ($node_lefts[1] =~ /HASH/ && $node_lefts[1]->as_text =~ /ItemNo.(\d+) (.+)/) {
+    if ($node_lefts[1] && $node_lefts[1] =~ /HASH/ && $node_lefts[1]->as_text =~ /ItemNo.(\d+) (.+)/) {
         $target_i_no = $1;
         $target_name = $2 ? $2 : "";
     }
@@ -190,7 +190,12 @@ sub GetAddition{
         if ($node_right =~ /HASH/ && $node_right->tag eq "a"){return;}
         if ($node_right =~ /HASH/ && $node_right->attr("class") && $node_right->attr("class") eq "Y3"){return;}
 
-        if ($node_right =~ /／(.+)：強さ(\d+)／/) {
+        my $node_right_text = $node_right;
+        if ($node_right =~ /HASH/ && $node_right->as_text =~ /／(.+)：強さ(\d+)／/) {
+            $node_right_text = $node_right->as_text;
+        }
+
+        if ($node_right_text =~ /／(.+)：強さ(\d+)／/) {
             $self->CrawlPassiveData(\@node_rights, $addition_id, $e_no);
 
             $self->{Datas}{Addition}->AddData(join(ConstData::SPLIT, ($self->{ResultNo}, $self->{GenerateNo}, $e_no, $self->{ENo}, $addition_id, $self->{LastResultNo}, $self->{LastGenerateNo}, $target_i_no, $target_name, $addition_i_no, $addition_name) ));
@@ -213,11 +218,16 @@ sub CrawlPassiveData{
         if ($node_right =~ /HASH/ && $node_right->tag eq "a") {return;}
         if ($node_right =~ /HASH/ && $node_right->attr("class") && $node_right->attr("class") eq "Y3"){return;}
 
-        if ($node_right =~ /HASH/ && $node_right->tag eq "span" && $node_right->attr("class") eq "P3"){
+        if ($node_right =~ /HASH/ && $node_right->tag eq "span" && $node_right->attr("class") && $node_right->attr("class") eq "P3"){
             $self->GetPassive($node_right, $addition_id, $e_no);
         }
 
-        if ($node_right =~ /／(.+)：強さ(\d+)／/) {return;}
+        my $node_right_text = $node_right;
+        if ($node_right =~ /HASH/ && $node_right->as_text =~ /／(.+)：強さ(\d+)／/) {
+            $node_right_text = $node_right->as_text;
+        }
+
+        if ($node_right_text =~ /／(.+)：強さ(\d+)／/) {return;}
     }
 }
 

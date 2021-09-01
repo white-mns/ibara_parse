@@ -157,7 +157,12 @@ sub GetMake{
         $source_name = $2 ? $2 : "";
     }
 
-    if ($node_rights[2] =~ /／(.+)：強さ(\d+)／/) {
+    my $node_right_text = $node_rights[2];
+    if ($node_rights[3] =~ /HASH/ && $node_rights[3]->as_text =~ /／(.+)：強さ(\d+)／/) {
+        $node_right_text = $node_rights[3]->as_text;
+    }
+
+    if ($node_right_text =~ /／(.+)：強さ(\d+)／/) {
         $kind_id  = $self->{CommonDatas}{ProperName}->GetOrAddId($1);
         $strength = $2;
 
